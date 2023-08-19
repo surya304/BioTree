@@ -59,12 +59,8 @@ app.use(bodyParser.urlencoded({
 // app.use(multer({dest:__dirname+'/file/uploads/'}).any());
 app.use(cookieParser());
 
-// var uri = 'mongodb://admin:admin@cluster0-shard-00-00-4f03b.mongodb.net:27017,cluster0-shard-00-01-4f03b.mongodb.net:27017,cluster0-shard-00-02-4f03b.mongodb.net:27017/VDC?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
 
-// var uri = 'mongodb+srv://tapshort:tapBeer@tapshortTesting-nt34k.mongodb.net/Tapshort?retryWrites=true&w=majority';
-var url_Data='mongodb+srv://ksaisurya304:vTqVDvn4WZyM02t9@cluster0.7utgfxb.mongodb.net/tapshort?retryWrites=true&w=majority'
 
-// let testingUrl = "mongodb://" + username + ":" + password + "@testingcluster-shard-00-00-jecty.mongodb.net:27017,testingcluster-shard-00-01-jecty.mongodb.net:27017,testingcluster-shard-00-02-jecty.mongodb.net:27017/vidlead_test?ssl=true&replicaSet=TestingCluster-shard-0&authSource=admin&w=majority";
 
 mongoose.connect(url_Data).catch((error) => {
     console.log(error, "ASGXGSABXGU");
