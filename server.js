@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var methodOverride = require('method-override');
 var session = require('client-sessions');
@@ -24,10 +26,8 @@ var parseForm = bodyParser.urlencoded({
     extended: false
 });
 
-// node/common.js style 
 
-var email_username = 'adzetsind@gmail.com';
-var email_apikey = '8f635dec-f537-43b4-9c19-3a80c0f53c03';
+
 var User = require('./models/user');
 app.set('view engine', 'ejs');
 app.use(session({
@@ -56,15 +56,33 @@ app.use(bodyParser.urlencoded({
     limit: '50mb',
     extended: true
 }));
-// app.use(multer({dest:__dirname+'/file/uploads/'}).any());
 app.use(cookieParser());
 
 
 
 
-mongoose.connect(url_Data).catch((error) => {
-    console.log(error, "ASGXGSABXGU");
-});
+// mongoose.connect(url_Data).catch((error) => {
+//     console.log(error, "ASGXGSABXGU");
+// });
+
+
+var username = process.env.DB_USERNAME;
+var password = process.env.DB_PASSWORD;
+
+
+
+
+    var dburl='mongodb+srv://'+ username +':'+ password +'@cluster0.7utgfxb.mongodb.net/tapshort?retryWrites=true&w=majority'
+
+
+    mongoose.connect(dburl, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, function(error, db) {
+        if (!error) {
+            console.log("Connected to database");
+        } else {
+            console.log("Error connecting to database", error);
+        }
+
+    });
 
 
 
@@ -95,51 +113,6 @@ function requireClientLogin(req, res, next) {
 
 // Email Related Stuff
 
-function sendEmail(fromName, fromEmail, toEmail, subject, contentHtml) {
-
-    var post_data = querystring.stringify({
-        'username': email_username,
-        'api_key': email_apikey,
-        'from': fromEmail,
-        'from_name': fromName,
-        'to': toEmail,
-        'subject': subject,
-        'body_html': contentHtml,
-        'body_text': ''
-    });
-
-    // Object of options.
-    var post_options = {
-        host: 'api.elasticemail.com',
-        path: '/mailer/send',
-        port: '443',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': post_data.length
-        }
-    };
-
-    var result = '';
-
-    // Create the request object.
-    var post_req = https.request(post_options, function(res) {
-        res.setEncoding('utf8');
-        res.on('data', function(chunk) {
-            result = chunk;
-
-        });
-        res.on('error', function(e) {
-            result = 'Error: ' + e.message;
-
-        });
-    });
-
-    // Post to Elastic Email
-    post_req.write(post_data);
-    post_req.end();
-
-}
 
 
 
