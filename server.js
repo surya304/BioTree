@@ -70,6 +70,7 @@ var username = process.env.DB_USERNAME;
 var password = process.env.DB_PASSWORD;
 
 
+console.log('Database Username ' + username + password);
 
 
     var dburl='mongodb+srv://'+ username +':'+ password +'@cluster0.7utgfxb.mongodb.net/tapshort?retryWrites=true&w=majority'
