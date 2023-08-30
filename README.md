@@ -14,18 +14,34 @@ Usage To use this Tapshort, simply click on any of the links to be directed to t
 
 This allows you to conveniently direct your audience to all of your profiles using just a single link to this page.
 
-Customizing To customize this for your own use, simply replace the links and icons with your own. You can easily edit the HTML and CSS to change the color scheme and styling as well.
+Customizing To customize this for your own use, replace the links and icons with your own. You can easily edit the HTML and CSS to change the color scheme and styling as well.
 
 
-## Installation
+## Run Locally
 
 
-Please Create an .env file and add your mongo Collection username and password 
+# 1. Clone Repo 
+
+```bash 
+
+$ git clone git@github.com:basir/node-javascript-ecommerce.git
+
+```
+
+# 2. Setup MongoDB
+
+Download and Install it from mongodb.com
+
+# 3. Create .env file 
+
+Create .env file in project folder and add these Keys to the project 
 
 ```bash
-DB_USERNAME
-DB_PASSWORD
+DB_USERNAME = <your_user_name>
+DB_PASSWORD = <your_password>
 ```
+
+# 4. Run Backend
 
 ```bash
 npm install 
