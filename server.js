@@ -28,7 +28,6 @@ var parseForm = bodyParser.urlencoded({
 
 
 
-var User = require('./models/user');
 app.set('view engine', 'ejs');
 app.use(session({
     cookieName: 'session',
