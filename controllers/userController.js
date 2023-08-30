@@ -18,15 +18,7 @@ router.get('/login', function(req, res) {
 
     })
 
-    // console.log(req.session.client, "req.session.client")
-    // if (!req.session.client) {
-    //     res.render('login', {
-
-    //     })
-    // } else {
-    //     res.redirect('/dashboard')
-
-    // }f
+   
 
 });
 

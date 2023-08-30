@@ -69,7 +69,6 @@ var username = process.env.DB_USERNAME;
 var password = process.env.DB_PASSWORD;
 
 
-console.log('Database Username ' + username + password);
 
 
     var dburl='mongodb+srv://'+ username +':'+ password +'@cluster0.7utgfxb.mongodb.net/tapshort?retryWrites=true&w=majority'
@@ -118,7 +117,13 @@ function requireClientLogin(req, res, next) {
 
 
 
+// Define routes
+// app.get('/', csrfProtection,(req, res) => {
 
+
+//     res.render('login'); // Render the "Login.ejs" template
+//   });
+  
 
 
 app.get('*', csrfProtection, function(req, res) {
@@ -128,9 +133,12 @@ app.get('*', csrfProtection, function(req, res) {
 
 
     if (!req.session.client) {
-        res.redirect('/login')
+
+        // res.redirect('/login')
+        res.render('login');
     } else {
-        res.redirect('/dashboard')
+        // res.redirect('/dashboard')
+        res.render('dashboard');
 
     }
 
@@ -148,72 +156,41 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 
-router.get('/', requireClientLogin, function(req, res) {
+// router.get('/', requireClientLogin, function(req, res) {
 
 
-    res.redirect('/login');
-
-
-});
-
-
-function requireClientLogin(req, res, next) {
-    if (!req.session.client) {
-        res.redirect('/login');
-    } else {
-        next();
-    }
-};
-
-app.get('/login', function(req, res) {
-
-
-
-    res.render('login')
-
-
-})
+//     res.redirect('/login');
 
 
 
 
-app.get('/forgotpwd', function(req, res) {
-    res.render('forgotPassword')
-})
+// });
 
 
-app.get('/resetpwd', function(req, res) {
-    res.render('resetPassword')
-})
+
+
+// app.get('/login', function(req, res) {
+
+
+
+//     res.render('login')
+
+
+// })
+
+
+
+
+// app.get('/forgotpwd', function(req, res) {
+//     res.render('forgotPassword')
+// })
+
+
+// app.get('/resetpwd', function(req, res) {
+//     res.render('resetPassword')
+// })
 
 
 
 
 
-
-function verifyToken(req, res, next) {
-
-    if (!req.headers.authorization) {
-        return res.status(401).send('Unauthorized Request');
-    }
-
-    let token = req.headers.authorization.split(' ')[1];
-
-
-    if (token === null) {
-        return res.status(401).send('Unauthorized Request');
-    }
-
-    let payload = jwt.verify(token, 'rahasyam#18');
-
-
-    if (!payload) {
-
-        return res.status(401).send('Unauthorized Request');
-    }
-
-    req.userID = payload.subject;
-
-    next();
-
-}
