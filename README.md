@@ -11,7 +11,6 @@ Tapshort allows you to create a simple landing page that links out to all of you
 
 My website, My Twitter profile, My Instagram profile, My Facebook page, My LinkedIn profile,
 
-Please visit this link for a preview of the project https://drive.google.com/file/d/1375CaHrxxscsaGUDMJ1Q72ouRbyC2Yqw/view?usp=sharing
 
 Usage To use this Tapshort, simply click on any of the links to be directed to that platform. The links will open in a new browser tab.
 
