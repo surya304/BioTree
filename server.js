@@ -124,7 +124,6 @@ function requireClientLogin(req, res, next) {
 app.get('*', csrfProtection, function(req, res) {
 
 
-    console.log(req.session.client, "req.session.clien")
 
 
 
