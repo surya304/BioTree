@@ -621,17 +621,7 @@ router.get('/link/:id', function(req, res) {
                     is_del: false
 
                 }).exec(function(err2, result) {
-                    // shortcode
-                    // console.log('knjhhuguhghghjgh');
-
-                    // console.log(result.title);
-                    // console.log(result.socialmedia);
-                    // console.log(socialmediaList);
-                    // console.log(clientsList);
-                    // // Render Code
-                    // 99
-
-                    // console.log(result, 'result');
+                   
 
 
 
