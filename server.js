@@ -71,9 +71,9 @@ var password = process.env.DB_PASSWORD;
 
 
 
-    var dburl='mongodb+srv://'+ username +':'+ password +'@cluster0.7utgfxb.mongodb.net/tapshort?retryWrites=true&w=majority'
 
-
+    let dburl=`mongodb+srv://${username}:${password}@cluster0.7utgfxb.mongodb.net/?retryWrites=true&w=majority`;
+    
     mongoose.connect(dburl, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, function(error, db) {
         if (!error) {
             console.log("Connected to database");
@@ -134,11 +134,11 @@ app.get('*', csrfProtection, function(req, res) {
 
     if (!req.session.client) {
 
-        // res.redirect('/login')
-        res.render('login');
+        res.redirect('/login')
+        // res.render('login');
     } else {
-        // res.redirect('/dashboard')
-        res.render('dashboard');
+        res.redirect('/dashboard')
+        // res.render('dashboard');
 
     }
 
