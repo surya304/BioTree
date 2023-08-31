@@ -116,11 +116,8 @@ function requireClientLogin(req, res, next) {
 // Email Related Stuff
 
 
-
 // Define routes
 // app.get('/', csrfProtection,(req, res) => {
-
-
 //     res.render('login'); // Render the "Login.ejs" template
 //   });
   
