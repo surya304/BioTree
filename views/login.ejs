@@ -33,13 +33,11 @@
     <script type="text/javascript">
         $(document).ready(function() {
             if ($("#email").val().length > 0) {
-                // console.log("empty email");
                 $("#checkemail").hide();
 
 
             }
             if ($("#password").val().length > 0) {
-                // console.log("empty password");
                 $("#checkpass").hide();
 
 
@@ -77,36 +75,12 @@
                         url: '/login',
                         success: function(data) {
 
-                            console.log(data, "aaa")
 
-                            // $.ajax({
-                            //     type: 'POST',
-                            //     url: '/getclientcount',
-                            //     success: function(data) {
-
-                            //         var count = data.id;
-                            //         if (count == 0) {
-                            //             window.location.href = "/steps";
-                            //         } else {
-                            //             window.location.href = "/dashboard/" + count + "";
-                            //         }
-                            //     },
-                            //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            //         alert(textStatus + errorThrown);
-                            //     }
-                            // });
-
-
+                         
 
                             window.location.href = "/dashboard";
 
-                            // var error = data.error;
-                            // var success = data.success;
-                            // if (error != undefined) {
-                            //     alert(error + "asidaisd");
-                            // } else {
-                            //     window.location.href = "/dashboard";
-                            // }
+                        
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             // alert(textStatus + errorThrown);
@@ -120,13 +94,11 @@
 
                     function senderror(urlexists, urlavailable) {
                         console.log(urlexists);
-                        // console.log(urlavailable);
                         if (urlexists === "invalid credentials") {
                             // console.log("show cross mark");
                             $('#verifyemail').show();
                             $('#verifypass').show();
 
-                            // $('.correct').hide();
 
 
                         }
@@ -141,80 +113,7 @@
         });
     </script>
 
-    <script>
-        function generatePassword() {
-            var length = 8,
-                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-                retVal = "";
-            for (var i = 0, n = charset.length; i < length; ++i) {
-                retVal += charset.charAt(Math.floor(Math.random() * n));
-            }
-            return retVal;
-        }
 
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log(profile);
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log(id_token);
-            var data = {};
-            data.name = profile.getName();
-            data.email = profile.getEmail();
-            var password = generatePassword();
-            data.password = password;
-            data.is_social = true;
-
-
-
-            $.ajax({
-                type: "POST",
-                url: "/signup",
-                data: data,
-                success: function(data) {
-                    console.log("sadnkd");
-                    window.location.href = '/dashboard';
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-                }
-            });
-
-
-
-        }
-        if (screen.width < 500) {
-
-            function renderButton() {
-                gapi.signin2.render('my-signin2', {
-
-                    'scope': 'profile email',
-                    'width': 320,
-                    'longtitle': true,
-                    'theme': 'dark',
-
-                });
-            }
-
-
-
-        } else {
-
-            function renderButton() {
-                gapi.signin2.render('my-signin2', {
-
-                    'scope': 'profile email',
-                    'width': 382,
-                    'longtitle': true,
-                    'theme': 'dark',
-
-                });
-            }
-        }
-    </script>
 </head>
 
 <body class="o-page o-page--center">
@@ -260,35 +159,6 @@
                     in to Dashboard</button>
 
 
-                <!-- <span class="c-divider c-divider--small has-text u-mv-medium">Login via social networks</span>
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="g-signin2 " data-onsuccess="onSignIn" id="my-signin2"> sign in with google</div>
-                    
-                    </div>
-
-
-                </div> -->
-                <!-- <span class="c-divider c-divider--small has-text u-mv-medium">Login via social networks</span>
-
-                    <div class="o-line">
-                        <a class="c-icon u-bg-twitter" href="#!">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-
-                        <a class="c-icon u-bg-facebook" href="#!">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-
-                        <a class="c-icon u-bg-pinterest" href="#!">
-                            <i class="fa fa-pinterest"></i>
-                        </a>
-
-                        <a class="c-icon u-bg-dribbble" href="#!">
-                            <i class="fa fa-dribbble"></i>
-                        </a>
-                    </div> -->
             </form>
         </div>
 

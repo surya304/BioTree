@@ -8,8 +8,7 @@
     <meta name="description" content="Dashboard UI Kit">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google Font -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet"> -->
+
     <link rel="stylesheet" href="https://use.typekit.net/foj0sle.css">
     <link rel="shortcut icon" href="/userui/64.png" type="image/x-icon">
     <link rel="stylesheet" href="/userui/css/main.css">
@@ -73,27 +72,12 @@
                     </div>
                 </div>
 
-                <!-- <button class="c-btn c-btn--info c-btn--fullwidth" id="newSignup" style="background: #4780E7;
-                color: #fff;text-decoration: none;border: 1px solid #4780E7">Sign
-                    Up</button> -->
-
+          
 
                 <button class="c-btn c-btn--info c-btn--fullwidth" id="newSignup" name="signup" style="background: #4780E7;
                 color: #fff;text-decoration: none;border: 1px solid #4780E7">Sign
                     Up</button>
-                <!-- <span class="c-divider c-divider--small has-text u-mv-medium">Login via social networks</span>
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="g-signin2 " data-onsuccess="onSignIn" id="my-signin2"> sign in with google</div>
-
-                    </div>
-
-
-                </div> -->
-                <!-- <div class="g-signin2 c-btn c-btn--info c-btn--fullwidth" data-onsuccess="onSignIn"></div> -->
-
-
+           
 
 
             </div>
@@ -115,26 +99,17 @@
     <script>
         $(document).ready(function() {
 
-
-
-            // $("#send-google").on("click", function() {
-            //     $(".g-signin2").click();
-
-            // })
-
             var newBtn = document.getElementById("#newSignup");
 
             console.log(newBtn, 'newBtn');
 
             $("#newSignup").click(function(e) {
 
-                console.log(e, 'eeeeeeeeeeeee');
 
 
 
 
                 e.preventDefault();
-                // alert(JSON.stringify(data));
                 var $name = $("#name").val();
                 var email = $("#email").val();
                 var $password = $("#password").val();
@@ -175,10 +150,7 @@
                         success: function(data) {
                             // alert(JSON.stringify(data));
                             window.location.href = '/login';
-                            // console.log(data);
-                            // alert(data.msg);
-                            // if (data.success) return location.reload();
-
+                        
 
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -207,50 +179,6 @@
 
 
 
-        function generatePassword() {
-            var length = 8,
-                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-                retVal = "";
-            for (var i = 0, n = charset.length; i < length; ++i) {
-                retVal += charset.charAt(Math.floor(Math.random() * n));
-            }
-            return retVal;
-        }
-
-        function onSignIn(googleUser) {
-
-            var profile = googleUser.getBasicProfile();
-            console.log(profile);
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log(id_token);
-            var data = {};
-            data.name = profile.getName();
-            data.email = profile.getEmail();
-            var password = generatePassword();
-            data.password = password;
-            data.is_social = true;
-
-
-
-            $.ajax({
-                type: "POST",
-                url: "/signup",
-                data: data,
-                success: function(data) {
-                    window.location.href = '/login';
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Status: " + textStatus);
-                    alert("Error: " + errorThrown);
-                }
-            });
-
-
-        }
     </script>
 
 

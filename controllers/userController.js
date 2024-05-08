@@ -37,88 +37,49 @@ router.get('/resetpwd', function(req, res) {
 });
 
 
-router.post('/forgotpassword', function(req, res) {
-    var url = req.url;
-    var key = req.body.key;
-    var password = req.body.password;
-    var newpassword = req.body.newpassword;
-    if (password === newpassword) {
-        var hash = bcrypt.hashSync(password, 10);
-        User.findOne({ 'verification_key': key }).exec(function(err, user) {
-            // console.log(user);
-            if (user != null) {
-                var expiresTime = user.expires_in;
-                var currentDate = new Date();
-                var currTime = currentDate.getTime();
-                if (currTime > expiresTime) {
-                    res.status(500).send({ error: "reset password expired", data: null, message: "reset password expired" });
-                    res.end();
-                } else {
-                    user.verification_key = uuid();
-                    user.password = hash;
-                    user.expires_in = currentDate.getTime() + 7200000; // 2 hours
-                    user.verification = true;
-                    user.save(function(err1, result) {
-                        if (err1) {
-                            console.log(url + '\n Error is - ' + err1);
-                            res.status(500).send({ error: "invalid url", data: null, message: "Password update failed. Please try again." });
-                            res.end();
-                        } else {
-                            res.status(200).send({ data: "Password updated successfully. Please login to continue" });
-                            res.end();
-                        }
-                    });
-                }
-            } else {
-                console.log(url + '\n Error is - ' + err);
-                res.status(500).send({ error: "invalid url", data: null, message: "Password update failed. Please try again." });
-                res.end();
-            }
-        });
-    } else {
-        console.log(url + '\n Error is - Passwords donot match');
-        res.status(500).send({ error: "passwords donot match url", data: null, message: "Passwords do not match. Please try again." });
-        res.end();
+router.post('/forgotpassword', async function (req, res) {
+    try {
+      const { key, password, newpassword } = req.body;
+  
+      if (password !== newpassword) {
+        throw new Error('Passwords do not match.');
+      }
+  
+      const hash = bcrypt.hashSync(password, 10);
+  
+      const user = await User.findOne({ verification_key: key });
+  
+      if (!user) {
+        throw new Error('Invalid reset password key or expired link.');
+      }
+  
+      const now = Date.now();
+      if (now > user.expires_in) {
+        throw new Error('Reset password link expired.');
+      }
+  
+      user.verification_key = uuid();
+      user.password = hash;
+      user.expires_in = now + 7200000; // 2 hours
+      user.verification = true;
+  
+      await user.save();
+  
+      res.status(200).send({ data: "Password updated successfully. Please login to continue" });
+    } catch (error) {
+      console.error(req.url, error);
+      res.status(500).send({ error: error.message, data: null, message: "Password update failed. Please try again." });
     }
-});
+  });
+  
 
-// router.get('/profile', requireLogin, function(req, res) {
-//     // User.findOne({
-//     //     '_id': 
-//     // }).exec(function(err, user) {
-//     var userid = req.session.user._id;
-//     console.log(userid, "userid");
-//     User.findById(userid, function(err, data) {
-//         console.log(data);
-//         if (err) {
-//             console.log(url + '\n Error is - ' + 'Invalid Credentials')
-//             res.status(501).send({
-//                 error: 'invalid credentials',
-//                 data: null,
-//                 message: 'Invalid Credentials'
-//             })
-//             res.end()
-//         } else {
-//             res.render('profile', {
-//                 'profilename': userid.name,
-//                 "email": userid.email,
-//             })
-//         }
-//     })
 
-// });
 
 router.get('/profile', requireLogin, function(req, res) {
 
 
     var url = req.url
     var userid = req.session.user._id
-    console.log(userid)
-        /// ///////###################################prinitng random images
-
-
-    // //////##############################
-
     User.findById(userid, function(err, data) {
 
         if (err) {
