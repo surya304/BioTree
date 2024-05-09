@@ -59,20 +59,7 @@ app.use(cookieParser());
 
 
 
-
-// mongoose.connect(url_Data).catch((error) => {
-//     console.log(error, "ASGXGSABXGU");
-// });
-
-
-var username = process.env.DB_USERNAME;
-var password = process.env.DB_PASSWORD;
-
-
-
-
-
-    let dburl=`mongodb+srv://${username}:${password}@cluster0.7utgfxb.mongodb.net/?retryWrites=true&w=majority`;
+const dburl = process.env.DB_URL;
     
     mongoose.connect(dburl, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, function(error, db) {
         if (!error) {
@@ -146,47 +133,7 @@ app.get('*', csrfProtection, function(req, res) {
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
-    // app.get(endpoint, callback)
-
-
-
-
-
-
-// router.get('/', requireClientLogin, function(req, res) {
-
-
-//     res.redirect('/login');
-
-
-
-
-// });
-
-
-
-
-// app.get('/login', function(req, res) {
-
-
-
-//     res.render('login')
-
-
-// })
-
-
-
-
-// app.get('/forgotpwd', function(req, res) {
-//     res.render('forgotPassword')
-// })
-
-
-// app.get('/resetpwd', function(req, res) {
-//     res.render('resetPassword')
-// })
-
+ 
 
 
 
