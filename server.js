@@ -1,28 +1,29 @@
 require('dotenv').config();
 
-var express = require('express');
-var methodOverride = require('method-override');
-var session = require('client-sessions');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+let express = require('express');
+let methodOverride = require('method-override');
+let session = require('client-sessions');
+let bodyParser = require('body-parser');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-var app = express();
-var multer = require('multer');
-var https = require('https');
-var fs = require('fs');
-var csrf = require('csurf');
-var cookieParser = require('cookie-parser');
-var request = require('request');
-var helmet = require('helmet')
-var querystring = require('querystring');
-var router = express.Router();
+let app = express();
+let multer = require('multer');
+let https = require('https');
+let fs = require('fs');
+let csrf = require('csurf');
+let cookieParser = require('cookie-parser');
+let request = require('request');
+let helmet = require('helmet')
+let querystring = require('querystring');
+let router = express.Router();
+
 
 // setup route middlewares
-var csrfProtection = csrf({
+let csrfProtection = csrf({
     cookie: true
 });
 
-var parseForm = bodyParser.urlencoded({
+let parseForm = bodyParser.urlencoded({
     extended: false
 });
 
@@ -37,7 +38,7 @@ app.use(session({
     httpOnly: true
 }));
 
-var port = 3000;
+let port = 3000;
 
 
 app.listen(process.env.PORT || port);

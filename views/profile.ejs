@@ -264,7 +264,7 @@
                     }
 
                     function signOut() {
-                        var auth2 = gapi.auth2.getAuthInstance();
+                        let auth2 = gapi.auth2.getAuthInstance();
                         auth2.signOut().then(function() {});
                         auth2.disconnect();
                         window.location.href = "/login";
@@ -280,7 +280,7 @@
 
 
                         function currentpassword1() {
-                            var password = $("#currentpassword").val().length;
+                            let password = $("#currentpassword").val().length;
 
                             if (password == "") {
                                 $("#currentpassword-err").html('<i class="fa fa-times-circle"></i>Please Enter the  Password');
@@ -295,7 +295,7 @@
                         }
 
                         function newpassword1() {
-                            var password = $("#newpassword").val().length;
+                            let password = $("#newpassword").val().length;
 
                             if (password == "") {
                                 $("#newpassword-err").html('<i class="fa fa-times-circle"></i>Please Enter the Password');
@@ -329,7 +329,7 @@
                         });
 
                         function cpass() {
-                            var password = $("#d-pass").val().length;
+                            let password = $("#d-pass").val().length;
 
                             if (password == "") {
                                 $("#d-pass-err").html('<i class="fa fa-times-circle"></i>Please Enter the Password');
@@ -351,8 +351,8 @@
                         });
 
                         function socialpassword() {
-                            var password = $("#d-pass").val();
-                            var obj = {};
+                            let password = $("#d-pass").val();
+                            let obj = {};
                             obj.password = password;
                             obj.is_social = false;
                             obj.tap_account = true;
@@ -383,9 +383,9 @@
 
 
                         function runlogin() {
-                            var currpass = $("#currentpassword").val();
-                            var newpass = $("#newpassword").val();
-                            var obj = {};
+                            let currpass = $("#currentpassword").val();
+                            let newpass = $("#newpassword").val();
+                            let obj = {};
                             obj.currentpassword = currpass;
                             obj.newpassword = newpass;
                             $.ajax({
@@ -412,9 +412,9 @@
                         }
 
                         $('.updateprofile').on("click", function() {
-                            var profilename = $('.getprofile').val();
+                            let profilename = $('.getprofile').val();
                             console.log(profilename);
-                            var obj = {
+                            let obj = {
 
                             }
                             obj.profilename = profilename;

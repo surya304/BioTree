@@ -171,7 +171,7 @@
                                         <div class="c-dropdown__menu dropdown-menu dropdown-menu-right c-dropdown__menu--large-custom add-full-track" style="height:300px;overflow: scroll;margin-top:100px;" aria-labelledby="dropdownMenuButton" id="dropdown">
                                             <!-- style="height:480px;overflow: scroll;margin-top: 100px;" -->
 
-                                            <% for(var i=0; i < trackingList.length; i++) { %>
+                                            <% for(let i=0; i < trackingList.length; i++) { %>
 
                                                 <a class="c-dropdown__item dropdown-item form-check form-check-inline add-track-indi" href="#" style="padding:4px 0 0 5px;" data-name="<%=trackingList[i].prefixname%>" data-icon="<%=trackingList[i].icon%>" data-id="<%=trackingList[i]._id%>">
                                                     <label class="iconbox1">
@@ -251,16 +251,16 @@
 
         function signOut() {
 
-            // var auth2 = gapi.auth2.getAuthInstance();
+            // let auth2 = gapi.auth2.getAuthInstance();
             // auth2.signOut().then(function() {
             //     console.log('User signed out.');
             // });
 
-            // var auth2 = gapi.auth2.getAuthInstance();
+            // let auth2 = gapi.auth2.getAuthInstance();
             // auth2.signOut().then(function() {});
             // auth2.disconnect();
 
-            var auth2 = gapi.auth2.getAuthInstance();
+            let auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function() {});
             auth2.disconnect();
             window.location.href = "/login";
@@ -276,9 +276,9 @@
 
 
             //jQuery time
-            var current_fs, next_fs, previous_fs; //fieldsets
-            var left, opacity, scale; //fieldset properties which we will animate
-            var animating; //flag to prevent quick multi-click glitches
+            let current_fs, next_fs, previous_fs; //fieldsets
+            let left, opacity, scale; //fieldset properties which we will animate
+            let animating; //flag to prevent quick multi-click glitches
 
             $(".next").click(function() {
                 if (animating) return false;
@@ -376,7 +376,7 @@
             });
 
 
-            var data = <%- JSON.stringify(trackingList) %>;
+            let data = <%- JSON.stringify(trackingList) %>;
             console.log(data);
 
 
@@ -385,7 +385,7 @@
             function updateClient(clientName, clientId, trackingList) {
                 // Bind Date To the Popup View
 
-                var count = JSON.parse(trackingList).length;
+                let count = JSON.parse(trackingList).length;
                 if (count > 0) {
 
                 }
@@ -417,13 +417,13 @@
             $('.add-full-track').on('click', '.add-track-indi', function() {
 
 
-                var prefixname = $(this).data("name");
-                var icon = $(this).data("icon");
-                var id = $(this).data("id");
+                let prefixname = $(this).data("name");
+                let icon = $(this).data("icon");
+                let id = $(this).data("id");
                 console.log(name);
                 console.log(icon);
                 console.log(id);
-                var listItemToAdda = makelist1(icon, id, prefixname);
+                let listItemToAdda = makelist1(icon, id, prefixname);
                 $("#add-track-data").append(listItemToAdda);
 
 
@@ -432,7 +432,7 @@
             });
 
             function makelist1(img, id, name) {
-                var $allData = `<div class="sortableitem u-mt-custom" ><li>
+                let $allData = `<div class="sortableitem u-mt-custom" ><li>
 <div class="row justify-content-left nolo r0">
 <div class="col-md-10 col-9 r2" >
 <div class="c-field has-addon-left">
@@ -468,9 +468,9 @@
             // FIXME ADD CLIENT
             $('#add_client').on("click", function() {
 
-                var clientname = false;
-                var socialdata = false;
-                var getcleintname = $('.q0d').val();
+                let clientname = false;
+                let socialdata = false;
+                let getcleintname = $('.q0d').val();
                 console.log(getcleintname);
                 if (!getcleintname) {
                     alert("please enter Your Name");
@@ -480,16 +480,16 @@
                 } else {
                     // console.log("its there");
                 }
-                var $socialdata = $('#add-track-data').children().length;
+                let $socialdata = $('#add-track-data').children().length;
 
 
-                var $appendData22 = $('#add-track-data').children();
+                let $appendData22 = $('#add-track-data').children();
                 for (let index = 0; index < $appendData22.length; index++) {
-                    var $dynamic = $appendData22.eq(index);
-                    var trackingid = $dynamic.children().find('.id').html();
-                    var href = $dynamic.children().find('.ip').val();
-                    var img = $dynamic.children().find('.img').html();
-                    var name = $dynamic.children().find('.name').html();
+                    let $dynamic = $appendData22.eq(index);
+                    let trackingid = $dynamic.children().find('.id').html();
+                    let href = $dynamic.children().find('.ip').val();
+                    let img = $dynamic.children().find('.img').html();
+                    let name = $dynamic.children().find('.name').html();
 
                     if (href === '') {
                         $dynamic.children().eq(0).find('.disit').remove();
@@ -522,24 +522,24 @@
             });
 
             function addclientdata() {
-                var clientobj = {
+                let clientobj = {
 
                     'trackingList': []
                 };
-                var clientName = $('.q0d').val();
+                let clientName = $('.q0d').val();
                 console.log(clientName);
                 clientobj.name = clientName;
 
-                var $appendData1 = $('#add-track-data').children()
+                let $appendData1 = $('#add-track-data').children()
                 for (let index = 0; index < $appendData1.length; index++) {
-                    var $dynamic = $appendData1.eq(index);
+                    let $dynamic = $appendData1.eq(index);
                     console.log($dynamic);
-                    var trackingid = $dynamic.children().find('.id').html();
-                    var href = $dynamic.children().find('.ip').val();
-                    var img = $dynamic.children().find('.img').html();
-                    var name = $dynamic.children().find('.name').html();
+                    let trackingid = $dynamic.children().find('.id').html();
+                    let href = $dynamic.children().find('.ip').val();
+                    let img = $dynamic.children().find('.img').html();
+                    let name = $dynamic.children().find('.name').html();
 
-                    var k = {}
+                    let k = {}
                     k.id = trackingid;
                     k.tracking_code = href;
                     k.icon = img;
@@ -560,7 +560,7 @@
                     success: function(data) {
 
                         $('#modal7').modal('hide');
-                        var message = data.data;
+                        let message = data.data;
                         swal(
                             'Great!',
                             message,
@@ -579,7 +579,7 @@
             }
             $('#add-track-data').on("click", ".deli", function() {
 
-                var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+                let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
             });
 

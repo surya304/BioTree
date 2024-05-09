@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var bgColorSchema = new Schema({
+let bgColorSchema = new Schema({
     title: { type: String, required: true, unique: true },
     color: { type: String, required: true, unique: true },
     is_del: { type: Boolean, default: false },
@@ -17,6 +17,6 @@ var bgColorSchema = new Schema({
 
 
 
-var BgColor = mongoose.model('BgColor', bgColorSchema);
+let BgColor = mongoose.model('BgColor', bgColorSchema);
 
 module.exports = BgColor;

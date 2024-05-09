@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var userSocialMediaSchema = new Schema({
+let userSocialMediaSchema = new Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     socialmedia: { type: mongoose.Schema.Types.ObjectId, ref: 'SocialMedia', required: true },
     shorturl: { type: mongoose.Schema.Types.ObjectId, ref: 'UserShortURL', required: true },
@@ -18,6 +18,6 @@ var userSocialMediaSchema = new Schema({
     updated_at: Date
 });
 
-var UserSocialMedia = mongoose.model('UserSocialMedia', userSocialMediaSchema);
+let UserSocialMedia = mongoose.model('UserSocialMedia', userSocialMediaSchema);
 
 module.exports = UserSocialMedia;

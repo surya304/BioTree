@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var messengerSchema = new Schema({
+let messengerSchema = new Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
   name : { type: String, required: true},
   tracking: [{ type:Object, required: true }],
@@ -19,6 +19,6 @@ var messengerSchema = new Schema({
 });
 
 
-var Client = mongoose.model('Client', messengerSchema);
+let Client = mongoose.model('Client', messengerSchema);
 
 module.exports = Client;

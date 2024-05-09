@@ -1,10 +1,10 @@
-var User = require('../models/user')
-var express = require('express')
-var nodemailer = require('nodemailer')
-var router = express.Router()
-var uuid = require('uuid/v4')
-var bcrypt = require('bcryptjs')
-var request = require('request')
+let User = require('../models/user')
+let express = require('express')
+let nodemailer = require('nodemailer')
+let router = express.Router()
+let uuid = require('uuid/v4')
+let bcrypt = require('bcryptjs')
+let request = require('request')
 const { stringify } = require('querystring');
 
 const fetch = require('node-fetch');
@@ -78,8 +78,8 @@ router.post('/forgotpassword', async function (req, res) {
 router.get('/profile', requireLogin, function(req, res) {
 
 
-    var url = req.url
-    var userid = req.session.user._id
+    let url = req.url
+    let userid = req.session.user._id
     User.findById(userid, function(err, data) {
 
         if (err) {
@@ -117,15 +117,15 @@ router.post('/subscribe', async(req, res) => {
 
 
 
-    var name = req.body.name;
-    var email = req.body.email;
-    var password = req.body.password;
+    let name = req.body.name;
+    let email = req.body.email;
+    let password = req.body.password;
 
     console.log(req.body)
-    var hash = bcrypt.hashSync(password, 10);
+    let hash = bcrypt.hashSync(password, 10);
 
 
-    var userObj = new User({
+    let userObj = new User({
         name: name,
         email: email,
         password: hash,
@@ -176,20 +176,20 @@ router.post('/signup', function(req, res) {
 
 
     // ////////////
-    var url = req.url
-    var name = req.body.name
-    var email = req.body.email
-    var password = req.body.password
-    var hash = bcrypt.hashSync(password, 10);
-    var is_social = req.body.is_social;
-    var captcha = req.body.captcha;
+    let url = req.url
+    let name = req.body.name
+    let email = req.body.email
+    let password = req.body.password
+    let hash = bcrypt.hashSync(password, 10);
+    let is_social = req.body.is_social;
+    let captcha = req.body.captcha;
 
     console.log(is_social, "is_social");
 
 
     if (is_social = true) {
-        var tap_account = false;
-        var userObj = new User({
+        let tap_account = false;
+        let userObj = new User({
             name: name,
             email: email,
             password: hash,
@@ -241,8 +241,8 @@ router.post('/signup', function(req, res) {
             }
         })
     } else {
-        var tap_account = true;
-        var userObj = new User({
+        let tap_account = true;
+        let userObj = new User({
             name: name,
             email: email,
             password: hash,
@@ -309,7 +309,7 @@ router.post('/signup', function(req, res) {
 
 function welcometemplate(name) {
 
-    var myvar = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    let mylet = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     
     <head>
@@ -813,10 +813,10 @@ function welcometemplate(name) {
 }
 
 router.post('/login', function(req, res) {
-    var url = req.url
+    let url = req.url
 
-    var email = req.body.email
-    var password = req.body.password
+    let email = req.body.email
+    let password = req.body.password
 
 
     console.log(req.body);
@@ -876,9 +876,9 @@ function requireLogin(req, res, next) {
 
 
 router.post('/resetpwd', function(req, res) {
-    var url = req.url
+    let url = req.url
 
-    var email = req.body.email
+    let email = req.body.email
 
     User.findOne({
         'email': email
@@ -901,11 +901,11 @@ router.post('/resetpwd', function(req, res) {
                     console.log('Reset Password called - ' + result.verification_key)
 
                     // Send email with verification link
-                    var emailContent = '<h1>Reset Lytboard Password</h1><br>Please click on the below link to reset your password. <br><br><a href="' + config.server.domain + config.server.port + '\/resetpwd?key=' + result.verification_key + '">Verify</a><br><br><a href="{unsubscribe}">Unsubscribe</a>'
+                    let emailContent = '<h1>Reset Lytboard Password</h1><br>Please click on the below link to reset your password. <br><br><a href="' + config.server.domain + config.server.port + '\/resetpwd?key=' + result.verification_key + '">Verify</a><br><br><a href="{unsubscribe}">Unsubscribe</a>'
 
 
 
-                    var message = 'Reset link has been sent to your email. Please follow the instructions to reset your password.'
+                    let message = 'Reset link has been sent to your email. Please follow the instructions to reset your password.'
                     res.status(200).send({
                         data: message
                     })
@@ -925,14 +925,14 @@ router.post('/resetpwd', function(req, res) {
 })
 
 router.post('/verifyresetpwd1', function(req, res) {
-    var url = req.url
+    let url = req.url
 
-    var key = req.body.key
-    var password = req.body.password
-    var newpassword = req.body.newpassword
+    let key = req.body.key
+    let password = req.body.password
+    let newpassword = req.body.newpassword
 
     if (password === newpassword) {
-        var hash = bcrypt.hashSync(password, 10)
+        let hash = bcrypt.hashSync(password, 10)
 
         User.findOne({
             'verification_key': key
@@ -981,7 +981,7 @@ router.post('/verifyresetpwd1', function(req, res) {
 })
 router.post('/sendforgotemail', function(req, res) {
     console.log("dumb");
-    var email = req.body.email;
+    let email = req.body.email;
 
     User.findOne({
         'email': email
@@ -1006,17 +1006,17 @@ router.post('/sendforgotemail', function(req, res) {
                     // Send email with verification link
 
                     ////////////////////////////
-                    // var fromEmail = 'webbooking@vijayadiagnostic.in';
-                    // var toCustomerEmail = ['tapshort123@gmail.com']; //enter customer email here
+                    // let fromEmail = 'webbooking@vijayadiagnostic.in';
+                    // let toCustomerEmail = ['tapshort123@gmail.com']; //enter customer email here
 
-                    // var customerEmailSubject = 'Vijaya Diagnostic Centre - Offer Enquiry Submitted';
-                    // var ccEmail = [];
-                    // var prin = gettemplate();
+                    // let customerEmailSubject = 'Vijaya Diagnostic Centre - Offer Enquiry Submitted';
+                    // let ccEmail = [];
+                    // let prin = gettemplate();
                     // // sendEmail(fromEmail, toCustomerEmail, ccEmail, customerEmailSubject, customer);
                     // sendEmail(fromEmail, toCustomerEmail, ccEmail, customerEmailSubject, prin);
 
 
-                    var transporter = nodemailer.createTransport({
+                    let transporter = nodemailer.createTransport({
                         host: "smtp.mailtrap.io",
                         port: 2525,
                         auth: {
@@ -1024,7 +1024,7 @@ router.post('/sendforgotemail', function(req, res) {
                             pass: "8cd401ea784acd"
                         }
                     });
-                    var template = gettemplate(result.name, result.verification_key);
+                    let template = gettemplate(result.name, result.verification_key);
                     const mailOptions = {
                         from: '"Test Server" <test@example.com>',
                         to: result.email,
@@ -1071,7 +1071,7 @@ router.post('/sendforgotemail', function(req, res) {
 
 function gettemplate(name, key) {
 
-    var $temp = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    let $temp = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -1536,9 +1536,9 @@ function gettemplate(name, key) {
 
 router.post('/changepwd', requireLogin, function(req, res) {
     console.log("dumb");
-    var currentpassword = req.body.currentpassword;
-    var newpassword = req.body.newpassword;
-    var newpashwordhash = bcrypt.hashSync(newpassword, 10)
+    let currentpassword = req.body.currentpassword;
+    let newpassword = req.body.newpassword;
+    let newpashwordhash = bcrypt.hashSync(newpassword, 10)
     console.log(currentpassword);
     console.log(newpassword)
     console.log(req.session.user._id);
@@ -1592,11 +1592,11 @@ router.post('/changepwd', requireLogin, function(req, res) {
 
 
     //////////////////////////////////////
-    // var url = req.url
-    // var password = req.body.password
-    // var newpassword = req.body.newpassword
-    // var renewpassword = req.body.renewpassword
-    // var hash = bcrypt.hashSync(newpassword, 10)
+    // let url = req.url
+    // let password = req.body.password
+    // let newpassword = req.body.newpassword
+    // let renewpassword = req.body.renewpassword
+    // let hash = bcrypt.hashSync(newpassword, 10)
 
     // if (newpassword === renewpassword) {
     //     User.findOne({
@@ -1656,11 +1656,11 @@ router.post('/changepwd', requireLogin, function(req, res) {
 
 router.post('/changesocialpassword', requireLogin, function(req, res) {
     console.log("dumb");
-    var newpassword = req.body.password;
-    var tap_account = req.body.tap_account;
-    var is_social = req.body.is_social;
+    let newpassword = req.body.password;
+    let tap_account = req.body.tap_account;
+    let is_social = req.body.is_social;
 
-    var newpashwordhash = bcrypt.hashSync(newpassword, 10)
+    let newpashwordhash = bcrypt.hashSync(newpassword, 10)
     console.log(newpassword)
     console.log(req.session.user._id);
 
@@ -1710,9 +1710,9 @@ router.post('/changesocialpassword', requireLogin, function(req, res) {
 });
 
 router.put('/profile/:id', requireLogin, function(req, res) {
-    var url = req.url
-    var id = req.params.id
-    var name = req.body.name
+    let url = req.url
+    let id = req.params.id
+    let name = req.body.name
 
     User.findById(id, function(err, data) {
         if (err) {
@@ -1744,8 +1744,8 @@ router.put('/profile/:id', requireLogin, function(req, res) {
 
 
 router.put('/profilenamechange', requireLogin, function(req, res) {
-    var url = req.url
-    var name = req.body.profilename;
+    let url = req.url
+    let name = req.body.profilename;
 
     console.log("name");
     // User.findById(id, function(err, data) {

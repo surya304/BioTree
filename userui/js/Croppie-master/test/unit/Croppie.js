@@ -1,4 +1,4 @@
-var assert, Croppie;
+let assert, Croppie;
 
 assert = require('assert');
 
@@ -6,7 +6,7 @@ require('./stubs/window');
 Croppie = require('../../croppie');
 
 describe('Croppie', function () {
-	var testCroppieObject, stubElement;
+	let testCroppieObject, stubElement;
 
 	beforeEach(function () {
 		stubElement = new HTMLElement();
@@ -25,7 +25,7 @@ describe('Croppie', function () {
 				Object
 					.keys(expectedOptionGroup)
 					.forEach(function (optionName) {
-						var currentPath;
+						let currentPath;
 
 						currentPath = [
 							path,

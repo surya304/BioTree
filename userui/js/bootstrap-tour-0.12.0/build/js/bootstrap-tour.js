@@ -19,7 +19,7 @@
  * ========================================================================
  */
 
-var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+let bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 (function(window, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -32,12 +32,12 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     return window.Tour = factory(window.jQuery);
   }
 })(window, function($) {
-  var Tour, document;
+  let Tour, document;
   document = window.document;
   Tour = (function() {
     function Tour(options) {
       this._showPopoverAndOverlay = bind(this._showPopoverAndOverlay, this);
-      var storage;
+      let storage;
       try {
         storage = window.localStorage;
       } catch (error) {
@@ -83,7 +83,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     }
 
     Tour.prototype.addSteps = function(steps) {
-      var j, len, step;
+      let j, len, step;
       for (j = 0, len = steps.length; j < len; j++) {
         step = steps[j];
         this.addStep(step);
@@ -160,7 +160,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.start = function(force) {
-      var promise;
+      let promise;
       if (force == null) {
         force = false;
       }
@@ -175,25 +175,25 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.next = function() {
-      var promise;
+      let promise;
       promise = this.hideStep(this._current, this._current + 1);
       return this._callOnPromiseDone(promise, this._showNextStep);
     };
 
     Tour.prototype.prev = function() {
-      var promise;
+      let promise;
       promise = this.hideStep(this._current, this._current - 1);
       return this._callOnPromiseDone(promise, this._showPrevStep);
     };
 
     Tour.prototype.goTo = function(i) {
-      var promise;
+      let promise;
       promise = this.hideStep(this._current, i);
       return this._callOnPromiseDone(promise, this.showStep, i);
     };
 
     Tour.prototype.end = function() {
-      var endHelper, promise;
+      let endHelper, promise;
       endHelper = (function(_this) {
         return function(e) {
           $(document).off("click.tour-" + _this._options.name);
@@ -225,7 +225,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.pause = function() {
-      var step;
+      let step;
       step = this.getStep(this._current);
       if (!(step && step.duration)) {
         return this;
@@ -240,7 +240,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.resume = function() {
-      var step;
+      let step;
       step = this.getStep(this._current);
       if (!(step && step.duration)) {
         return this;
@@ -264,7 +264,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.hideStep = function(i, iNext) {
-      var hideDelay, hideStepHelper, promise, step;
+      let hideDelay, hideStepHelper, promise, step;
       step = this.getStep(i);
       if (!step) {
         return;
@@ -273,7 +273,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
       promise = this._makePromise(step.onHide != null ? step.onHide(this, i) : void 0);
       hideStepHelper = (function(_this) {
         return function(e) {
-          var $element, next_step;
+          let $element, next_step;
           $element = $(step.element);
           if (!($element.data('bs.popover') || $element.data('popover'))) {
             $element = $('body');
@@ -308,7 +308,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.showStep = function(i) {
-      var path, promise, showDelay, showStepHelper, skipToPrevious, step;
+      let path, promise, showDelay, showStepHelper, skipToPrevious, step;
       if (this.ended()) {
         this._debug('Tour ended, showStep prevented.');
         return this;
@@ -394,7 +394,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._setState = function(key, value) {
-      var e, keyName;
+      let e, keyName;
       if (this._options.storage) {
         keyName = this._options.name + "_" + key;
         try {
@@ -415,7 +415,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._removeState = function(key) {
-      var keyName;
+      let keyName;
       if (this._options.storage) {
         keyName = this._options.name + "_" + key;
         this._options.storage.removeItem(keyName);
@@ -428,7 +428,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._getState = function(key) {
-      var keyName, value;
+      let keyName, value;
       if (this._options.storage) {
         keyName = this._options.name + "_" + key;
         value = this._options.storage.getItem(keyName);
@@ -445,7 +445,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showNextStep = function() {
-      var promise, showNextStepHelper, step;
+      let promise, showNextStepHelper, step;
       step = this.getStep(this._current);
       showNextStepHelper = (function(_this) {
         return function(e) {
@@ -457,7 +457,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showPrevStep = function() {
-      var promise, showPrevStepHelper, step;
+      let promise, showPrevStepHelper, step;
       step = this.getStep(this._current);
       showPrevStepHelper = (function(_this) {
         return function(e) {
@@ -475,7 +475,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._isRedirect = function(host, path, location) {
-      var currentPath;
+      let currentPath;
       if ((host != null) && host !== '' && (({}.toString.call(host) === '[object RegExp]' && !host.test(location.origin)) || ({}.toString.call(host) === '[object String]' && this._isHostDifferent(host, location)))) {
         return true;
       }
@@ -499,7 +499,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._isJustPathHashDifferent = function(host, path, location) {
-      var currentPath;
+      let currentPath;
       if ((host != null) && host !== '') {
         if (this._isHostDifferent(host, location)) {
           return false;
@@ -513,7 +513,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._redirect = function(step, i, path) {
-      var href;
+      let href;
       if ($.isFunction(step.redirect)) {
         return step.redirect.call(this, path);
       } else {
@@ -541,7 +541,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showPopoverAndOverlay = function(i) {
-      var step;
+      let step;
       if (this.getCurrentStep() !== i || this.ended()) {
         return;
       }
@@ -557,7 +557,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showPopover = function(step, i) {
-      var $element, $tip, isOrphan, options, shouldAddSmart;
+      let $element, $tip, isOrphan, options, shouldAddSmart;
       $(".tour-" + this._options.name).remove();
       options = $.extend({}, this._options);
       isOrphan = this._isOrphan(step);
@@ -606,7 +606,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._template = function(step, i) {
-      var $navigation, $next, $prev, $resume, $template, template;
+      let $navigation, $next, $prev, $resume, $template, template;
       template = step.template;
       if (this._isOrphan(step) && {}.toString.call(step.orphan) !== '[object Boolean]') {
         template = step.orphan;
@@ -644,7 +644,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._reposition = function($tip, step) {
-      var offsetBottom, offsetHeight, offsetRight, offsetWidth, originalLeft, originalTop, tipOffset;
+      let offsetBottom, offsetHeight, offsetRight, offsetWidth, originalLeft, originalTop, tipOffset;
       offsetWidth = $tip[0].offsetWidth;
       offsetHeight = $tip[0].offsetHeight;
       tipOffset = $tip.offset();
@@ -685,7 +685,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._scrollIntoView = function(i) {
-      var $element, $window, counter, height, offsetTop, scrollTop, step, windowHeight;
+      let $element, $window, counter, height, offsetTop, scrollTop, step, windowHeight;
       step = this.getStep(i);
       $element = $(step.element);
       if (!$element.length) {
@@ -736,7 +736,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._initMouseNavigation = function() {
-      var _this;
+      let _this;
       _this = this;
       return $(document).off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='prev']").off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='next']").off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='end']").off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='pause-resume']").on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='next']", (function(_this) {
         return function(e) {
@@ -756,7 +756,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
           return _this.end();
         };
       })(this)).on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='pause-resume']", function(e) {
-        var $this;
+        let $this;
         e.preventDefault();
         $this = $(this);
         $this.text(_this._paused ? $this.data('pause-text') : $this.data('resume-text'));
@@ -817,7 +817,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showBackground = function(step, data) {
-      var $backdrop, base, height, j, len, pos, ref, results, width;
+      let $backdrop, base, height, j, len, pos, ref, results, width;
       height = $(document).height();
       width = $(document).width();
       ref = ['top', 'bottom', 'left', 'right'];
@@ -861,7 +861,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showOverlayElement = function(step) {
-      var $backdropElement, elementData;
+      let $backdropElement, elementData;
       $backdropElement = $(step.backdropElement);
       if ($backdropElement.length === 0) {
         elementData = {
@@ -887,7 +887,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._hideOverlayElement = function(step) {
-      var $backdrop, pos, ref;
+      let $backdrop, pos, ref;
       $(step.backdropElement).removeClass('tour-step-backdrop');
       ref = this.backdrops;
       for (pos in ref) {
@@ -960,7 +960,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._getParams = function(path, start) {
-      var j, len, param, params, paramsObject;
+      let j, len, param, params, paramsObject;
       params = path.split(start);
       if (params.length === 1) {
         return {};
@@ -976,7 +976,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._equal = function(obj1, obj2) {
-      var j, k, len, obj1Keys, obj2Keys, v;
+      let j, k, len, obj1Keys, obj2Keys, v;
       if ({}.toString.call(obj1) === '[object Object]' && {}.toString.call(obj2) === '[object Object]') {
         obj1Keys = Object.keys(obj1);
         obj2Keys = Object.keys(obj2);

@@ -11,23 +11,7 @@ $(function() {
         // $('.flex-image').append(`<div><img src="" class="roundimage mx-auto d-block" id="item-img-output" /></div>`);
 
     });
-    // var imagesPreview = function (input, placeToInsertImagePreview) {
-
-    //     if (input.files) {
-    //         var filesAmount = input.files.length;
-
-    //         for (i = 0; i < filesAmount; i++) {
-    //             var reader = new FileReader();
-
-    //             reader.onload = function (event) {
-    //                 $($.parseHTML('<img class="roundimage mx-auto d-block">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-    //             }
-
-    //             reader.readAsDataURL(input.files[i]);
-    //         }
-    //     }
-
-    // };
+   
     // ************************************************************check url exists************************************************************************************************//
     // $('.correct').hide();
     $('.linkit').on("keyup", function() {
@@ -84,23 +68,23 @@ $(function() {
 
     //////////////////////////////
 
-    var $appendData = $('#sortable');
+    let $appendData = $('#sortable');
     $('.dropping').on('click', '.hello', function() {
 
         // console.log("hello");
-        // var img = $(this).find('.image1').attr("src");
-        var name = $(this).data("name");
-        var prefixurl = $(this).data("prefixurl");
-        var id = $(this).data("id");
-        var img = $(this).data("icon");
+        // let img = $(this).find('.image1').attr("src");
+        let name = $(this).data("name");
+        let prefixurl = $(this).data("prefixurl");
+        let id = $(this).data("id");
+        let img = $(this).data("icon");
 
 
 
 
 
-        // var img = $(this).find('.image1').html();
-        // var id = $(this).find('.first').html();
-        // var name = $(this).find('.naming').html();
+        // let img = $(this).find('.image1').html();
+        // let id = $(this).find('.first').html();
+        // let name = $(this).find('.naming').html();
         img = img.trim();
         id = id.trim();
         name = name.trim();
@@ -111,11 +95,11 @@ $(function() {
 
 
         //////////////
-        var listItemToAdda = makelist(img, id, name, prefixurl);
+        let listItemToAdda = makelist(img, id, name, prefixurl);
         $appendData.append(listItemToAdda);
         createpreview();
         // /////////////////
-        var $putDisable = $(this);
+        let $putDisable = $(this);
         $putDisable.remove();
 
 
@@ -126,36 +110,36 @@ $(function() {
     function createpreview() {
         // console.log("haisdisaihdih");
         $('.button-area').empty();
-        var $appendData1 = $('#sortable').children();
+        let $appendData1 = $('#sortable').children();
 
         for (let index = 0; index < $appendData1.length; index++) {
 
-            var $dynamic = $appendData1.eq(index);
+            let $dynamic = $appendData1.eq(index);
 
-            var element = $dynamic.find('.image1').html();
+            let element = $dynamic.find('.image1').html();
 
 
             // const number = $dynamic.children().children().find('.findp').html();
             const href = $dynamic.children().find('.ip').val();
 
-            var listItemToAdda1 = makeNewListItema1(element, href);
+            let listItemToAdda1 = makeNewListItema1(element, href);
             $('.button-area').append(listItemToAdda1);
 
         }
     }
-    // var makeNewListItema1 = function (add, troop, link) {
+    // let makeNewListItema1 = function (add, troop, link) {
     function makeNewListItema1(add, link) {
 
 
 
-        var $allData = `<a  href="` + link + `"><i class="` + add + `" class="rounded-circle image1" id="previewicon" ></i></a>`;
+        let $allData = `<a  href="` + link + `"><i class="` + add + `" class="rounded-circle image1" id="previewicon" ></i></a>`;
         return $allData;
 
     }
 
     // function makelist(add, troop, name, url) {
     function makelist(img, id, name, prefixurl) {
-        var $allData = `<div class="sortableitem u-mt-custom" ><li>
+        let $allData = `<div class="sortableitem u-mt-custom" ><li>
     
     <div class="row justify-content-left nolo r0">
     <div class="col-md-10 col-9 r2" >
@@ -191,10 +175,10 @@ $(function() {
         //////////////////////////////
 
         console.log($(this).parent().find(".url").html(), "$(this).parent()")
-        var icon = $(this).parent().find(".image1").html();
-        var id = $(this).parent().find('.findp').html();
-        var name = $(this).parent().find('.naming').html();
-        var prefixurl = $(this).parent().find('.url').html();
+        let icon = $(this).parent().find(".image1").html();
+        let id = $(this).parent().find('.findp').html();
+        let name = $(this).parent().find('.naming').html();
+        let prefixurl = $(this).parent().find('.url').html();
 
 
         icon = icon.trim();
@@ -209,9 +193,9 @@ $(function() {
         console.log(icon);
 
 
-        // var listItemToAdda = makelistdrop(icon, id, name);
+        // let listItemToAdda = makelistdrop(icon, id, name);
         // $appendData.append(listItemToAdda);
-        //     var prin = '';
+        //     let prin = '';
         //     prin += ` <a class="c-dropdown__item dropdown-item form-check form-check-inline hello" href="#" style="padding:4px 5px 0 5px;">
         //     <label class="iconbox1">
         //         <i class="` + icon + `" id="dropdownicon" ></i>
@@ -226,7 +210,7 @@ $(function() {
 
 
 
-        var prin = '';
+        let prin = '';
         prin +=
             '<a class="c-dropdown__item dropdown-item form-check form-check-inline hello"  style="padding:4px 5px 0 5px;"  data-name="' + name + '" data-prefixurl="' + prefixurl + '" data-icon="' + icon + '" data-id="' + id + '">' +
             '        <label class="iconbox1">' +
@@ -258,7 +242,7 @@ $(function() {
         /////////////////////////////
 
         createpreview();
-        var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+        let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
 
 
@@ -304,12 +288,12 @@ $(function() {
 
 
         });
-    var $data = $('#sortable1');
+    let $data = $('#sortable1');
 
     $('.linkbtn').on('click', function() {
 
 
-        var $data1 = ` <div class="row sortableitem u-mt-custom">
+        let $data1 = ` <div class="row sortableitem u-mt-custom">
 
   
    <div class="col-md-5 l0">
@@ -348,27 +332,27 @@ $(function() {
     ////////////////
 
     //////////////
-    // var createpreview1 = function () {
+    // let createpreview1 = function () {
     function createpreview1() {
         $('.button-area1').empty();
 
-        var oyy = $('#sortable1').children();
+        let oyy = $('#sortable1').children();
 
 
         for (let index = 0; index < oyy.length; index++) {
 
-            var $dynamic = oyy.eq(index);
+            let $dynamic = oyy.eq(index);
 
-            // var number = $dynamic.children().find('.find').html();
+            // let number = $dynamic.children().find('.find').html();
             // console.log(number);
 
             const href = $dynamic.children().find('.link').val();
             const title = $dynamic.children().find('.title').val();
 
 
-            // var listItemToAdda1 = makeNewListItemLink(number, href, title);
+            // let listItemToAdda1 = makeNewListItemLink(number, href, title);
             // $('.button-area1').append(listItemToAdda1);
-            var listItemToAdda1 = makeNewListItemLink(href, title);
+            let listItemToAdda1 = makeNewListItemLink(href, title);
             $('.button-area1').append(listItemToAdda1);
 
 
@@ -381,8 +365,8 @@ $(function() {
 
     }
     $data.on("click", ".del3", function() {
-        // var bolo = $(this).parent().parent().remove();
-        var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+        // let bolo = $(this).parent().parent().remove();
+        let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
 
 
@@ -392,7 +376,7 @@ $(function() {
 
     function makeNewListItemLink(href, title) {
 
-        var $allData = `<a href="` + href + `" >` + title + `</a>`;
+        let $allData = `<a href="` + href + `" >` + title + `</a>`;
         return $allData;
 
     }
@@ -451,10 +435,10 @@ $(function() {
 
     // $style1 = $('.flex-name');
     // $("#alert").hide();
-    // var name = false;
+    // let name = false;
     // $('.bioname').on("keyup", function (e) {
 
-    //     var a1 = $(this).val();
+    //     let a1 = $(this).val();
     //     if (a1.length < 20) {
     //         check1();
     //         $("#alert").hide();
@@ -475,16 +459,16 @@ $(function() {
 
     //     $(".flex-name").empty();
 
-    //     var val = $('.bioname').val();
+    //     let val = $('.bioname').val();
 
-    //     var a2 = foo(val);
+    //     let a2 = foo(val);
     //     $(".flex-name").append(a2);
 
 
     // }
 
     // function foo(params) {
-    //     var data = `<div class="title">` + params + `</div>`;
+    //     let data = `<div class="title">` + params + `</div>`;
     //     return data;
 
     // }
@@ -493,11 +477,11 @@ $(function() {
 
     // $style2 = $('.flex-bio');
     // $("#alert1").hide();
-    // var bio = false;
+    // let bio = false;
     // $('.bio').on("keyup", function (e) {
 
 
-    //     var a1 = $(this).val();
+    //     let a1 = $(this).val();
 
     //     if (a1.length < 100) {
     //         check2();
@@ -514,9 +498,9 @@ $(function() {
 
     // function check2() {
     //     $('.flex-bio').empty();
-    //     var val = $('.bio').val();
+    //     let val = $('.bio').val();
 
-    //     var a2 = foo1(val);
+    //     let a2 = foo1(val);
     //     $('.flex-bio').append(a2);
 
 
@@ -524,7 +508,7 @@ $(function() {
 
     // function foo1(params) {
 
-    //     var data = `<div>` + params + `</div>`;
+    //     let data = `<div>` + params + `</div>`;
     //     return data;
 
     // }
@@ -540,7 +524,7 @@ $(function() {
 
     ///////////////////////////////////////////////////////////////////
 
-    var short = {
+    let short = {
         "data": [{
                 "is_del": false,
                 "is_active": true,
@@ -605,8 +589,8 @@ $(function() {
     };
 
 
-    var ramp = short.data;
-    var prin = '';
+    let ramp = short.data;
+    let prin = '';
 
     for (let index = 3; index < ramp.length; index++) {
         const element = ramp[index];
@@ -629,7 +613,7 @@ $(function() {
     }
     // $('.dropping').append(prin);
     //////////////////////////////////////////////
-    var defaultPrin = '';
+    let defaultPrin = '';
     for (let index = 0; index <= 1; index++) {
         const element = ramp[index];
 
@@ -711,17 +695,17 @@ $(function() {
     $('.hello1').on('click', function() {
 
         console.log("hello");
-        // var img = $(this).find('.image1').attr("src");
-        var img = $(this).find('.image1').html();
+        // let img = $(this).find('.image1').attr("src");
+        let img = $(this).find('.image1').html();
 
-        var id = $(this).find('.first').html();
-        var name = $(this).find('.naming').html();
+        let id = $(this).find('.first').html();
+        let name = $(this).find('.naming').html();
         console.log(img);
         console.log(id);
         console.log(name);
 
         //////////////
-        var listItemToAdda = makelist(img, id, name);
+        let listItemToAdda = makelist(img, id, name);
         $('.sorttracking').append(listItemToAdda);
 
         // /////////////////
@@ -734,7 +718,7 @@ $(function() {
 
 
     $('.sorttracking').on("click", ".del", function() {
-        var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+        let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
     });
 
     // ###########################################################################################
@@ -742,7 +726,7 @@ $(function() {
 
     // $('.updateshort').hide();
     // $('.shortlink').on("click", function () {
-    //     var value = $(this).html();
+    //     let value = $(this).html();
     //     $(this).hide();
     //     $('.updateshort').show();
     //     $('.linkit').val(value);
@@ -754,7 +738,7 @@ $(function() {
     // $('.linkit').on("keyup", function (e) {
     //     e.preventDefault();
     //     if (e.keyCode == 13) {
-    //         var value = $(this).val();
+    //         let value = $(this).val();
     //         $(this).hide();
     //         $('.shortlink').show();
     //         $('.shortlink').html(value);

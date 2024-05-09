@@ -2133,7 +2133,7 @@ often you call it. Useful for lazy initialization.</p>
   <span class="hljs-keyword">var</span> collectNonEnumProps = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj, keys</span>) </span>{
     <span class="hljs-keyword">var</span> nonEnumIdx = nonEnumerableProps.length;
     <span class="hljs-keyword">var</span> <span class="hljs-keyword">constructor</span> = obj.<span class="hljs-keyword">constructor</span>;
-    var proto = _.isFunction(<span class="hljs-keyword">constructor</span>) &amp;&amp; <span class="hljs-keyword">constructor</span>.prototype || ObjProto;</pre></div></div>
+    let proto = _.isFunction(<span class="hljs-keyword">constructor</span>) &amp;&amp; <span class="hljs-keyword">constructor</span>.prototype || ObjProto;</pre></div></div>
             
         </li>
         
@@ -3794,7 +3794,7 @@ NB: <code>oldSettings</code> only exists for backwards compatibility.</p>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!settings.variable) source = <span class="hljs-string">'with(obj||{}){\n'</span> + source + <span class="hljs-string">'}\n'</span>;
 
-    source = <span class="hljs-string">"var __t,__p='',__j=Array.prototype.join,"</span> +
+    source = <span class="hljs-string">"let __t,__p='',__j=Array.prototype.join,"</span> +
       <span class="hljs-string">"print=function(){__p+=__j.call(arguments,'');};\n"</span> +
       source + <span class="hljs-string">'return __p;\n'</span>;
 

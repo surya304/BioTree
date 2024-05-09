@@ -31,9 +31,9 @@
         $(function () {
             $('.getclientid').on("click", function () {
                 console.log("dumb ass");
-                var id = $(this).prev().val();
+                let id = $(this).prev().val();
                 console.log(id);
-                var name = $(this).html();
+                let name = $(this).html();
                 name = name.trim();
                 console.log(name);
                 $('.printclientvalue').html(name);
@@ -42,29 +42,29 @@
 
 
             // /////////////////////////////////////////
-            var one = <%- JSON.stringify(linkclicks)%>;
-            var two = <%- JSON.stringify(totallinkscreated)%>;
-            var three = <%- JSON.stringify(totallinkclikcs)%>;
-            var four = <%- JSON.stringify(pixelsconnected)%>;
+            let one = <%- JSON.stringify(linkclicks)%>;
+            let two = <%- JSON.stringify(totallinkscreated)%>;
+            let three = <%- JSON.stringify(totallinkclikcs)%>;
+            let four = <%- JSON.stringify(pixelsconnected)%>;
             $('.u1').html(one);
             $('.u2').html(two);
             $('.u3').html(three);
             $('.u4').html(four);
-            var analytics = <%- JSON.stringify(clientsanalyticslist)%>;
+            let analytics = <%- JSON.stringify(clientsanalyticslist)%>;
             console.log(analytics);
 
             for (let index = 0; index < analytics.length; index++) {
                 const element = analytics[index];
-                var url = element.shorturl;
-                var icons = element.pixelsicons[index];
-                var clicks = element.clicks;
-                var source = element.source;
-                var medium = element.medium;
-                var name = element.name;
-                var date = element.date;
+                let url = element.shorturl;
+                let icons = element.pixelsicons[index];
+                let clicks = element.clicks;
+                let source = element.source;
+                let medium = element.medium;
+                let name = element.name;
+                let date = element.date;
                 for (let index1 = 0; index1 < analytics[index].pixelsicons.length; index1++) {
-                    var see = analytics[index].pixelsicons[index1].icon;
-                    var listitemtoadd = makelist(url, see, clicks, source, medium, name, date);
+                    let see = analytics[index].pixelsicons[index1].icon;
+                    let listitemtoadd = makelist(url, see, clicks, source, medium, name, date);
                     $('.appendtbdata').append(listitemtoadd);
 
                 }
@@ -76,7 +76,7 @@
 
                 console.log(see);
                 console.log(clicks);
-                var $alldata = '<tr class="c-table__row">' +
+                let $alldata = '<tr class="c-table__row">' +
                     '                                <td class="c-table__cell">' +
                     '                                    Tap.sr' + url + '</td>' +
                     '                                <td class="c-table__cell">' +
@@ -125,7 +125,7 @@
 
                             <%if (client_count > 0) { %>
 
-                            <% for(var i=0; i < clientsList.length; i++) { %>
+                            <% for(let i=0; i < clientsList.length; i++) { %>
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="text" value="<%=clientsList[i]._id%>" id="clientlist" style="display: none">
@@ -260,8 +260,8 @@ background: linear-gradient(135deg, #3f53a9 0%, #6b4193 100%);text-align: center
                                 <th class="c-table__cell c-table__cell--head">Date</th>
                             </tr>
                         </thead>
-                        <% for(var i=0; i < clientsanalyticslist.length; i++) { %>
-                        <% for (var j = 0; j < clientsanalyticslist[i].pixelsicons.length; j++) {%>
+                        <% for(let i=0; i < clientsanalyticslist.length; i++) { %>
+                        <% for (let j = 0; j < clientsanalyticslist[i].pixelsicons.length; j++) {%>
 
                         <p>
                             <%=clientsanalyticslist[i].pixelsicons[j].icon%>

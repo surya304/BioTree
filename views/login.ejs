@@ -47,7 +47,7 @@
                 console.log('askdisadasinm');
                 e.preventDefault();
 
-                var data = {};
+                let data = {};
                 data.email = $("#email").val();
                 data.password = $("#password").val();
 
@@ -84,8 +84,8 @@
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             // alert(textStatus + errorThrown);
-                            var x = JSON.parse(XMLHttpRequest.responseText);
-                            var urlexists = x.error;
+                            let x = JSON.parse(XMLHttpRequest.responseText);
+                            let urlexists = x.error;
                             console.log(urlexists);
 
                             senderror(urlexists);

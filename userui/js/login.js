@@ -17,7 +17,7 @@ $(document).ready(function() {
         console.log('askdisadasinm');
         e.preventDefault();
 
-        var data = {};
+        let data = {};
         data.email = $("#email").val();
         data.password = $("#password").val();
 
@@ -52,7 +52,7 @@ $(document).ready(function() {
                     //     url: '/getclientcount',
                     //     success: function(data) {
 
-                    //         var count = data.id;
+                    //         let count = data.id;
                     //         if (count == 0) {
                     //             window.location.href = "/steps";
                     //         } else {
@@ -68,8 +68,8 @@ $(document).ready(function() {
 
                     window.location.href = "/dashboard";
 
-                    // var error = data.error;
-                    // var success = data.success;
+                    // let error = data.error;
+                    // let success = data.success;
                     // if (error != undefined) {
                     //     alert(error + "asidaisd");
                     // } else {
@@ -78,8 +78,8 @@ $(document).ready(function() {
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     // alert(textStatus + errorThrown);
-                    var x = JSON.parse(XMLHttpRequest.responseText);
-                    var urlexists = x.error;
+                    let x = JSON.parse(XMLHttpRequest.responseText);
+                    let urlexists = x.error;
                     console.log(urlexists);
 
                     senderror(urlexists);

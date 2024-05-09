@@ -1,7 +1,7 @@
-var Demo = (function() {
+let Demo = (function() {
 
 	function output(node) {
-		var existing = $('#result .croppie-result');
+		let existing = $('#result .croppie-result');
 		if (existing.length > 0) {
 			existing[0].parentNode.replaceChild(node, existing[0]);
 		}
@@ -11,7 +11,7 @@ var Demo = (function() {
 	}
 
 	function popupResult(result) {
-		var html;
+		let html;
 		if (result.html) {
 			html = result.html;
 		}
@@ -26,7 +26,7 @@ var Demo = (function() {
 		});
 		setTimeout(function(){
 			$('.sweet-alert').css('margin', function() {
-				var top = -1 * ($(this).height() / 2),
+				let top = -1 * ($(this).height() / 2),
 					left = -1 * ($(this).width() / 2);
 
 				return top + 'px 0 0 ' + left + 'px';
@@ -35,7 +35,7 @@ var Demo = (function() {
 	}
 
 	function demoMain () {
-		var mc = $('#cropper-1');
+		let mc = $('#cropper-1');
 		mc.croppie({
 			viewport: {
 				width: 150,
@@ -68,7 +68,7 @@ var Demo = (function() {
 	}
 
 	function demoBasic() {
-		var $w = $('.basic-width'),
+		let $w = $('.basic-width'),
 			$h = $('.basic-height'),
 			basic = $('#demo-basic').croppie({
 			viewport: {
@@ -86,7 +86,7 @@ var Demo = (function() {
 		});
 
 		$('.basic-result').on('click', function() {
-			var w = parseInt($w.val(), 10),
+			let w = parseInt($w.val(), 10),
 				h = parseInt($h.val(), 10),s
 				size = 'viewport';
 			if (w || h) {
@@ -108,7 +108,7 @@ var Demo = (function() {
 	}
 
 	function demoVanilla() {
-		var vEl = document.getElementById('vanilla-demo'),
+		let vEl = document.getElementById('vanilla-demo'),
 			vanilla = new Croppie(vEl, {
 			viewport: { width: 200, height: 100 },
 			boundary: { width: 300, height: 300 },
@@ -139,7 +139,7 @@ var Demo = (function() {
 	}
 
     function demoResizer() {
-		var vEl = document.getElementById('resizer-demo'),
+		let vEl = document.getElementById('resizer-demo'),
 			resize = new Croppie(vEl, {
 			viewport: { width: 100, height: 100 },
 			boundary: { width: 300, height: 300 },
@@ -167,11 +167,11 @@ var Demo = (function() {
 	}
 
 	function demoUpload() {
-		var $uploadCrop;
+		let $uploadCrop;
 
 		function readFile(input) {
  			if (input.files && input.files[0]) {
-	            var reader = new FileReader();
+	            let reader = new FileReader();
 	            
 	            reader.onload = function (e) {
 					$('.upload-demo').addClass('ready');
@@ -213,7 +213,7 @@ var Demo = (function() {
 	}
 
 	function demoHidden() {
-		var $hid = $('#hidden-demo');
+		let $hid = $('#hidden-demo');
 
 		$hid.croppie({
 			viewport: {
@@ -234,9 +234,9 @@ var Demo = (function() {
 	}
 
 	function bindNavigation () {
-		var $html = $('html');
+		let $html = $('html');
 		$('nav a').on('click', function (ev) {
-			var lnk = $(ev.currentTarget),
+			let lnk = $(ev.currentTarget),
 				href = lnk.attr('href'),
 				targetTop = $('a[name=' + href.substring(1) + ']').offset().top;
 
@@ -265,16 +265,16 @@ var Demo = (function() {
 //  * Prevents errors on console methods when no console present.
 //  * Exposes a global 'log' function that preserves line numbering and formatting.
 (function () {
-  var method;
-  var noop = function () { };
-  var methods = [
+  let method;
+  let noop = function () { };
+  let methods = [
       'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
       'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
       'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
       'timeStamp', 'trace', 'warn'
   ];
-  var length = methods.length;
-  var console = (window.console = window.console || {});
+  let length = methods.length;
+  let console = (window.console = window.console || {});
  
   while (length--) {
     method = methods[length];

@@ -31,29 +31,29 @@
 
 
                 // console.log(fullData);
-                var fromdata = <%-JSON.stringify(from) %>;
+                let fromdata = <%-JSON.stringify(from) %>;
 
 
                 if (fromdata === "instabio") {
 
-                    var shortcode = <%- JSON.stringify(shortcode)%>;
+                    let shortcode = <%- JSON.stringify(shortcode)%>;
                     console.log(shortcode);
-                    var loc = location.href;
+                    let loc = location.href;
                     // loc += loc.indexOf("?") === -1 ? "?" : "&";
                     // console.log(loc);
                     // window.location.href = "/" + loc + "Tap.sr/" + shortcode;
                     // window.location.href = "Tap.sr/" + shortcode;
                     // //////////////////////////////////////////////////////// font color
-                    var previewcolor = <%-JSON.stringify(backgroundcolor) %>;
+                    let previewcolor = <%-JSON.stringify(backgroundcolor) %>;
                     console.log(previewcolor);
                     if (previewcolor !== "purewhite") {
                         // set white color to all buttons
-                        var $a1 = $('.flex-name');
-                        var $a2 = $('.flex-bio');
-                        var $a3 = $('.button-area');
-                        var $a4 = $('.button-area1');
-                        var $a5 = $('.flex-name1');
-                        var $image = $(".e1");
+                        let $a1 = $('.flex-name');
+                        let $a2 = $('.flex-bio');
+                        let $a3 = $('.button-area');
+                        let $a4 = $('.button-area1');
+                        let $a5 = $('.flex-name1');
+                        let $image = $(".e1");
                         $a1.addClass('white');
                         $a2.addClass('white');
                         $a3.addClass('white');
@@ -61,12 +61,12 @@
                         $a5.addClass('white');
                         $image.attr('src', '/userui/biotree_logo.png');
                     } else {
-                        var $a1 = $('.flex-name');
-                        var $a2 = $('.flex-bio');
-                        var $a3 = $('.button-area');
-                        var $a4 = $('.button-area1');
-                        var $a5 = $('.flex-name1');
-                        var $image = $(".e1");
+                        let $a1 = $('.flex-name');
+                        let $a2 = $('.flex-bio');
+                        let $a3 = $('.button-area');
+                        let $a4 = $('.button-area1');
+                        let $a5 = $('.flex-name1');
+                        let $image = $(".e1");
                         $a1.addClass('black');
                         $a2.addClass('black');
                         $a3.addClass('black');
@@ -75,23 +75,23 @@
                     }
                     // ---------------------------------------
 
-                    var sendeddata = <%-JSON.stringify(sociallists) %>;
-                    var recordid = <%-JSON.stringify(id) %>;
+                    let sendeddata = <%-JSON.stringify(sociallists) %>;
+                    let recordid = <%-JSON.stringify(id) %>;
 
 
 
                     // ------------------------------------------------------
                     // print social data if from dat is intabio 
-                    for (var d = 0; d < sendeddata.length; d++) {
-                        var savedid = sendeddata[d].id;
-                        var savedusername = sendeddata[d].username;
-                        var img = sendeddata[d].icon;
-                        var prefixurl = sendeddata[d].url;
-                        var name = sendeddata[d].name;
-                        var finalurl = prefixurl + savedusername;
+                    for (let d = 0; d < sendeddata.length; d++) {
+                        let savedid = sendeddata[d].id;
+                        let savedusername = sendeddata[d].username;
+                        let img = sendeddata[d].icon;
+                        let prefixurl = sendeddata[d].url;
+                        let name = sendeddata[d].name;
+                        let finalurl = prefixurl + savedusername;
                         console.log(sendeddata[d]);
 
-                        var listItemToAdda = makesocial(img, savedid, name, prefixurl, savedusername, finalurl, recordid);
+                        let listItemToAdda = makesocial(img, savedid, name, prefixurl, savedusername, finalurl, recordid);
                         $('.button-area').append(listItemToAdda);
 
 
@@ -100,7 +100,7 @@
 
                     function makesocial(img, savedid, name, prefixurl, savedusername, finalurl) {
 
-                        var $allData =
+                        let $allData =
                             ` <a  data-id="` + savedid + `" data-recordid="` + recordid + `" class="getsocialid" data-href="` + finalurl + `"><i class="` + img + `" id="previewicon" data-id="` + savedid + `" data-name="` + name + `"></i></a>`;
 
                         return $allData;
@@ -108,21 +108,21 @@
                     }
 
 
-                    var bordering = <%-JSON.stringify(border) %>;
+                    let bordering = <%-JSON.stringify(border) %>;
                     console.log(bordering);
 
                     if (bordering === true) {
                         // add is-active class
-                        var $a5 = $('.button-area');
-                        var $a6 = $('.button-area1');
+                        let $a5 = $('.button-area');
+                        let $a6 = $('.button-area1');
                         $a5.removeClass('rectangle');
                         $a6.removeClass('rectangle');
                         $a5.addClass('rounded');
                         $a6.addClass('rounded');
                     } else {
                         // remove is-active class
-                        var $a3 = $('.button-area');
-                        var $a4 = $('.button-area1');
+                        let $a3 = $('.button-area');
+                        let $a4 = $('.button-area1');
                         $a3.removeClass('rounded');
                         $a4.removeClass('rounded');
                         $a3.addClass('rectangle');
@@ -131,7 +131,7 @@
 
 
 
-                    var obj = {};
+                    let obj = {};
                     obj.shortcode = shortcode;
                     $.ajax({
                         type: 'POST',
@@ -150,12 +150,12 @@
 
 
                 if (fromdata === "shortenurl") {
-                    var websiteurl = <%-JSON.stringify(websiteurl) %>;
-                    var shortcode = <%-JSON.stringify(shortcode) %>;
-                    var id = <%-JSON.stringify(id) %>;
+                    let websiteurl = <%-JSON.stringify(websiteurl) %>;
+                    let shortcode = <%-JSON.stringify(shortcode) %>;
+                    let id = <%-JSON.stringify(id) %>;
 
 
-                    var obj = {};
+                    let obj = {};
                     obj.shortcode = shortcode;
                     $.ajax({
                         type: 'POST',
@@ -175,10 +175,10 @@
                 }
 
                 if (fromdata === "shortenurl_utm") {
-                    var websiteurl = <%-JSON.stringify(websiteurl) %>;
-                    var shortcode = <%-JSON.stringify(shortcode) %>;
+                    let websiteurl = <%-JSON.stringify(websiteurl) %>;
+                    let shortcode = <%-JSON.stringify(shortcode) %>;
 
-                    var obj = {};
+                    let obj = {};
                     obj.shortcode = shortcode;
                     $.ajax({
                         type: 'POST',
@@ -199,13 +199,13 @@
 
                 $('.button-area').on("click", '.getsocialid', function() {
 
-                    var id = $(this).data("id");
-                    var recordid = $(this).data("recordid");
-                    var href = $(this).data("href");
+                    let id = $(this).data("id");
+                    let recordid = $(this).data("recordid");
+                    let href = $(this).data("href");
 
-                    var type = "social";
+                    let type = "social";
 
-                    var obj = {};
+                    let obj = {};
                     obj.id = id;
                     obj.type = type;
                     obj.recordid = recordid;
@@ -233,13 +233,13 @@
 
                 $('.button-area1').on("click", '.getlinkid', function() {
 
-                    var id = $(this).data("id");
-                    var recordid = $(this).data("recordid");
-                    var href = $(this).data("href");
+                    let id = $(this).data("id");
+                    let recordid = $(this).data("recordid");
+                    let href = $(this).data("href");
 
 
-                    var type = "links";
-                    var obj = {};
+                    let type = "links";
+                    let obj = {};
                     obj.id = id;
                     obj.type = type;
                     obj.recordid = recordid;
@@ -270,7 +270,7 @@
                 // ////////////////////////////////////////////
 
 
-                var data = [{
+                let data = [{
                     name: 'Butters',
                     age: 3,
                     type: 'dog'
@@ -344,7 +344,7 @@
 
                             </div>
                             <div class="button-area1 rectangle">
-                                <% for(var i=0; i < links.length; i++) { %>
+                                <% for(let i=0; i < links.length; i++) { %>
                                     <a data-id="<%=links[i].id%>" data-href="<%=links[i].link%>" data-recordid="<%=id%>" class="getlinkid">
 
                                         <%=links[i].title%>

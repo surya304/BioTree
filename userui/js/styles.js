@@ -1,16 +1,16 @@
 $('.colorbutton').on("click", function () {
-    var bronny = $(this).attr('id');
+    let bronny = $(this).attr('id');
     // console.log(bronny);
     $('.phonebody-internal').attr('id', bronny);
     $('.phonebody-internal1').attr('id', bronny);
 
-    var $a1 = $('.flex-name');
-    var $a2 = $('.flex-bio');
-    var $a3 = $('.button-area');
-    var $a4 = $('.button-area1');
-    var $a5 = $('.flex-name1');
-    var $image = $(".e1");
-    // var $blackimage = $("#e1");
+    let $a1 = $('.flex-name');
+    let $a2 = $('.flex-bio');
+    let $a3 = $('.button-area');
+    let $a4 = $('.button-area1');
+    let $a5 = $('.flex-name1');
+    let $image = $(".e1");
+    // let $blackimage = $("#e1");
 
 
 
@@ -56,8 +56,8 @@ $('.colorbutton').on("click", function () {
 // #########################################rounded border
 ////////////////////
 $("#secondswitch").on("click", function () {
-    var $a3 = $('.button-area');
-    var $a4 = $('.button-area1');
+    let $a3 = $('.button-area');
+    let $a4 = $('.button-area1');
 
     $a3.removeClass('rectangle');
 
@@ -69,8 +69,8 @@ $("#secondswitch").on("click", function () {
 });
 
 function checkit() {
-    var $a3 = $('.button-area');
-    var $a4 = $('.button-area1');
+    let $a3 = $('.button-area');
+    let $a4 = $('.button-area1');
     if ($a3.hasClass('rounded')) {
         console.log("do nothing");
 

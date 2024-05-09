@@ -1,17 +1,17 @@
 (function() {
   if (typeof document == 'undefined') return;
 
-  var _ = typeof require == 'function' ? require('..') : window._;
+  let _ = typeof require == 'function' ? require('..') : window._;
 
   QUnit.module('Cross Document');
   /* global iObject, iElement, iArguments, iFunction, iArray, iError, iString, iNumber, iBoolean, iDate, iRegExp, iNaN, iNull, iUndefined, ActiveXObject */
 
   // Setup remote variables for iFrame tests.
-  var iframe = document.createElement('iframe');
+  let iframe = document.createElement('iframe');
   iframe.frameBorder = iframe.height = iframe.width = 0;
   document.body.appendChild(iframe);
-  var iframeContent = iframe.contentDocument || iframe.contentWindow;
-  var iDoc = iframeContent.document || iframeContent;
+  let iframeContent = iframe.contentDocument || iframe.contentWindow;
+  let iDoc = iframeContent.document || iframeContent;
   iDoc.write(
     [
       '<script>',
@@ -113,7 +113,7 @@
 
   if (typeof ActiveXObject != 'undefined') {
     QUnit.test('IE host objects', function(assert) {
-      var xml = new ActiveXObject('Msxml2.DOMDocument.3.0');
+      let xml = new ActiveXObject('Msxml2.DOMDocument.3.0');
       assert.ok(!_.isNumber(xml));
       assert.ok(!_.isBoolean(xml));
       assert.ok(!_.isNaN(xml));
@@ -123,12 +123,12 @@
     });
 
     QUnit.test('#1621 IE 11 compat mode DOM elements are not functions', function(assert) {
-      var fn = function() {};
-      var xml = new ActiveXObject('Msxml2.DOMDocument.3.0');
-      var div = document.createElement('div');
+      let fn = function() {};
+      let xml = new ActiveXObject('Msxml2.DOMDocument.3.0');
+      let div = document.createElement('div');
 
       // JIT the function
-      var count = 200;
+      let count = 200;
       while (count--) {
         _.isFunction(fn);
       }

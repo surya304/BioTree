@@ -34,7 +34,7 @@
         $(document).ready(function () {
             $("#preview").hide();
             $('#polo').on("click", function () {
-                var name = $(this).html();
+                let name = $(this).html();
                 console.log(name);
                 if (name === "see preview") {
                     $(this).html("hide preview");
@@ -45,23 +45,23 @@
                 $("#preview").slideToggle();
                 $('.whole').toggle();
             });
-            // var dbdata1 = <%- JSON.stringify(socialmediaList) %>;
+            // let dbdata1 = <%- JSON.stringify(socialmediaList) %>;
             // console.table(dbdata1);
             // for (let index = 0; index < dbdata1.length; index++) {
 
 
             // }
-            var fullData = <%- JSON.stringify(socialmediaList) %>;
+            let fullData = <%- JSON.stringify(socialmediaList) %>;
             // console.log(fullData);
-            var sendeddata = <%-JSON.stringify(sociallists) %>;
+            let sendeddata = <%-JSON.stringify(sociallists) %>;
             // console.log(sendeddata);
 
 
 
 
             // console.log(fullData.length);
-            for (var i = fullData.length - 1; i >= 0; i--) {
-                for (var j = 0; j < sendeddata.length; j++) {
+            for (let i = fullData.length - 1; i >= 0; i--) {
+                for (let j = 0; j < sendeddata.length; j++) {
                     // console.log(i);
                     // console.log(j);
                     // console.log(fullData[i]);
@@ -76,21 +76,21 @@
             }
 
             // alert(JSON.stringify(myArray));
-            for (var j = 0; j < fullData.length; j++) {
+            for (let j = 0; j < fullData.length; j++) {
 
-                var name = fullData[j].name;
-                var id = fullData[j]._id;
-                var icon = fullData[j].icon;
+                let name = fullData[j].name;
+                let id = fullData[j]._id;
+                let icon = fullData[j].icon;
                 // console.log(name);
                 // console.log(id);
                 // console.log(icon);
-                var adddata = sendsocial(name, id, icon);
+                let adddata = sendsocial(name, id, icon);
                 $(".dropping").append(adddata);
             }
 
             function sendsocial() {
 
-                var $allData =
+                let $allData =
                     ` <a class="c-dropdown__item dropdown-item form-check form-check-inline hello" href="#" style="padding:4px 5px 0 5px;">
         <label class="iconbox1">
             <i class="` +
@@ -115,15 +115,15 @@
             // ##################################################
 
 
-            var border = <%-JSON.stringify(border.active) %>;
+            let border = <%-JSON.stringify(border.active) %>;
             console.log(border);
-            var $a3 = $('.button-area');
-            var $a4 = $('.button-area1');
+            let $a3 = $('.button-area');
+            let $a4 = $('.button-area1');
             if (border === "is-active") {
                 // $("#secondswitch").trigger('click');
 
-                var $a3 = $('.button-area');
-                var $a4 = $('.button-area1');
+                let $a3 = $('.button-area');
+                let $a4 = $('.button-area1');
 
                 $a3.removeClass('rectangle');
 
@@ -134,8 +134,8 @@
             }
 
             function checkit() {
-                var $a3 = $('.button-area');
-                var $a4 = $('.button-area1');
+                let $a3 = $('.button-area');
+                let $a4 = $('.button-area1');
                 if ($a3.hasClass('rounded')) {
                     console.log("do nothing");
 
@@ -180,7 +180,7 @@
                         <div class="c-dropdown__menu dropdown-menu here" aria-labelledby="dropdwonMenuProjects" style="padding-bottom: 0;padding-top: 0;">
 
 
-                            <% for(var i=0; i < clientsList.length; i++) { %>
+                            <% for(let i=0; i < clientsList.length; i++) { %>
                             <div class="row">
                                 <div class="col-md-12">
                                     <a class="c-dropdown__item  text-center " id="drop" href="#!">
@@ -570,7 +570,7 @@ background: linear-gradient(135deg, #3f53a9 0%, #6b4193 100%);text-align: center
                                         <ul id="sortable" class="sort">
                                             <!--  -->
                                             <!--  -->
-                                            <% for(var i=0; i < sociallists.length; i++) { %>
+                                            <% for(let i=0; i < sociallists.length; i++) { %>
                                             <div class="sortableitem u-mb-custom u-mt-custom">
                                                 <li>
                                                     <div class="row justify-content-left nolo r0">
@@ -641,7 +641,7 @@ background: linear-gradient(135deg, #3f53a9 0%, #6b4193 100%);text-align: center
                                     <div class="steph">
                                         <ul id="sortable1">
                                             <!-- first -->
-                                            <% for(var i=0; i < linklists.length; i++) { %>
+                                            <% for(let i=0; i < linklists.length; i++) { %>
 
                                             <div class="row sortableitem u-mt-custom">
                                                 <!-- <li> -->

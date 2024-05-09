@@ -1,6 +1,6 @@
 $(function () {
     // Instance the tour
-    var tour = new Tour({
+    let tour = new Tour({
         steps: [{
                 element: "#input10",
                 placement: "auto",

@@ -1,5 +1,5 @@
 (function() {
-  var _ = typeof require == 'function' ? require('..') : window._;
+  let _ = typeof require == 'function' ? require('..') : window._;
 
   QUnit.module('Collections');
 
@@ -8,7 +8,7 @@
       assert.strictEqual(num, i + 1, 'each iterators provide value and iteration count');
     });
 
-    var answers = [];
+    let answers = [];
     _.each([1, 2, 3], function(num){ answers.push(num * this.multiplier); }, {multiplier: 5});
     assert.deepEqual(answers, [5, 10, 15], 'context object property accessed');
 
@@ -17,7 +17,7 @@
     assert.deepEqual(answers, [1, 2, 3], 'can iterate a simple array');
 
     answers = [];
-    var obj = {one: 1, two: 2, three: 3};
+    let obj = {one: 1, two: 2, three: 3};
     obj.constructor.prototype.four = 4;
     _.each(obj, function(value, key){ answers.push(key); });
     assert.deepEqual(answers, ['one', 'two', 'three'], 'iterating over objects works, and ignores the object prototype.');
@@ -25,12 +25,12 @@
 
     // ensure the each function is JITed
     _(1000).times(function() { _.each([], function(){}); });
-    var count = 0;
+    let count = 0;
     obj = {1: 'foo', 2: 'bar', 3: 'baz'};
     _.each(obj, function(){ count++; });
     assert.strictEqual(count, 3, 'the fun should be called only 3 times');
 
-    var answer = null;
+    let answer = null;
     _.each([1, 2, 3], function(num, index, arr){ if (_.include(arr, num)) answer = true; });
     assert.ok(answer, 'can reference the original collection from inside the iterator');
 
@@ -40,7 +40,7 @@
 
     _.each(false, function(){});
 
-    var a = [1, 2, 3];
+    let a = [1, 2, 3];
     assert.strictEqual(_.each(a, function(){}), a);
     assert.strictEqual(_.each(null, function(){}), null);
   });
@@ -60,14 +60,14 @@
   });
 
   QUnit.test('Iterating objects with sketchy length properties', function(assert) {
-    var functions = [
+    let functions = [
       'each', 'map', 'filter', 'find',
       'some', 'every', 'max', 'min',
       'groupBy', 'countBy', 'partition', 'indexBy'
     ];
-    var reducers = ['reduce', 'reduceRight'];
+    let reducers = ['reduce', 'reduceRight'];
 
-    var tricks = [
+    let tricks = [
       {length: '5'},
       {length: {valueOf: _.constant(5)}},
       {length: Math.pow(2, 53) + 1},
@@ -80,7 +80,7 @@
     assert.expect(tricks.length * (functions.length + reducers.length + 4));
 
     _.each(tricks, function(trick) {
-      var length = trick.length;
+      let length = trick.length;
       assert.strictEqual(_.size(trick), 1, 'size on obj with length: ' + length);
       assert.deepEqual(_.toArray(trick), [length], 'toArray on obj with length: ' + length);
       assert.deepEqual(_.shuffle(trick), [length], 'shuffle on obj with length: ' + length);
@@ -101,30 +101,30 @@
 
   QUnit.test('Resistant to collection length and properties changing while iterating', function(assert) {
 
-    var collection = [
+    let collection = [
       'each', 'map', 'filter', 'find',
       'some', 'every', 'max', 'min', 'reject',
       'groupBy', 'countBy', 'partition', 'indexBy',
       'reduce', 'reduceRight'
     ];
-    var array = [
+    let array = [
       'findIndex', 'findLastIndex'
     ];
-    var object = [
+    let object = [
       'mapObject', 'findKey', 'pick', 'omit'
     ];
 
     _.each(collection.concat(array), function(method) {
-      var sparseArray = [1, 2, 3];
+      let sparseArray = [1, 2, 3];
       sparseArray.length = 100;
-      var answers = 0;
+      let answers = 0;
       _[method](sparseArray, function(){
         ++answers;
         return method === 'every' ? true : null;
       }, {});
       assert.strictEqual(answers, 100, method + ' enumerates [0, length)');
 
-      var growingCollection = [1, 2, 3], count = 0;
+      let growingCollection = [1, 2, 3], count = 0;
       _[method](growingCollection, function() {
         if (count < 10) growingCollection.push(count++);
         return method === 'every' ? true : null;
@@ -133,7 +133,7 @@
     });
 
     _.each(collection.concat(object), function(method) {
-      var changingObject = {0: 0, 1: 1}, count = 0;
+      let changingObject = {0: 0, 1: 1}, count = 0;
       _[method](changingObject, function(val) {
         if (count < 10) changingObject[++count] = val + 1;
         return method === 'every' ? true : null;
@@ -144,16 +144,16 @@
   });
 
   QUnit.test('map', function(assert) {
-    var doubled = _.map([1, 2, 3], function(num){ return num * 2; });
+    let doubled = _.map([1, 2, 3], function(num){ return num * 2; });
     assert.deepEqual(doubled, [2, 4, 6], 'doubled numbers');
 
-    var tripled = _.map([1, 2, 3], function(num){ return num * this.multiplier; }, {multiplier: 3});
+    let tripled = _.map([1, 2, 3], function(num){ return num * this.multiplier; }, {multiplier: 3});
     assert.deepEqual(tripled, [3, 6, 9], 'tripled numbers with context');
 
     doubled = _([1, 2, 3]).map(function(num){ return num * 2; });
     assert.deepEqual(doubled, [2, 4, 6], 'OO-style doubled numbers');
 
-    var ids = _.map({length: 2, 0: {id: '1'}, 1: {id: '2'}}, function(n){
+    let ids = _.map({length: 2, 0: {id: '1'}, 1: {id: '2'}}, function(n){
       return n.id;
     });
     assert.deepEqual(ids, ['1', '2'], 'Can use collection methods on Array-likes.');
@@ -165,7 +165,7 @@
     }, [5]), [1], 'called with context');
 
     // Passing a property name like _.pluck.
-    var people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}];
+    let people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}];
     assert.deepEqual(_.map(people, 'name'), ['moe', 'curly'], 'predicate string map to object properties');
   });
 
@@ -174,10 +174,10 @@
   });
 
   QUnit.test('reduce', function(assert) {
-    var sum = _.reduce([1, 2, 3], function(memo, num){ return memo + num; }, 0);
+    let sum = _.reduce([1, 2, 3], function(memo, num){ return memo + num; }, 0);
     assert.strictEqual(sum, 6, 'can sum up an array');
 
-    var context = {multiplier: 3};
+    let context = {multiplier: 3};
     sum = _.reduce([1, 2, 3], function(memo, num){ return memo + num * this.multiplier; }, 0, context);
     assert.strictEqual(sum, 18, 'can reduce with a context object');
 
@@ -187,7 +187,7 @@
     sum = _.reduce([1, 2, 3], function(memo, num){ return memo + num; });
     assert.strictEqual(sum, 6, 'default initial value');
 
-    var prod = _.reduce([1, 2, 3, 4], function(memo, num){ return memo * num; });
+    let prod = _.reduce([1, 2, 3, 4], function(memo, num){ return memo * num; });
     assert.strictEqual(prod, 24, 'can reduce via multiplication');
 
     assert.strictEqual(_.reduce(null, _.noop, 138), 138, 'handles a null (with initial value) properly');
@@ -205,13 +205,13 @@
   });
 
   QUnit.test('reduceRight', function(assert) {
-    var list = _.reduceRight(['foo', 'bar', 'baz'], function(memo, str){ return memo + str; }, '');
+    let list = _.reduceRight(['foo', 'bar', 'baz'], function(memo, str){ return memo + str; }, '');
     assert.strictEqual(list, 'bazbarfoo', 'can perform right folds');
 
     list = _.reduceRight(['foo', 'bar', 'baz'], function(memo, str){ return memo + str; });
     assert.strictEqual(list, 'bazbarfoo', 'default initial value');
 
-    var sum = _.reduceRight({a: 1, b: 2, c: 3}, function(memo, num){ return memo + num; });
+    let sum = _.reduceRight({a: 1, b: 2, c: 3}, function(memo, num){ return memo + num; });
     assert.strictEqual(sum, 6, 'default initial value on object');
 
     assert.strictEqual(_.reduceRight(null, _.noop, 138), 138, 'handles a null (with initial value) properly');
@@ -222,12 +222,12 @@
 
     // Assert that the correct arguments are being passed.
 
-    var args,
+    let args,
         init = {},
         object = {a: 1, b: 2},
         lastKey = _.keys(object).pop();
 
-    var expected = lastKey === 'a'
+    let expected = lastKey === 'a'
       ? [init, 1, 'a', object]
       : [init, 2, 'b', object];
 
@@ -259,7 +259,7 @@
   });
 
   QUnit.test('find', function(assert) {
-    var array = [1, 2, 3, 4];
+    let array = [1, 2, 3, 4];
     assert.strictEqual(_.find(array, function(n) { return n > 2; }), 3, 'should return first found `value`');
     assert.strictEqual(_.find(array, function() { return false; }), void 0, 'should return `undefined` if `value` is not found');
 
@@ -267,16 +267,16 @@
     assert.strictEqual(_.find(array, function(x) { return x === 55; }), void 0, 'iterates array-likes correctly');
 
     // Matching an object like _.findWhere.
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}, {a: 2, b: 4}];
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}, {a: 2, b: 4}];
     assert.deepEqual(_.find(list, {a: 1}), {a: 1, b: 2}, 'can be used as findWhere');
     assert.deepEqual(_.find(list, {b: 4}), {a: 1, b: 4});
     assert.ok(!_.find(list, {c: 1}), 'undefined when not found');
     assert.ok(!_.find([], {c: 1}), 'undefined when searching empty list');
 
-    var result = _.find([1, 2, 3], function(num){ return num * 2 === 4; });
+    let result = _.find([1, 2, 3], function(num){ return num * 2 === 4; });
     assert.strictEqual(result, 2, 'found the first "2" and broke the loop');
 
-    var obj = {
+    let obj = {
       a: {x: 1, z: 3},
       b: {x: 2, z: 2},
       c: {x: 3, z: 4},
@@ -301,9 +301,9 @@
   });
 
   QUnit.test('filter', function(assert) {
-    var evenArray = [1, 2, 3, 4, 5, 6];
-    var evenObject = {one: 1, two: 2, three: 3};
-    var isEven = function(num){ return num % 2 === 0; };
+    let evenArray = [1, 2, 3, 4, 5, 6];
+    let evenObject = {one: 1, two: 2, three: 3};
+    let isEven = function(num){ return num % 2 === 0; };
 
     assert.deepEqual(_.filter(evenArray, isEven), [2, 4, 6]);
     assert.deepEqual(_.filter(evenObject, isEven), [2], 'can filter objects');
@@ -314,7 +314,7 @@
     }, evenObject);
 
     // Can be used like _.where.
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
     assert.deepEqual(_.filter(list, {a: 1}), [{a: 1, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}]);
     assert.deepEqual(_.filter(list, {b: 2}), [{a: 1, b: 2}, {a: 2, b: 2}]);
     assert.deepEqual(_.filter(list, {}), list, 'Empty object accepts all items');
@@ -326,12 +326,12 @@
   });
 
   QUnit.test('reject', function(assert) {
-    var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 === 0; });
+    let odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 === 0; });
     assert.deepEqual(odds, [1, 3, 5], 'rejected each even number');
 
-    var context = 'obj';
+    let context = 'obj';
 
-    var evens = _.reject([1, 2, 3, 4, 5, 6], function(num){
+    let evens = _.reject([1, 2, 3, 4, 5, 6], function(num){
       assert.strictEqual(context, 'obj');
       return num % 2 !== 0;
     }, context);
@@ -340,7 +340,7 @@
     assert.deepEqual(_.reject([odds, {one: 1, two: 2, three: 3}], 'two'), [odds], 'predicate string map to object properties');
 
     // Can be used like _.where.
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
     assert.deepEqual(_.reject(list, {a: 1}), [{a: 2, b: 2}]);
     assert.deepEqual(_.reject(list, {b: 2}), [{a: 1, b: 3}, {a: 1, b: 4}]);
     assert.deepEqual(_.reject(list, {}), [], 'Returns empty list given empty object');
@@ -356,7 +356,7 @@
     assert.strictEqual(_.every([0], _.identity), false, 'cast to boolean - false');
     assert.ok(!_.every([void 0, void 0, void 0], _.identity), 'works with arrays of undefined');
 
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
     assert.ok(!_.every(list, {a: 1, b: 2}), 'Can be called with object');
     assert.ok(_.every(list, 'a'), 'String mapped to object property');
 
@@ -386,7 +386,7 @@
     assert.strictEqual(_.some([0], _.identity), false, 'cast to boolean - false');
     assert.ok(_.some([false, false, true]));
 
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
     assert.ok(!_.some(list, {a: 5, b: 2}), 'Can be called with object');
     assert.ok(_.some(list, 'a'), 'String mapped to object property');
 
@@ -416,7 +416,7 @@
     assert.strictEqual(_.includes({moe: 1, larry: 3, curly: 9}, 3), true, '_.includes on objects checks their values');
     assert.ok(_([1, 2, 3]).includes(2), 'OO-style includes');
 
-    var numbers = [1, 2, 3, 1, 2, 3, 1, 2, 3];
+    let numbers = [1, 2, 3, 1, 2, 3, 1, 2, 3];
     assert.strictEqual(_.includes(numbers, 1, 1), true, 'takes a fromIndex');
     assert.strictEqual(_.includes(numbers, 1, -1), false, 'takes a fromIndex');
     assert.strictEqual(_.includes(numbers, 1, -2), false, 'takes a fromIndex');
@@ -452,8 +452,8 @@
 
   QUnit.test('invoke', function(assert) {
     assert.expect(13);
-    var list = [[5, 1, 7], [3, 2, 1]];
-    var result = _.invoke(list, 'sort');
+    let list = [[5, 1, 7], [3, 2, 1]];
+    let result = _.invoke(list, 'sort');
     assert.deepEqual(result[0], [1, 5, 7], 'first array sorted');
     assert.deepEqual(result[1], [1, 2, 3], 'second array sorted');
 
@@ -469,9 +469,9 @@
       _.invoke([{a: 1}], 'a');
     }, TypeError, 'throws for non-functions');
 
-    var getFoo = _.constant('foo');
-    var getThis = function() { return this; };
-    var item = {
+    let getFoo = _.constant('foo');
+    let getThis = function() { return this; };
+    let item = {
       a: {
         b: getFoo,
         c: getThis,
@@ -485,7 +485,7 @@
         };
       }
     };
-    var arr = [item];
+    let arr = [item];
     assert.deepEqual(_.invoke(arr, ['a', 'b']), ['foo'], 'supports deep method access via an array syntax');
     assert.deepEqual(_.invoke(arr, ['a', 'c']), [item.a], 'executes deep methods on their direct parent');
     assert.deepEqual(_.invoke(arr, ['a', 'd', 'z']), [void 0], 'does not try to access attributes of non-objects');
@@ -503,8 +503,8 @@
   });
 
   QUnit.test('invoke w/ function reference', function(assert) {
-    var list = [[5, 1, 7], [3, 2, 1]];
-    var result = _.invoke(list, Array.prototype.sort);
+    let list = [[5, 1, 7], [3, 2, 1]];
+    let result = _.invoke(list, Array.prototype.sort);
     assert.deepEqual(result[0], [1, 5, 7], 'first array sorted');
     assert.deepEqual(result[1], [1, 2, 3], 'second array sorted');
 
@@ -518,10 +518,10 @@
     String.prototype.call = function() {
       return 42;
     };
-    var list = [[5, 1, 7], [3, 2, 1]];
-    var s = 'foo';
+    let list = [[5, 1, 7], [3, 2, 1]];
+    let s = 'foo';
     assert.strictEqual(s.call(), 42, 'call function exists');
-    var result = _.invoke(list, 'sort');
+    let result = _.invoke(list, 'sort');
     assert.deepEqual(result[0], [1, 5, 7], 'first array sorted');
     assert.deepEqual(result[1], [1, 2, 3], 'second array sorted');
     delete String.prototype.call;
@@ -529,7 +529,7 @@
   });
 
   QUnit.test('pluck', function(assert) {
-    var people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}];
+    let people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}];
     assert.deepEqual(_.pluck(people, 'name'), ['moe', 'curly'], 'pulls names out of objects');
     assert.deepEqual(_.pluck(people, 'address'), [void 0, void 0], 'missing properties are returned as undefined');
     //compat: most flexible handling of edge cases
@@ -537,8 +537,8 @@
   });
 
   QUnit.test('where', function(assert) {
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
-    var result = _.where(list, {a: 1});
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
+    let result = _.where(list, {a: 1});
     assert.strictEqual(result.length, 3);
     assert.strictEqual(result[result.length - 1].b, 4);
     result = _.where(list, {b: 2});
@@ -553,8 +553,8 @@
   });
 
   QUnit.test('findWhere', function(assert) {
-    var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}, {a: 2, b: 4}];
-    var result = _.findWhere(list, {a: 1});
+    let list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}, {a: 2, b: 4}];
+    let result = _.findWhere(list, {a: 1});
     assert.deepEqual(result, {a: 1, b: 2});
     result = _.findWhere(list, {b: 4});
     assert.deepEqual(result, {a: 1, b: 4});
@@ -573,7 +573,7 @@
       this.y = 5;
       this.x = 'foo';
     }
-    var expect = {c: 1, x: 'foo', y: 5};
+    let expect = {c: 1, x: 'foo', y: 5};
     assert.deepEqual(_.findWhere([{y: 5, b: 6}, expect], new TestClass()), expect, 'uses class instance properties');
   });
 
@@ -584,7 +584,7 @@
 
     assert.strictEqual(_.max([1, 2, 3]), 3, 'can perform a regular Math.max');
 
-    var neg = _.max([1, 2, 3], function(num){ return -num; });
+    let neg = _.max([1, 2, 3], function(num){ return -num; });
     assert.strictEqual(neg, 1, 'can perform a computation-based max');
 
     assert.strictEqual(-Infinity, _.max({}), 'Maximum value of an empty object');
@@ -610,9 +610,9 @@
 
     assert.deepEqual(_.map([[1, 2, 3], [4, 5, 6]], _.max), [3, 6], 'Finds correct max in array when mapping through multiple arrays');
 
-    var a = {x: -Infinity};
-    var b = {x: -Infinity};
-    var iterator = function(o){ return o.x; };
+    let a = {x: -Infinity};
+    let b = {x: -Infinity};
+    let iterator = function(o){ return o.x; };
     assert.strictEqual(_.max([a, b], iterator), a, 'Respects iterator return value of -Infinity');
 
     assert.deepEqual(_.max([{a: 1}, {a: 0, b: 3}, {a: 4}, {a: 2}], 'a'), {a: 4}, 'String keys use property iterator');
@@ -629,7 +629,7 @@
 
     assert.strictEqual(_.min([1, 2, 3]), 1, 'can perform a regular Math.min');
 
-    var neg = _.min([1, 2, 3], function(num){ return -num; });
+    let neg = _.min([1, 2, 3], function(num){ return -num; });
     assert.strictEqual(neg, 3, 'can perform a computation-based min');
 
     assert.strictEqual(_.min({}), Infinity, 'Minimum value of an empty object');
@@ -638,8 +638,8 @@
 
     assert.deepEqual(_.map([[1, 2, 3], [4, 5, 6]], _.min), [1, 4], 'Finds correct min in array when mapping through multiple arrays');
 
-    var now = new Date(9999999999);
-    var then = new Date(0);
+    let now = new Date(9999999999);
+    let then = new Date(0);
     assert.strictEqual(_.min([now, then]), then);
 
     assert.strictEqual(_.min(_.range(1, 300000)), 1, 'Minimum value of a too-big array');
@@ -653,9 +653,9 @@
     assert.strictEqual(_.min([0, 1, 2, 3, 4]), 0, 'Finds correct min in array containing a zero');
     assert.strictEqual(_.min([-3, -2, -1, 0]), -3, 'Finds correct min in array containing negative numbers');
 
-    var a = {x: Infinity};
-    var b = {x: Infinity};
-    var iterator = function(o){ return o.x; };
+    let a = {x: Infinity};
+    let b = {x: Infinity};
+    let iterator = function(o){ return o.x; };
     assert.strictEqual(_.min([a, b], iterator), a, 'Respects iterator return value of Infinity');
 
     assert.deepEqual(_.min([{a: 1}, {a: 0, b: 3}, {a: 4}, {a: 2}], 'a'), {a: 0, b: 3}, 'String keys use property iterator');
@@ -666,15 +666,15 @@
   });
 
   QUnit.test('sortBy', function(assert) {
-    var people = [{name: 'curly', age: 50}, {name: 'moe', age: 30}];
+    let people = [{name: 'curly', age: 50}, {name: 'moe', age: 30}];
     people = _.sortBy(people, function(person){ return person.age; });
     assert.deepEqual(_.pluck(people, 'name'), ['moe', 'curly'], 'stooges sorted by age');
 
-    var list = [void 0, 4, 1, void 0, 3, 2];
+    let list = [void 0, 4, 1, void 0, 3, 2];
     assert.deepEqual(_.sortBy(list, _.identity), [1, 2, 3, 4, void 0, void 0], 'sortBy with undefined values');
 
     list = ['one', 'two', 'three', 'four', 'five'];
-    var sorted = _.sortBy(list, 'length');
+    let sorted = _.sortBy(list, 'length');
     assert.deepEqual(sorted, ['one', 'two', 'four', 'five', 'three'], 'sorted by length');
 
     function Pair(x, y) {
@@ -682,7 +682,7 @@
       this.y = y;
     }
 
-    var stableArray = [
+    let stableArray = [
       new Pair(1, 1), new Pair(1, 2),
       new Pair(1, 3), new Pair(1, 4),
       new Pair(1, 5), new Pair(1, 6),
@@ -694,9 +694,9 @@
       new Pair(void 0, 5), new Pair(void 0, 6)
     ];
 
-    var stableObject = _.object('abcdefghijklmnopqr'.split(''), stableArray);
+    let stableObject = _.object('abcdefghijklmnopqr'.split(''), stableArray);
 
-    var actual = _.sortBy(stableArray, function(pair) {
+    let actual = _.sortBy(stableArray, function(pair) {
       return pair.x;
     });
 
@@ -714,17 +714,17 @@
   });
 
   QUnit.test('groupBy', function(assert) {
-    var parity = _.groupBy([1, 2, 3, 4, 5, 6], function(num){ return num % 2; });
+    let parity = _.groupBy([1, 2, 3, 4, 5, 6], function(num){ return num % 2; });
     assert.ok('0' in parity && '1' in parity, 'created a group for each value');
     assert.deepEqual(parity[0], [2, 4, 6], 'put each even number in the right group');
 
-    var list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-    var grouped = _.groupBy(list, 'length');
+    let list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    let grouped = _.groupBy(list, 'length');
     assert.deepEqual(grouped['3'], ['one', 'two', 'six', 'ten']);
     assert.deepEqual(grouped['4'], ['four', 'five', 'nine']);
     assert.deepEqual(grouped['5'], ['three', 'seven', 'eight']);
 
-    var context = {};
+    let context = {};
     _.groupBy([{}], function(){ assert.strictEqual(this, context); }, context);
 
     grouped = _.groupBy([4.2, 6.1, 6.4], function(num) {
@@ -733,7 +733,7 @@
     assert.strictEqual(grouped.constructor.length, 1);
     assert.strictEqual(grouped.hasOwnProperty.length, 2);
 
-    var array = [{}];
+    let array = [{}];
     _.groupBy(array, function(value, index, obj){ assert.strictEqual(obj, array); });
 
     array = [1, 2, 1, 2, 3];
@@ -741,7 +741,7 @@
     assert.strictEqual(grouped['1'].length, 2);
     assert.strictEqual(grouped['3'].length, 1);
 
-    var matrix = [
+    let matrix = [
       [1, 2],
       [1, 3],
       [2, 3]
@@ -749,32 +749,32 @@
     assert.deepEqual(_.groupBy(matrix, 0), {1: [[1, 2], [1, 3]], 2: [[2, 3]]});
     assert.deepEqual(_.groupBy(matrix, 1), {2: [[1, 2]], 3: [[1, 3], [2, 3]]});
 
-    var liz = {name: 'Liz', stats: {power: 10}};
-    var chelsea = {name: 'Chelsea', stats: {power: 10}};
-    var jordan = {name: 'Jordan', stats: {power: 6}};
-    var collection = [liz, chelsea, jordan];
-    var expected = {
+    let liz = {name: 'Liz', stats: {power: 10}};
+    let chelsea = {name: 'Chelsea', stats: {power: 10}};
+    let jordan = {name: 'Jordan', stats: {power: 6}};
+    let collection = [liz, chelsea, jordan];
+    let expected = {
       10: [liz, chelsea],
       6: [jordan]
     };
     assert.deepEqual(_.groupBy(collection, ['stats', 'power']), expected, 'can group by deep properties');
 
-    var foos = [{foo: [1, 2]}, {foo: [1, 2]}]
+    let foos = [{foo: [1, 2]}, {foo: [1, 2]}]
     assert.deepEqual(_.groupBy(foos, 'foo'), {"1,2": foos}, 'will coerce arrays to string keys');
   });
 
   QUnit.test('indexBy', function(assert) {
-    var parity = _.indexBy([1, 2, 3, 4, 5], function(num){ return num % 2 === 0; });
+    let parity = _.indexBy([1, 2, 3, 4, 5], function(num){ return num % 2 === 0; });
     assert.strictEqual(parity['true'], 4);
     assert.strictEqual(parity['false'], 5);
 
-    var list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-    var grouped = _.indexBy(list, 'length');
+    let list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    let grouped = _.indexBy(list, 'length');
     assert.strictEqual(grouped['3'], 'ten');
     assert.strictEqual(grouped['4'], 'nine');
     assert.strictEqual(grouped['5'], 'eight');
 
-    var array = [1, 2, 1, 2, 3];
+    let array = [1, 2, 1, 2, 3];
     grouped = _.indexBy(array);
     assert.strictEqual(grouped['1'], 1);
     assert.strictEqual(grouped['2'], 2);
@@ -782,17 +782,17 @@
   });
 
   QUnit.test('countBy', function(assert) {
-    var parity = _.countBy([1, 2, 3, 4, 5], function(num){ return num % 2 === 0; });
+    let parity = _.countBy([1, 2, 3, 4, 5], function(num){ return num % 2 === 0; });
     assert.strictEqual(parity['true'], 2);
     assert.strictEqual(parity['false'], 3);
 
-    var list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-    var grouped = _.countBy(list, 'length');
+    let list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    let grouped = _.countBy(list, 'length');
     assert.strictEqual(grouped['3'], 4);
     assert.strictEqual(grouped['4'], 3);
     assert.strictEqual(grouped['5'], 3);
 
-    var context = {};
+    let context = {};
     _.countBy([{}], function(){ assert.strictEqual(this, context); }, context);
 
     grouped = _.countBy([4.2, 6.1, 6.4], function(num) {
@@ -801,7 +801,7 @@
     assert.strictEqual(grouped.constructor, 1);
     assert.strictEqual(grouped.hasOwnProperty, 2);
 
-    var array = [{}];
+    let array = [{}];
     _.countBy(array, function(value, index, obj){ assert.strictEqual(obj, array); });
 
     array = [1, 2, 1, 2, 3];
@@ -809,14 +809,14 @@
     assert.strictEqual(grouped['1'], 2);
     assert.strictEqual(grouped['3'], 1);
 
-    var foos = [{foo: [1, 2]}, {foo: [1, 2]}]
+    let foos = [{foo: [1, 2]}, {foo: [1, 2]}]
     assert.deepEqual(_.countBy(foos, 'foo'), {'1,2': 2}, 'will coerce arrays to string keys');
   });
 
   QUnit.test('shuffle', function(assert) {
     assert.deepEqual(_.shuffle([1]), [1], 'behaves correctly on size 1 arrays');
-    var numbers = _.range(20);
-    var shuffled = _.shuffle(numbers);
+    let numbers = _.range(20);
+    let shuffled = _.shuffle(numbers);
     assert.notDeepEqual(numbers, shuffled, 'does change the order'); // Chance of false negative: 1 in ~2.4*10^18
     assert.notStrictEqual(numbers, shuffled, 'original object is unmodified');
     assert.deepEqual(numbers, _.sortBy(shuffled), 'contains the same members before and after shuffle');
@@ -829,8 +829,8 @@
   QUnit.test('sample', function(assert) {
     assert.strictEqual(_.sample([1]), 1, 'behaves correctly when no second parameter is given');
     assert.deepEqual(_.sample([1, 2, 3], -2), [], 'behaves correctly on negative n');
-    var numbers = _.range(10);
-    var allSampled = _.sample(numbers, 10).sort();
+    let numbers = _.range(10);
+    let allSampled = _.sample(numbers, 10).sort();
     assert.deepEqual(allSampled, numbers, 'contains the same members before and after sample');
     allSampled = _.sample(numbers, 20).sort();
     assert.deepEqual(allSampled, numbers, 'also works when sampling more objects than are present');
@@ -840,30 +840,30 @@
     assert.notStrictEqual(_.sample([1, 2, 3], 0), [], 'sampling an array with 0 picks returns an empty array');
     assert.deepEqual(_.sample([1, 2], -1), [], 'sampling a negative number of picks returns an empty array');
     assert.ok(_.contains([1, 2, 3], _.sample({a: 1, b: 2, c: 3})), 'sample one value from an object');
-    var partialSample = _.sample(_.range(1000), 10);
-    var partialSampleSorted = partialSample.sort();
+    let partialSample = _.sample(_.range(1000), 10);
+    let partialSampleSorted = partialSample.sort();
     assert.notDeepEqual(partialSampleSorted, _.range(10), 'samples from the whole array, not just the beginning');
   });
 
   QUnit.test('toArray', function(assert) {
     assert.ok(!_.isArray(arguments), 'arguments object is not an array');
     assert.ok(_.isArray(_.toArray(arguments)), 'arguments object converted into array');
-    var a = [1, 2, 3];
+    let a = [1, 2, 3];
     assert.notStrictEqual(_.toArray(a), a, 'array is cloned');
     assert.deepEqual(_.toArray(a), [1, 2, 3], 'cloned array contains same elements');
 
-    var numbers = _.toArray({one: 1, two: 2, three: 3});
+    let numbers = _.toArray({one: 1, two: 2, three: 3});
     assert.deepEqual(numbers, [1, 2, 3], 'object flattened into array');
 
-    var hearts = '\uD83D\uDC95';
-    var pair = hearts.split('');
-    var expected = [pair[0], hearts, '&', hearts, pair[1]];
+    let hearts = '\uD83D\uDC95';
+    let pair = hearts.split('');
+    let expected = [pair[0], hearts, '&', hearts, pair[1]];
     assert.deepEqual(_.toArray(expected.join('')), expected, 'maintains astral characters');
     assert.deepEqual(_.toArray(''), [], 'empty string into empty array');
 
     if (typeof document != 'undefined') {
       // test in IE < 9
-      var actual;
+      let actual;
       try {
         actual = _.toArray(document.childNodes);
       } catch (e) { /* ignored */ }
@@ -876,7 +876,7 @@
     assert.strictEqual(_.size([1, 2, 3]), 3, 'can compute the size of an array');
     assert.strictEqual(_.size({length: 3, 0: 0, 1: 0, 2: 0}), 3, 'can compute the size of Array-likes');
 
-    var func = function() {
+    let func = function() {
       return _.size(arguments);
     };
 
@@ -890,7 +890,7 @@
   });
 
   QUnit.test('partition', function(assert) {
-    var list = [0, 1, 2, 3, 4, 5];
+    let list = [0, 1, 2, 3, 4, 5];
     assert.deepEqual(_.partition(list, function(x) { return x < 4; }), [[0, 1, 2, 3], [4, 5]], 'handles bool return values');
     assert.deepEqual(_.partition(list, function(x) { return x & 1; }), [[1, 3, 5], [0, 2, 4]], 'handles 0 and 1 return values');
     assert.deepEqual(_.partition(list, function(x) { return x - 3; }), [[0, 1, 2, 4, 5], [3]], 'handles other numeric return values');
@@ -906,12 +906,12 @@
     assert.deepEqual(_.partition([{x: 1}, {x: 0}, {x: 1}], 'x'), [[{x: 1}, {x: 1}], [{x: 0}]], 'Takes a string');
 
     // Context
-    var predicate = function(x){ return x === this.x; };
+    let predicate = function(x){ return x === this.x; };
     assert.deepEqual(_.partition([1, 2, 3], predicate, {x: 2}), [[2], [1, 3]], 'partition takes a context argument');
 
     assert.deepEqual(_.partition([{a: 1}, {b: 2}, {a: 1, b: 2}], {a: 1}), [[{a: 1}, {a: 1, b: 2}], [{b: 2}]], 'predicate can be object');
 
-    var object = {a: 1};
+    let object = {a: 1};
     _.partition(object, function(val, key, obj) {
       assert.strictEqual(val, 1);
       assert.strictEqual(key, 'a');
@@ -922,10 +922,10 @@
 
   if (typeof document != 'undefined') {
     QUnit.test('Can use various collection methods on NodeLists', function(assert) {
-      var parent = document.createElement('div');
+      let parent = document.createElement('div');
       parent.innerHTML = '<span id=id1></span>textnode<span id=id2></span>';
 
-      var elementChildren = _.filter(parent.childNodes, _.isElement);
+      let elementChildren = _.filter(parent.childNodes, _.isElement);
       assert.strictEqual(elementChildren.length, 2);
 
       assert.deepEqual(_.map(elementChildren, 'id'), ['id1', 'id2']);

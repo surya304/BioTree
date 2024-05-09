@@ -13,7 +13,7 @@ $(function() {
     //  name = false;
     // }
     $('.checkshort').on("keyup", function() {
-        var value = $(this).val();
+        let value = $(this).val();
         // console.log(value);
         if (value.length = 0) {
             alert("please enter only 5 letters");
@@ -28,15 +28,15 @@ $(function() {
             success: function(data) {
 
                 // console.log(data.data);
-                var urlavailable = data.data;
+                let urlavailable = data.data;
                 senderror(urlavailable);
 
 
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                var x = JSON.parse(XMLHttpRequest.responseText);
-                var urlexists = x.error;
+                let x = JSON.parse(XMLHttpRequest.responseText);
+                let urlexists = x.error;
                 // console.log(urlexists);
 
                 senderror(urlexists);
@@ -69,7 +69,7 @@ $(function() {
 
 
     $('.bioname').on('keyup', function(e) {
-        // var a1 = $(this).val()
+        // let a1 = $(this).val()
 
         // if (a1.length < 20) {
         //     check1()
@@ -86,7 +86,7 @@ $(function() {
     })
 
     function checkbioname() {
-        var name = $(".bioname").val().length;
+        let name = $(".bioname").val().length;
         if (name > 20) {
             $("#name-err").html("Max allowed For Name - 20 characters");
             $("#name-err").show();
@@ -105,7 +105,7 @@ $(function() {
     })
 
     function checkbio() {
-        var name = $(".bio").val().length;
+        let name = $(".bio").val().length;
         if (name > 140) {
             $("#bio-err").html("Max allowed For Bio- 140 characters");
             $("#bio-err").show();
@@ -121,27 +121,27 @@ $(function() {
     function check1() {
         $('.flex-name').empty()
 
-        var val = $('.bioname').val()
+        let val = $('.bioname').val()
 
-        var a2 = foo(val)
+        let a2 = foo(val)
         $('.flex-name').append(a2)
     }
 
     function check2() {
         $('.flex-bio').empty()
-        var val = $('.bio').val()
+        let val = $('.bio').val()
 
-        var a2 = foo1(val)
+        let a2 = foo1(val)
         $('.flex-bio').append(a2)
     }
 
     function foo1(params) {
-        var data = `<div>` + params + `</div>`
+        let data = `<div>` + params + `</div>`
         return data
     }
 
     function foo(params) {
-        var data = `<div class="title">` + params + `</div>`
+        let data = `<div class="title">` + params + `</div>`
         return data
     }
     // console.log(name)
@@ -149,7 +149,7 @@ $(function() {
 
     $style2 = $('.flex-bio')
     $('#alert1').hide()
-    var bio = false
+    let bio = false
         // if ($('#alert1').css('display') == 'none') {
         //  bio = true;
 
@@ -157,7 +157,7 @@ $(function() {
     //  bio = false;
     // }
     // $('.bio').on('keyup', function(e) {
-    //     var a1 = $(this).val()
+    //     let a1 = $(this).val()
 
     //     if (a1.length < 100) {
     //         check2()
@@ -182,11 +182,11 @@ $(function() {
 
         // ###########################################social validation
         e.preventDefault()
-        var socialboolean = false
-        var $appendData1 = $('#sortable').children()
+        let socialboolean = false
+        let $appendData1 = $('#sortable').children()
 
         for (let index = 0; index < $appendData1.length; index++) {
-            var $dynamic = $appendData1.eq(index)
+            let $dynamic = $appendData1.eq(index)
                 // console.log($dynamic.children().html());
             const href = $dynamic.children().find('.ip').val();
             if (href === '') {
@@ -202,12 +202,12 @@ $(function() {
 
         // ###########################################social validation complete end
         // ###########################################links validation#############################################################//
-        var oyy = $('#sortable1').children()
-        var hrefboolean = false;
-        var linkboolean = false;
+        let oyy = $('#sortable1').children()
+        let hrefboolean = false;
+        let linkboolean = false;
 
         for (let index = 0; index < oyy.length; index++) {
-            var $dynamic = oyy.eq(index)
+            let $dynamic = oyy.eq(index)
             const href = $dynamic.children().find('.link').val()
             const title = $dynamic.children().find('.title').val()
                 // console.log($dynamic.append('<span class="alert-danger disit">please Enter the URL here</span>'));
@@ -238,9 +238,9 @@ $(function() {
 
         // check name and bio length
 
-        var bioname = $('.bioname').val();
-        var bio = $('.bio').val();
-        var nameandbio = false;
+        let bioname = $('.bioname').val();
+        let bio = $('.bio').val();
+        let nameandbio = false;
         if (bioname.length < 20 && bio.length < 140) {} else {
             swal("Oops...",
                 "Oops! Please check name and bio length",
@@ -255,8 +255,8 @@ $(function() {
 
 
 
-        var shortlength = false
-        var shortUrlCode = $('.checkshort').val()
+        let shortlength = false
+        let shortUrlCode = $('.checkshort').val()
 
         if (shortUrlCode.length = 0) {
             swal("Oops...",
@@ -269,11 +269,11 @@ $(function() {
         }
 
 
-        var $appendData10 = $('#sortable').children()
+        let $appendData10 = $('#sortable').children()
 
 
         // for (let index = 0; index < $appendData10.length; index++) {
-        //     var $dynamic = $appendData1.eq(index)
+        //     let $dynamic = $appendData1.eq(index)
         //         // console.log($dynamic.children().html());
         //     const href = $dynamic.children().find('.disit');
         //     console.log(href);
@@ -297,12 +297,12 @@ $(function() {
 
 
 
-        var childrencount = $("#checktrack").children();
+        let childrencount = $("#checktrack").children();
 
         console.log(childrencount, "childrencount");
         console.log(childrencount.length);
 
-        var childrencount = $("#checktrack").children();
+        let childrencount = $("#checktrack").children();
 
         console.log(childrencount, "childrencount");
         console.log();
@@ -331,32 +331,32 @@ $(function() {
 
     function validate() {
         // alert("true");
-        var obj = {
+        let obj = {
             'socialmedia': [],
             'links': [],
             'trackingList': []
 
         }
-        var personName = $(".bioname").val();
-        var personBio = $(".bio").val();
+        let personName = $(".bioname").val();
+        let personBio = $(".bio").val();
         console.log(personName);
-        var shortUrlCode = $('.checkshort').val();
-        var clientidval = $('#getclientid').val();
-        var getImage = $('#item-img-output').prop('src');
-        var tapLogo = $('.e1').prop('src');
-        var description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
+        let shortUrlCode = $('.checkshort').val();
+        let clientidval = $('#getclientid').val();
+        let getImage = $('#item-img-output').prop('src');
+        let tapLogo = $('.e1').prop('src');
+        let description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
             'app-icon6.png', 'app-icon7.png'
         ]
-        var size = description.length
-        var x = Math.floor(size * Math.random())
-        var imaged = '/userui/img/' + description[x];
-        var dashimage = imaged;
-        // var personName = $('.flex-name').children().html()
-        // var personBio = $('.flex-bio').children().html()
+        let size = description.length
+        let x = Math.floor(size * Math.random())
+        let imaged = '/userui/img/' + description[x];
+        let dashimage = imaged;
+        // let personName = $('.flex-name').children().html()
+        // let personBio = $('.flex-bio').children().html()
 
 
 
-        // var k = new Object();
+        // let k = new Object();
         // k.img = pic;
         // k.name = personName;
         // k.bio = personBio;
@@ -370,15 +370,15 @@ $(function() {
         obj.bio = personBio;
         // obj.profile.logo = tapLogo;
 
-        var getColor = $('.phonebody-internal').attr('id')
+        let getColor = $('.phonebody-internal').attr('id')
 
         /// //////////////////////////////////////////////if anything is checked it will be true (if button contains rounded corner then rounded is true)
 
-        var rounded = false
+        let rounded = false
 
         /// ////////////
-        var $a3 = $('.button-area')
-        var $a4 = $('.button-area1')
+        let $a3 = $('.button-area')
+        let $a4 = $('.button-area1')
 
         if ($a3.hasClass('rounded')) {
             // obj.style.rounded_border = "is-active";
@@ -387,7 +387,7 @@ $(function() {
             // obj.style.rounded_border = "is";
             rounded = false
         }
-        // var k = new Object();
+        // let k = new Object();
         // k.rectangle_border = rectangle;
         // k.rounded_border = rounded;
         // k.bg_color = getColor;
@@ -398,32 +398,32 @@ $(function() {
 
         /// ////////////////////// social media
 
-        var $appendData1 = $('#sortable').children()
+        let $appendData1 = $('#sortable').children()
 
         for (let index = 0; index < $appendData1.length; index++) {
-            var $dynamic = $appendData1.eq(index)
-            var name = $dynamic.find('.naming').html()
+            let $dynamic = $appendData1.eq(index)
+            let name = $dynamic.find('.naming').html()
             name = name.trim()
-            var icon = $dynamic.find('.image1').html()
+            let icon = $dynamic.find('.image1').html()
             icon = icon.trim()
-            var href = $dynamic.children().find('.ip').val()
+            let href = $dynamic.children().find('.ip').val()
             href = href.trim()
-            var iconnumber = $dynamic.children().find('.findp').html()
-            var url = $dynamic.children().find('.url').html()
+            let iconnumber = $dynamic.children().find('.findp').html()
+            let url = $dynamic.children().find('.url').html()
             url = url.trim();
 
             iconnumber = iconnumber.trim();
 
             // console.log(icon, href);
 
-            var k = {}
+            let k = {}
             k.name = name;
             k.username = href
             k.icon = icon;
             // k.id = iconnumber;
             k.url = url;
             k.name = name;
-            var uniqueid = generateGuid();
+            let uniqueid = generateGuid();
             k.id = uniqueid;
             k.clicks = 0;
 
@@ -432,16 +432,16 @@ $(function() {
         }
 
         /// //////////////////////////////////////////////////////// links to json object
-        var oyy = $('#sortable1').children()
+        let oyy = $('#sortable1').children()
 
         for (let index = 0; index < oyy.length; index++) {
-            var $dynamic = oyy.eq(index);
+            let $dynamic = oyy.eq(index);
             const href = $dynamic.children().find('.link').val();
             const title = $dynamic.children().find('.title').val();
-            var k = {};
+            let k = {};
             k.link = href;
             k.title = title;
-            var uniqueid = generateGuid();
+            let uniqueid = generateGuid();
             k.id = uniqueid;
             k.clicks = 0;
 
@@ -449,7 +449,7 @@ $(function() {
         }
 
         function generateGuid() {
-            var result, i, j;
+            let result, i, j;
             result = '';
             for (j = 0; j < 32; j++) {
                 if (j == 8 || j == 12 || j == 16 || j == 20)
@@ -460,16 +460,16 @@ $(function() {
             return result;
         }
 
-        var $appendData1 = $('#update-client-list').children()
+        let $appendData1 = $('#update-client-list').children()
         for (let index = 0; index < $appendData1.length; index++) {
-            var $dynamic = $appendData1.eq(index);
+            let $dynamic = $appendData1.eq(index);
             console.log($dynamic);
-            // var trackingid = $dynamic.children().find('.id').html();
-            var href = $dynamic.children().find('.ip').val();
-            var img = $dynamic.children().find('.img').html();
-            var name = $dynamic.children().find('.name').html();
+            // let trackingid = $dynamic.children().find('.id').html();
+            let href = $dynamic.children().find('.ip').val();
+            let img = $dynamic.children().find('.img').html();
+            let name = $dynamic.children().find('.name').html();
 
-            var k = {};
+            let k = {};
             // k.id = trackingid;
             k.tracking_code = href;
             k.icon = img;
@@ -529,11 +529,11 @@ $(function() {
 
 
         e.preventDefault()
-        var socialboolean1 = false
-        var $appendData1 = $('#sortable').children()
+        let socialboolean1 = false
+        let $appendData1 = $('#sortable').children()
 
         for (let index = 0; index < $appendData1.length; index++) {
-            var $dynamic = $appendData1.eq(index)
+            let $dynamic = $appendData1.eq(index)
                 // console.log($dynamic.children().html());
             const href = $dynamic.children().find('.ip').val();
             if (href === '') {
@@ -549,12 +549,12 @@ $(function() {
 
         // ###########################################social validation complete end
         // ###########################################links validation#############################################################//
-        var oyy = $('#sortable1').children()
-        var hrefboolean1 = false;
-        var linkboolean1 = false;
+        let oyy = $('#sortable1').children()
+        let hrefboolean1 = false;
+        let linkboolean1 = false;
 
         for (let index = 0; index < oyy.length; index++) {
-            var $dynamic = oyy.eq(index)
+            let $dynamic = oyy.eq(index)
             const href = $dynamic.children().find('.link').val()
             const title = $dynamic.children().find('.title').val()
                 // console.log($dynamic.append('<span class="alert-danger disit">please Enter the URL here</span>'));
@@ -586,9 +586,9 @@ $(function() {
 
         // check name and bio length
 
-        var bioname = $('.bioname').val();
-        var bio = $('.bio').val();
-        var nameandbio1 = false;
+        let bioname = $('.bioname').val();
+        let bio = $('.bio').val();
+        let nameandbio1 = false;
         if (bioname.length < 20 && bio.length < 140) {} else {
             swal("Oops...",
                 "Oops! Please check name and bio length",
@@ -601,8 +601,8 @@ $(function() {
 
 
 
-        var shortlength = false
-        var shortUrlCode = $('.checkshort').val()
+        let shortlength = false
+        let shortUrlCode = $('.checkshort').val()
 
         if (shortUrlCode.length = 0) {
             swal("Oops...",
@@ -612,7 +612,7 @@ $(function() {
 
 
         }
-        var childrencount = $("#checktrack").children();
+        let childrencount = $("#checktrack").children();
 
         // console.log(childrencount, "childrencount");
         // console.log();
@@ -631,7 +631,7 @@ $(function() {
     })
 
     function validate1() {
-        var obj = {
+        let obj = {
             'socialmedia': [],
             'links': [],
             'trackingList': []
@@ -639,14 +639,14 @@ $(function() {
 
 
         }
-        var shortUrlCode = $('.checkshort').val()
-        var clientidval = $('#getclientid').val()
-        var getImage = $('#item-img-output').prop('src')
-        var tapLogo = $('.e1').prop('src')
-        var personName = $('.flex-name').children().html()
-        var personBio = $('.flex-bio').children().html()
+        let shortUrlCode = $('.checkshort').val()
+        let clientidval = $('#getclientid').val()
+        let getImage = $('#item-img-output').prop('src')
+        let tapLogo = $('.e1').prop('src')
+        let personName = $('.flex-name').children().html()
+        let personBio = $('.flex-bio').children().html()
         console.log(getImage)
-            // var k = new Object();
+            // let k = new Object();
             // k.img = pic;
             // k.name = personName;
             // k.bio = personBioupdate
@@ -658,15 +658,15 @@ $(function() {
         obj.bio = personBio
             // obj.profile.logo = tapLogo;
 
-        var getColor = $('.phonebody-internal').attr('id')
+        let getColor = $('.phonebody-internal').attr('id')
 
         /// //////////////////////////////////////////////if anything is checked it will be true (if button contains rounded corner then rounded is true)
 
-        var rounded = false
+        let rounded = false
 
         /// ////////////
-        var $a3 = $('.button-area')
-        var $a4 = $('.button-area1')
+        let $a3 = $('.button-area')
+        let $a4 = $('.button-area1')
         if ($a3.hasClass('rounded')) {
             // obj.style.rounded_border = "is-active";
             rounded = true
@@ -674,7 +674,7 @@ $(function() {
             // obj.style.rounded_border = "is";
             rounded = false
         }
-        // var k = new Object();
+        // let k = new Object();
         // k.rectangle_border = rectangle;
         // k.rounded_border = rounded;
         // k.bg_color = getColor;
@@ -683,24 +683,24 @@ $(function() {
 
         /// ////////////////////// social media
         // FIXME kanye
-        var $appendData1 = $('#sortable').children()
+        let $appendData1 = $('#sortable').children()
         for (let index = 0; index < $appendData1.length; index++) {
-            var $dynamic = $appendData1.eq(index)
-            var name = $dynamic.find('.naming').html()
+            let $dynamic = $appendData1.eq(index)
+            let name = $dynamic.find('.naming').html()
             name = name.trim()
-            var icon = $dynamic.find('.image1').html()
+            let icon = $dynamic.find('.image1').html()
             icon = icon.trim()
-            var href = $dynamic.children().find('.ip').val()
+            let href = $dynamic.children().find('.ip').val()
             href = href.trim()
-            var iconnumber = $dynamic.children().find('.findp').html()
-            var url = $dynamic.children().find('.url').html()
+            let iconnumber = $dynamic.children().find('.findp').html()
+            let url = $dynamic.children().find('.url').html()
             url = url.trim();
 
             iconnumber = iconnumber.trim();
 
             // console.log(icon, href);
 
-            var k = {}
+            let k = {}
                 // k.name = name;
             k.username = href
             k.icon = icon;
@@ -712,33 +712,33 @@ $(function() {
             obj.socialmedia.push(k)
         }
         /// //////////////////////////////////////////////////////// links to json object
-        var oyy = $('#sortable1').children()
+        let oyy = $('#sortable1').children()
 
         for (let index = 0; index < oyy.length; index++) {
-            var $dynamic = oyy.eq(index)
+            let $dynamic = oyy.eq(index)
             const href = $dynamic.children().find('.link').val()
             const title = $dynamic.children().find('.title').val()
-            var k = {}
+            let k = {}
             k.link = href
             k.title = title
             obj.links.push(k)
         }
 
-        var updateid = $('#gettingid').val()
+        let updateid = $('#gettingid').val()
         console.log(updateid)
         obj.id = updateid;
 
 
-        var $appendData1 = $('#update-client-list').children()
+        let $appendData1 = $('#update-client-list').children()
         for (let index = 0; index < $appendData1.length; index++) {
-            var $dynamic = $appendData1.eq(index);
+            let $dynamic = $appendData1.eq(index);
             console.log($dynamic);
-            // var trackingid = $dynamic.children().find('.id').html();
-            var href = $dynamic.children().find('.ip').val();
-            var img = $dynamic.children().find('.img').html();
-            var name = $dynamic.children().find('.name').html();
+            // let trackingid = $dynamic.children().find('.id').html();
+            let href = $dynamic.children().find('.ip').val();
+            let img = $dynamic.children().find('.img').html();
+            let name = $dynamic.children().find('.name').html();
 
-            var k = {}
+            let k = {}
                 // k.id = trackingid;
             k.tracking_code = href;
             k.icon = img;

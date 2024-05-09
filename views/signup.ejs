@@ -99,7 +99,7 @@
     <script>
         $(document).ready(function() {
 
-            var newBtn = document.getElementById("#newSignup");
+            let newBtn = document.getElementById("#newSignup");
 
             console.log(newBtn, 'newBtn');
 
@@ -110,9 +110,9 @@
 
 
                 e.preventDefault();
-                var $name = $("#name").val();
-                var email = $("#email").val();
-                var $password = $("#password").val();
+                let $name = $("#name").val();
+                let email = $("#email").val();
+                let $password = $("#password").val();
 
 
 
@@ -123,14 +123,14 @@
 
 
                 function isEmail(email) {
-                    var regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,24})$/;
+                    let regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,24})$/;
                     return regex.test(email);
                 }
                 // ////////////////////////////////////////
                 function sendobj() {
 
-                    var data = {};
-                    var obj = {
+                    let data = {};
+                    let obj = {
                         name: $("#name").val(),
                         email: $("#email").val(),
                         password: $("#password").val(),

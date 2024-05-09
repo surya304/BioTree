@@ -1,6 +1,6 @@
 $(function () {
     // $('[data-toggle="tooltip"]').tooltip();
-    //     var short = {
+    //     let short = {
     //         "data": [{
     //                 "is_del": false,
     //                 "is_active": true,
@@ -65,8 +65,8 @@ $(function () {
     //     };
 
 
-    //     var ramp = short.data;
-    //     var prin = '';
+    //     let ramp = short.data;
+    //     let prin = '';
 
     //     for (let index = 0; index < ramp.length; index++) {
     //         const element = ramp[index];
@@ -95,16 +95,16 @@ $(function () {
     $('.droppingtracking').on('click', '.hello', function () {
 
         // console.log("hello");
-        // var img = $(this).find('.image1').attr("src");
-        var img = $(this).find('.image1').html();
-        var id = $(this).find('.first').html();
-        var name = $(this).find('.naming').html();
+        // let img = $(this).find('.image1').attr("src");
+        let img = $(this).find('.image1').html();
+        let id = $(this).find('.first').html();
+        let name = $(this).find('.naming').html();
         console.log(img)
         console.log(id);
         console.log(name);
 
         //////////////
-        var listItemToAdda = makelist(img, id, name);
+        let listItemToAdda = makelist(img, id, name);
         $("#sortable").append(listItemToAdda);
 
 
@@ -117,7 +117,7 @@ $(function () {
 
     function makelist(add, troop, name) {
 
-        var $allData = `<div class="sortableitem u-mt-custom" ><li>
+        let $allData = `<div class="sortableitem u-mt-custom" ><li>
 
   <div class="row justify-content-left nolo r0">
   <div class="col-md-10 col-9 r2" >
@@ -151,7 +151,7 @@ $(function () {
     }
     $('.sort').on("click", ".deli", function () {
 
-        var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+        let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
     });
 
@@ -162,17 +162,17 @@ $(function () {
     $('.inditracking').on('click', '.hello', function () {
 
         console.log("helloasdasd");
-        // var img = $(this).find('.image1').attr("src");
-        var img = $(this).find('.image1').html();
+        // let img = $(this).find('.image1').attr("src");
+        let img = $(this).find('.image1').html();
 
-        var id = $(this).find('.first').html();
-        var name = $(this).find('.naming').html();
+        let id = $(this).find('.first').html();
+        let name = $(this).find('.naming').html();
         console.log(img)
         console.log(id);
         console.log(name);
 
         //////////////
-        var listItemToAdda = makelist(img, id, name);
+        let listItemToAdda = makelist(img, id, name);
         $("#sortable1").append(listItemToAdda);
 
 
@@ -183,7 +183,7 @@ $(function () {
 
     function makelist(add, troop, name) {
 
-        var $allData = `<div class="sortableitem u-mt-custom" ><li>
+        let $allData = `<div class="sortableitem u-mt-custom" ><li>
 
   <div class="row justify-content-left nolo r0">
   <div class="col-md-10 col-9 r2" >
@@ -218,7 +218,7 @@ $(function () {
     }
     $('.sort').on("click", ".deli", function () {
 
-        var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+        let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
     });
 
@@ -230,26 +230,26 @@ $(function () {
 
     $('.copyshort').on("click", function () {
         console.log("hello");
-        // var value = $()
+        // let value = $()
 
     });
 
-    // var thaturl = "1?utm_source=2&utm_medium=3&utm_campaign=4&utm_term=5&utm_content=6";
+    // let thaturl = "1?utm_source=2&utm_medium=3&utm_campaign=4&utm_term=5&utm_content=6";
     // $.urlParam = function (name) {
-    //     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(thaturl);
+    //     let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(thaturl);
     //     if (results == null) {
     //         return null;
     //     }
     //     return decodeURI(results[1]) || 0;
     // }
-    // var website = thaturl.split("?");
+    // let website = thaturl.split("?");
     // console.log(website[0]);
-    // var n1 = $.urlParam('utm_source');
+    // let n1 = $.urlParam('utm_source');
     // // console.log(none);
-    // var n2 = $.urlParam('utm_medium');
-    // var n3 = $.urlParam('utm_campaign');
-    // var n4 = $.urlParam('utm_term');
-    // var n5$.urlParam('utm_content');
+    // let n2 = $.urlParam('utm_medium');
+    // let n3 = $.urlParam('utm_campaign');
+    // let n4 = $.urlParam('utm_term');
+    // let n5$.urlParam('utm_content');
 
 
 
@@ -304,14 +304,14 @@ $(function () {
 
     // ************************************************** short url dynamic*****************************************************************************************//
     // $('.inputing').on("keyup", function () {
-    //     var f1 = $(this).val();
+    //     let f1 = $(this).val();
     //     console.log(f1);
     //     $('.v0').val(f1);
     // });
     $('.shorturl').on("click", function () {
 
         $(this).val("");
-        var h1 = $('.inputing').val();
+        let h1 = $('.inputing').val();
 
         if (h1 === "") {
             alert("please enter the Url");
@@ -320,7 +320,7 @@ $(function () {
         }
 
         function gowithit() {
-            var obj = {
+            let obj = {
 
             }
             obj.input = h1;
@@ -370,26 +370,26 @@ $(function () {
 
 
     // ************************************************************new project client************************************************************************************************//
-    var obj = {
+    let obj = {
         "client": {},
         "tracking": []
     };
 
     // $('.newproject1').on("click", function () {
     //
-    //     var valuething = $(this).parent().parentsUntil('.c-modal__body').find('.q0').val();
+    //     let valuething = $(this).parent().parentsUntil('.c-modal__body').find('.q0').val();
     //     // console.log(valuething);
-    //     // var clientEmail = $(this).parent().parentsUntil('.c-modal__body').find('.q1').val();
+    //     // let clientEmail = $(this).parent().parentsUntil('.c-modal__body').find('.q1').val();
     //     obj.client.name = valuething;
     //     // obj.client.email = clientEmail;
     //     if (valuething === "") {
-    //         var $p1 = $(this).parent().parentsUntil('.c-modal__body').find('.d1');
-    //         var $p2 = $(this).parent().parentsUntil('.c-modal__body').find('.d2');
+    //         let $p1 = $(this).parent().parentsUntil('.c-modal__body').find('.d1');
+    //         let $p2 = $(this).parent().parentsUntil('.c-modal__body').find('.d2');
     //         $p1.append('<span class="alert-danger disit">please Enter the URL here</span>');
     //         $p2.append('<span class="alert-danger disit">please Enter the URL here</span>');
     //     } else {
-    //         var $p1 = $(this).parent().parentsUntil('.c-modal__body').find('.d1');
-    //         var $p2 = $(this).parent().parentsUntil('.c-modal__body').find('.d2');
+    //         let $p1 = $(this).parent().parentsUntil('.c-modal__body').find('.d1');
+    //         let $p2 = $(this).parent().parentsUntil('.c-modal__body').find('.d2');
     //         $p1.find('.disit').remove();
     //         $p2.find('.disit').remove();
     //         sendobj();
@@ -401,13 +401,13 @@ $(function () {
     //     function sendobj() {
     //
     //
-    //         var $appendData1 = $("#sortable").children();
+    //         let $appendData1 = $("#sortable").children();
     //
     //         for (let index = 0; index < $appendData1.length; index++) {
     //
-    //             var $dynamic = $appendData1.eq(index);
+    //             let $dynamic = $appendData1.eq(index);
     //
-    //             var icon = $dynamic.find('.image1').html();
+    //             let icon = $dynamic.find('.image1').html();
     //             const href = $dynamic.children().find('.ip').val();
     //             const iconnumber = $dynamic.children().find('.findp').html();
     //
@@ -415,7 +415,7 @@ $(function () {
     //             console.log(href);
     //             console.log(iconnumber);
     //
-    //             var k = {};
+    //             let k = {};
     //             k.name = href;
     //             k.icon = icon;
     //             k.id = iconnumber;
@@ -442,8 +442,8 @@ $(function () {
     // ************************************************************edit short url in links************************************************************************************************//
 
     // $('.saveshort').on("click", function () {
-    //     var a1 = $(this).parentsUntil('.e1').find('.fullip').val();
-    //     var a2 = $(this).parentsUntil('.e3').find('.checkshort').val();
+    //     let a1 = $(this).parentsUntil('.e1').find('.fullip').val();
+    //     let a2 = $(this).parentsUntil('.e3').find('.checkshort').val();
     //     if (a1 === '' && a2 === "") {
     //         alert('please enter something');
     //     } else {
@@ -451,7 +451,7 @@ $(function () {
     //     }
 
     //     function sendit() {
-    //         var obj = {
+    //         let obj = {
 
     //         };
 
@@ -479,7 +479,7 @@ $(function () {
 
 
     $('.checkshort').on('keydown', function () {
-        var p1 = $(this).val();
+        let p1 = $(this).val();
         console.log(p1);
         $.ajax({
             type: 'GET',
@@ -497,19 +497,19 @@ $(function () {
     // ************************************************************edit short url in links************************************************************************************************//
 
     // ************************************************************tracking pixels in links************************************************************************************************//
-    var obj1 = {
+    let obj1 = {
         "tracking": []
     }
 
     $('.getdata').on("click", function () {
 
-        var $appendData1 = $("#sortable1").children();
+        let $appendData1 = $("#sortable1").children();
 
         for (let index = 0; index < $appendData1.length; index++) {
 
-            var $dynamic = $appendData1.eq(index);
+            let $dynamic = $appendData1.eq(index);
 
-            var icon = $dynamic.find('.image1').html();
+            let icon = $dynamic.find('.image1').html();
             const href = $dynamic.children().find('.ip').val();
             const iconnumber = $dynamic.children().find('.findp').html();
 
@@ -517,7 +517,7 @@ $(function () {
             console.log(href);
             console.log(iconnumber);
 
-            var k = {};
+            let k = {};
             k.name = href;
             k.icon = icon;
             k.id = iconnumber;
@@ -544,36 +544,36 @@ $(function () {
     // ############################################################## utm
 
     $('.ifull').on('click', '.getinput', function () {
-        var oyy = $(this).parentsUntil('.i1').find('.a1');
+        let oyy = $(this).parentsUntil('.i1').find('.a1');
         console.log(oyy);
-        var oyy1 = $(this).parentsUntil('.i1').find('.a2').html();
+        let oyy1 = $(this).parentsUntil('.i1').find('.a2').html();
         console.log(oyy1);
-        var $a1 = $('.saveshort').parentsUntil('.e1').find('.fullip');
-        var $a2 = $('.saveshort').parentsUntil('.e3').find('.checkshort');
+        let $a1 = $('.saveshort').parentsUntil('.e1').find('.fullip');
+        let $a2 = $('.saveshort').parentsUntil('.e3').find('.checkshort');
         console.log($a1);
         console.log($a2);
         $a1.val(oyy1);
         $a2.val(oyy);
 
-        var thaturl = "1?utm_source=2&utm_medium=3&utm_campaign=4&utm_term=5&utm_content=6";
+        let thaturl = "1?utm_source=2&utm_medium=3&utm_campaign=4&utm_term=5&utm_content=6";
         $.urlParam = function (name) {
-            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(thaturl);
+            let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(thaturl);
             if (results == null) {
                 return null;
             }
             return decodeURI(results[1]) || 0;
         }
-        var website = thaturl.split("?");
+        let website = thaturl.split("?");
         console.log(website[0]);
-        var n1 = $.urlParam('utm_source');
+        let n1 = $.urlParam('utm_source');
         console.log(n1);
-        var n2 = $.urlParam('utm_medium');
+        let n2 = $.urlParam('utm_medium');
         console.log(n2);
-        var n3 = $.urlParam('utm_campaign');
+        let n3 = $.urlParam('utm_campaign');
         console.log(n3);
-        var n4 = $.urlParam('utm_term');
+        let n4 = $.urlParam('utm_term');
         console.log(n4);
-        var n5 = $.urlParam('utm_content');
+        let n5 = $.urlParam('utm_content');
         console.log(n5);
 
 
@@ -583,17 +583,17 @@ $(function () {
 
 
     // $('.getutm').on('click', function () {
-    //     var z1 = $(this).parentsUntil('.p0').find('.v0').val();
-    //     var z2 = $(this).parentsUntil('.p1').find('.v1').val();
-    //     var z3 = $(this).parentsUntil('.p2').find('.v2').val();
-    //     var z4 = $(this).parentsUntil('.p3').find('.v3').val();
-    //     var z5 = $(this).parentsUntil('.p4').find('.v4').val();
-    //     var z6 = $(this).parentsUntil('.p5').find('.v5').val();
+    //     let z1 = $(this).parentsUntil('.p0').find('.v0').val();
+    //     let z2 = $(this).parentsUntil('.p1').find('.v1').val();
+    //     let z3 = $(this).parentsUntil('.p2').find('.v2').val();
+    //     let z4 = $(this).parentsUntil('.p3').find('.v3').val();
+    //     let z5 = $(this).parentsUntil('.p4').find('.v4').val();
+    //     let z6 = $(this).parentsUntil('.p5').find('.v5').val();
     //
-    //     var obj = {
+    //     let obj = {
     //
     //     };
-    //     var newobj = {
+    //     let newobj = {
     //
     //     };
     //
@@ -626,8 +626,8 @@ $(function () {
     //             obj.utm_content = z6;
     //         }
     //
-    //         var str = jQuery.param(obj);
-    //         var fullurl = z1 + '?' + str;
+    //         let str = jQuery.param(obj);
+    //         let fullurl = z1 + '?' + str;
     //         console.log(fullurl);
     //         $('.inputing').val("");
     //         newobj.fullutmurl = fullurl;

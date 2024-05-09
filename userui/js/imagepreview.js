@@ -1,13 +1,13 @@
 // Start upload preview image
 $(".gambar").attr("src", "https://user.gadjian.com/static/images/personnel_boy.png");
-var $uploadCrop,
+let $uploadCrop,
     tempFilename,
     rawImg,
     imageId;
 
 function readFile(input) {
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function(e) {
             $('.upload-demo').addClass('ready');
             $('#cropImagePop').modal('show');
@@ -51,8 +51,8 @@ $('#cropImageBtn').on('click', function(ev) {
             height: 200,
         }
     }).then(function(resp) {
-        var dumb = $('.flex-image').find('#item-img-output');
-        var dumb1 = $('.flex-image').find('#item-img-output1');
+        let dumb = $('.flex-image').find('#item-img-output');
+        let dumb1 = $('.flex-image').find('#item-img-output1');
         console.log(dumb);
         $(dumb).attr('src', resp);
         $('.flex-image').append(`<div><img src="${resp}" class="roundimage mx-auto d-block" id="item-img-output" /></div>`);

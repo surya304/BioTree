@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var trackingSchema = new Schema({
+let trackingSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -34,6 +34,6 @@ var trackingSchema = new Schema({
 });
 
 
-var Tracking = mongoose.model('Tracking', trackingSchema);
+let Tracking = mongoose.model('Tracking', trackingSchema);
 
 module.exports = Tracking;

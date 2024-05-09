@@ -4,7 +4,7 @@
 
 function factory($)
 {
-	var pluginName = "searcher",
+	let pluginName = "searcher",
 		dataKey = "plugin_" + pluginName,
 		defaults = {
 			// selector for the item element
@@ -37,7 +37,7 @@ function factory($)
 			// unbind all events
 			this._$input.unbind("." + pluginName);
 			// toggle all elements with true
-			var options = this.options,
+			let options = this.options,
 				toggle = options.toggle || defaults.toggle;
 			this._$element.find(options.itemSelector).each(function() { toggle(this, true); });
 		},
@@ -45,18 +45,18 @@ function factory($)
 		{
 			this._lastValue = value;
 
-			var options = this.options,
+			let options = this.options,
 				textSelector = options.textSelector,
 				toggle = options.toggle || defaults.toggle;
 
 			// build the regular expression for searching
-			var flags = "gm" + (!options.caseSensitive ? "i" : "");
-			var regex = new RegExp("(" + escapeRegExp(value) + ")", flags);
+			let flags = "gm" + (!options.caseSensitive ? "i" : "");
+			let regex = new RegExp("(" + escapeRegExp(value) + ")", flags);
 
 			this._$element
 				.find(options.itemSelector)
 				.each(function eachItem() {
-					var $item = $(this),
+					let $item = $(this),
 						$textElements = textSelector ? $item.find(textSelector) : $item,
 						itemContainsText = false;
 
@@ -70,25 +70,25 @@ function factory($)
 		},
 		_create: function()
 		{
-			var options = this.options;
+			let options = this.options;
 
 			this._$element = $(this.element);
 
 			// find the input and bind to various events
 			this._fn = $.proxy(this._onValueChange, this);
-			var eventNames = "input." + pluginName + " change." + pluginName + " keyup." + pluginName;
+			let eventNames = "input." + pluginName + " change." + pluginName + " keyup." + pluginName;
 			this._$input = $(options.inputSelector).bind(eventNames, this._fn);
 
 			// remember the last entered value
 			this._lastValue = null;
 
 			// call the toggle with true for all items on startup
-			var toggle = options.toggle || defaults.toggle;
+			let toggle = options.toggle || defaults.toggle;
 			this._$element.find(options.itemSelector).each(function() { toggle(this, true); });
 		},
 		_onValueChange: function()
 		{
-			var value = this._$input.val();
+			let value = this._$input.val();
 			if (value === this._lastValue)
 				return; // nothing has changed
 
@@ -103,10 +103,10 @@ function factory($)
 	}
 
 	$.fn[pluginName] = function pluginHandler(options) {
-		var args = Array.prototype.slice.call(arguments, 1);
+		let args = Array.prototype.slice.call(arguments, 1);
 		return this.each(function() {
-			var searcher = $.data(this, dataKey);
-			var t = typeof(options);
+			let searcher = $.data(this, dataKey);
+			let t = typeof(options);
 			if (t === "string" && searcher)
 			{
 				searcher[options].apply(searcher, args);

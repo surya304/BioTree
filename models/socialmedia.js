@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var socialmediaSchema = new Schema({
+let socialmediaSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -39,6 +39,6 @@ var socialmediaSchema = new Schema({
 });
 
 
-var SocialMedia = mongoose.model('SocialMedia', socialmediaSchema);
+let SocialMedia = mongoose.model('SocialMedia', socialmediaSchema);
 
 module.exports = SocialMedia;

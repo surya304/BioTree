@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 // create a schema
-var Trackingdata1 = new Schema({
+let Trackingdata1 = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -51,5 +51,5 @@ var Trackingdata1 = new Schema({
     created_at: Date,
     updated_at: Date
 });
-var Trackingdata = mongoose.model('Trackingdata', Trackingdata1);
+let Trackingdata = mongoose.model('Trackingdata', Trackingdata1);
 module.exports = Trackingdata;

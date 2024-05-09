@@ -13,13 +13,13 @@
 		}
 	});
 
-	var inputSelector = "#testinput";
-	var $input = $(inputSelector);
-	var $table = $("#testtable");
-	var $list =  $("#testlist");
-	var $any =   $("#testany");
+	let inputSelector = "#testinput";
+	let $input = $(inputSelector);
+	let $table = $("#testtable");
+	let $list =  $("#testlist");
+	let $any =   $("#testany");
 
-	var testData = {
+	let testData = {
 		"dylan":    ["1", "Like a Rolling Stone",          "Bob Dylan",          "1965"],
 		"stones":   ["2", "(I Can't Get No) Satisfaction", "The Rolling Stones", "1965"],
 		"lennon":   ["3", "Imagine",                       "John Lennon",        "1971"],
@@ -46,7 +46,7 @@
 		});
 
 		// AND: run some basic tests
-		var $items = $table.find("tr");
+		let $items = $table.find("tr");
 		basicTests($items);
 	});
 
@@ -60,7 +60,7 @@
 		});
 
 		// AND: run some basic tests
-		var $items = $list.find("li");
+		let $items = $list.find("li");
 		basicTests($items);
 	});
 
@@ -74,7 +74,7 @@
 		});
 
 		// AND: run some basic tests
-		var $items = $any.find(".item");
+		let $items = $any.find(".item");
 		basicTests($items);
 	});
 
@@ -122,7 +122,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $table.find("tr");
+		let $items = $table.find("tr");
 		caseSensitiveTests($items);
 
 		// wHEN: I change the caseSensitive option to false
@@ -145,7 +145,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $list.find("li");
+		let $items = $list.find("li");
 		caseSensitiveTests($items);
 
 		// wHEN: I change the caseSensitive option to false
@@ -168,7 +168,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $any.find(".item");
+		let $items = $any.find(".item");
 		caseSensitiveTests($items);
 
 		// wHEN: I change the caseSensitive option to false
@@ -232,7 +232,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $table.find("tr");
+		let $items = $table.find("tr");
 		toggleTests($items);
 
 		// wHEN: I change the toggle function back to it's default
@@ -258,7 +258,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $list.find("li");
+		let $items = $list.find("li");
 		toggleTests($items);
 
 		// wHEN: I change the toggle function back to it's default
@@ -284,7 +284,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $any.find(".item");
+		let $items = $any.find(".item");
 		toggleTests($items);
 
 		// wHEN: I change the toggle function back to it's default
@@ -338,7 +338,7 @@
 		});
 
 		// WHEN: I run some tests
-		var $items = $table.find("tr");
+		let $items = $table.find("tr");
 
 		// WHEN: I filter the items with "a"
 		$table.searcher("filter", "a");
@@ -379,7 +379,7 @@
 
 	function assertItems($elements, expectedData)
 	{
-		var expected = expectedData.length;
+		let expected = expectedData.length;
 		equal($elements.length, expected, expected + " item(s) should be visible");
 		$elements.each(function(i) {
 			assertItem($(this), testData[expectedData[i]]);
@@ -388,7 +388,7 @@
 
 	function assertItem($item, expectedData)
 	{
-		var actualData = [];
+		let actualData = [];
 		$item.children().each(function() {
 			actualData.push($(this).text());
 		});

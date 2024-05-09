@@ -183,7 +183,7 @@
                                     <div class="c-dropdown__menu dropdown-menu dropdown-menu-right c-dropdown__menu--large-custom droppingeditclient" style="height:300px;overflow: scroll;margin-top:100px;" aria-labelledby="dropdownMenuButton" id="dropdown">
                                         <!-- style="height:480px;overflow: scroll;margin-top: 100px;" -->
 
-                                        <% for(var i=0; i < trackingList.length; i++) { %>
+                                        <% for(let i=0; i < trackingList.length; i++) { %>
 
                                             <a class="c-dropdown__item dropdown-item form-check form-check-inline update-add-client" href="#" style="padding:4px 0 0 5px;" data-name="<%=trackingList[i].prefixname%>" data-icon="<%=trackingList[i].icon%>" data-id="<%=trackingList[i]._id%>">
                                                 <label class="iconbox1">
@@ -257,7 +257,7 @@
                                     <div class="c-dropdown__menu dropdown-menu dropdown-menu-right c-dropdown__menu--large-custom add-full-track" style="height:300px;overflow: scroll;margin-top:100px;" aria-labelledby="dropdownMenuButton" id="dropdown">
                                         <!-- style="height:480px;overflow: scroll;margin-top: 100px;" -->
 
-                                        <% for(var i=0; i < trackingList.length; i++) { %>
+                                        <% for(let i=0; i < trackingList.length; i++) { %>
 
                                             <a class="c-dropdown__item dropdown-item form-check form-check-inline add-track-indi" href="#" style="padding:4px 0 0 5px;" data-name="<%=trackingList[i].prefixname%>" data-icon="<%=trackingList[i].icon%>" data-id="<%=trackingList[i]._id%>">
                                                 <label class="iconbox1">
@@ -479,7 +479,7 @@
                 <div class="shorturllist" id="shorturllist1">
 
 
-                    <% for(var i=shorturlsList.length-1; i >= 0; i--) { %>
+                    <% for(let i=shorturlsList.length-1; i >= 0; i--) { %>
 
                         <div class="container hoverdynamically borderbottomresponsive filter-js">
 
@@ -756,7 +756,7 @@
                 }
 
                 function signOut() {
-                    var auth2 = gapi.auth2.getAuthInstance();
+                    let auth2 = gapi.auth2.getAuthInstance();
                     auth2.signOut().then(function() {});
                     auth2.disconnect();
                     window.location.href = "/login";
@@ -766,13 +766,13 @@
 
             <script type="text/javascript">
                 function myFunction41(dump) {
-                    var new41 = $(dump).find('.myTooltip');
-                    var copyText = $(dump).attr("id");
+                    let new41 = $(dump).find('.myTooltip');
+                    let copyText = $(dump).attr("id");
                     new41.text("Copied");
                 }
 
                 function outFunc(dump) {
-                    var new41 = $(dump).find('.myTooltip');
+                    let new41 = $(dump).find('.myTooltip');
                     new41.text("Copy");
 
                 }
@@ -780,7 +780,7 @@
 
                 $(".copybutton21").on("click", function() {
 
-                    var newa = $(this).next();
+                    let newa = $(this).next();
                     console.log(newa);
                     newa.select();
                     document.execCommand("copy");
@@ -789,9 +789,9 @@
                 });
 
                 $('.checkshort').on("keyup", function() {
-                    var value = $(this).val();
+                    let value = $(this).val();
                     // console.log(value);
-                    var length = false;
+                    let length = false;
                     if (value.length = 0) {
                         alert("please enter atleast 4 characters");
                     } else {
@@ -807,15 +807,15 @@
                         success: function(data) {
 
                             // console.log(data.data);
-                            var urlavailable = data.data;
+                            let urlavailable = data.data;
                             senderror(urlavailable);
 
 
 
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            var x = JSON.parse(XMLHttpRequest.responseText);
-                            var urlexists = x.error;
+                            let x = JSON.parse(XMLHttpRequest.responseText);
+                            let urlexists = x.error;
                             // console.log(urlexists);
 
                             senderror(urlexists);
@@ -860,10 +860,10 @@
                 // FIXME analytics popup
 
                 $('.shorturllist').on("click", '.indi-analytics', function() {
-                    var type = $(this).data("type");
-                    var shorts41 = <%- JSON.stringify(shorturlsList) %>;
-                    var id = $(this).attr("id");
-                    var result = shorts41.filter(function(o1) {
+                    let type = $(this).data("type");
+                    let shorts41 = <%- JSON.stringify(shorturlsList) %>;
+                    let id = $(this).attr("id");
+                    let result = shorts41.filter(function(o1) {
                         return o1._id === id;
                     });
                     if (type === "instabio") {
@@ -873,15 +873,15 @@
                         $(".shorturl-analytics").hide();
                         $(".utm-analytics").hide();
                         console.log(result, "result");
-                        var social = result[0].socialmedia;
-                        var links = result[0].links;
+                        let social = result[0].socialmedia;
+                        let links = result[0].links;
                         for (let index = 0; index < social.length; index++) {
                             const name = social[index].name;
                             const username = social[index].username;
                             const clicks = social[index].clicks;
                             const icon = social[index].icon;
                             const url = social[index].url;
-                            var listItemToAdda21 = socialprint21(name, username, icon, url, clicks);
+                            let listItemToAdda21 = socialprint21(name, username, icon, url, clicks);
                             $("#socialprint").append(listItemToAdda21);
 
 
@@ -890,7 +890,7 @@
                             const link = links[j].link;
                             const title = links[j].title;
                             const clicks21 = links[j].clicks;
-                            var listItemToAdda41 = linksprint41(link, title, clicks21);
+                            let listItemToAdda41 = linksprint41(link, title, clicks21);
                             $("#linksprint").append(listItemToAdda41);
 
 
@@ -903,9 +903,9 @@
                         $(".utm-analytics").hide();
                         $("#shorturlprint").empty();
 
-                        var website = result[0].website;
-                        var clicks = result[0].clicks;
-                        var listItemToAdda41 = shortprint(website, clicks);
+                        let website = result[0].website;
+                        let clicks = result[0].clicks;
+                        let listItemToAdda41 = shortprint(website, clicks);
                         $("#shorturlprint").append(listItemToAdda41);
 
                     } else {
@@ -915,9 +915,9 @@
                         $(".utm-analytics").show();
                         $("#utmprint").empty();
 
-                        var website = result[0].utm_url;
-                        var clicks = result[0].clicks;
-                        var listItemToAdda41 = shortprint(website, clicks);
+                        let website = result[0].utm_url;
+                        let clicks = result[0].clicks;
+                        let listItemToAdda41 = shortprint(website, clicks);
                         $("#utmprint").append(listItemToAdda41);
 
 
@@ -929,7 +929,7 @@
                 });
 
                 function socialprint21(name, username, icon, url, clicks) {
-                    var ret = `<tr><td>${name}</td><td>${username}</td><td>${url}</td><td>${clicks}</td></tr>`;
+                    let ret = `<tr><td>${name}</td><td>${username}</td><td>${url}</td><td>${clicks}</td></tr>`;
                     return ret;
                 }
 
@@ -937,14 +937,14 @@
 
                 function linksprint41(link, title, clicks) {
                     console.log(clicks);
-                    var ret = `<tr><td>${link}</td><td>${title}</td><td>${clicks}</td></tr>`;
+                    let ret = `<tr><td>${link}</td><td>${title}</td><td>${clicks}</td></tr>`;
 
                     return ret;
                 }
 
                 function shortprint(website, clicks) {
 
-                    var ret = `<tr><td>Website</td><td>${website}</td></tr><tr><td>Clicks</td><td>${clicks}</td></tr>`;
+                    let ret = `<tr><td>Website</td><td>${website}</td></tr><tr><td>Clicks</td><td>${clicks}</td></tr>`;
 
                     return ret;
                 }
@@ -952,11 +952,11 @@
 
 
                 $('.takeit').on('click', '.copybutton', function() {
-                    var newa = $(this).next();
+                    let newa = $(this).next();
                     console.log(newa);
                     newa.select();
                     document.execCommand("copy");
-                    var $this = $(this);
+                    let $this = $(this);
                     $this.popover({
                         container: '#fileArea',
                         placement: 'top auto',
@@ -975,13 +975,13 @@
                 $('.droppingeditclient').on('click', '.update-add-client', function() {
 
 
-                    var prefixname = $(this).data("name");
-                    var icon = $(this).data("icon");
-                    var id = $(this).data("id");
+                    let prefixname = $(this).data("name");
+                    let icon = $(this).data("icon");
+                    let id = $(this).data("id");
                     console.log(name);
                     console.log(icon);
                     console.log(id);
-                    var listItemToAdda = makelist1(icon, id, prefixname);
+                    let listItemToAdda = makelist1(icon, id, prefixname);
                     $("#update-client-list").append(listItemToAdda);
 
 
@@ -993,13 +993,13 @@
                 $('.add-full-track').on('click', '.add-track-indi', function() {
 
 
-                    var prefixname = $(this).data("name");
-                    var icon = $(this).data("icon");
-                    var id = $(this).data("id");
+                    let prefixname = $(this).data("name");
+                    let icon = $(this).data("icon");
+                    let id = $(this).data("id");
                     console.log(name);
                     console.log(icon);
                     console.log(id);
-                    var listItemToAdda = makelist1(icon, id, prefixname);
+                    let listItemToAdda = makelist1(icon, id, prefixname);
                     $("#add-track-data").append(listItemToAdda);
 
 
@@ -1008,7 +1008,7 @@
                 });
 
                 function makelist1(img, id, name) {
-                    var $allData = `<div class="sortableitem u-mt-custom" ><li>
+                    let $allData = `<div class="sortableitem u-mt-custom" ><li>
 <div class="row justify-content-left nolo r0">
 <div class="col-md-10 col-9 r2" >
 <div class="c-field has-addon-left">
@@ -1039,7 +1039,7 @@
 
                 function updatetracking(inditrackicon, clientId, individualTrackingCode, individualTrackingid) {
 
-                    var $allData =
+                    let $allData =
                         `<div class="sortableitem u-mt-custom" ><li>
 <div class="row justify-content-left nolo r0">
 <div class="col-md-10 col-9 r2" >
@@ -1091,11 +1091,11 @@
 
                 $('.dynamic').on("click", '.get-updated-data', function() {
 
-                    var clientId = $(this).attr("id");
+                    let clientId = $(this).attr("id");
                     // ///////////////////////////update client validaton
-                    var clientname = false;
-                    var socialdata = false;
-                    var getcleintname = $('.q0e').val();
+                    let clientname = false;
+                    let socialdata = false;
+                    let getcleintname = $('.q0e').val();
                     console.log(getcleintname);
                     if (!getcleintname) {
                         alert("please enter Your Name");
@@ -1105,7 +1105,7 @@
                     } else {
                         // console.log("its there");
                     }
-                    var $socialdata = $('#update-client-list').children().length;
+                    let $socialdata = $('#update-client-list').children().length;
 
                     if ($socialdata < 0) {
                         console.log("its empty");
@@ -1113,14 +1113,14 @@
                     } else {
                         console.log("its there");
                     }
-                    var $appendData22 = $('#update-client-list').children()
+                    let $appendData22 = $('#update-client-list').children()
 
                     for (let index = 0; index < $appendData22.length; index++) {
-                        var $dynamic = $appendData22.eq(index);
-                        var trackingid = $dynamic.children().find('.id').html();
-                        var href = $dynamic.children().find('.ip').val();
-                        var img = $dynamic.children().find('.img').html();
-                        var name = $dynamic.children().find('.name').html();
+                        let $dynamic = $appendData22.eq(index);
+                        let trackingid = $dynamic.children().find('.id').html();
+                        let href = $dynamic.children().find('.ip').val();
+                        let img = $dynamic.children().find('.img').html();
+                        let name = $dynamic.children().find('.name').html();
 
                         if (href === '') {
                             $dynamic.children().eq(0).find('.disit').remove();
@@ -1150,25 +1150,25 @@
 
 
                     function sendupdated(clientId) {
-                        var clientobj = {
+                        let clientobj = {
 
                             'trackingList': []
                         };
-                        var clientName = $('.q0e').val();
+                        let clientName = $('.q0e').val();
                         console.log(clientName);
                         clientobj.name = clientName;
                         clientobj.clientId = clientId;
 
-                        var $appendData1 = $('#update-client-list').children()
+                        let $appendData1 = $('#update-client-list').children()
                         for (let index = 0; index < $appendData1.length; index++) {
-                            var $dynamic = $appendData1.eq(index);
+                            let $dynamic = $appendData1.eq(index);
                             console.log($dynamic);
-                            var trackingid = $dynamic.children().find('.id').html();
-                            var href = $dynamic.children().find('.ip').val();
-                            var img = $dynamic.children().find('.img').html();
-                            var name = $dynamic.children().find('.name').html();
+                            let trackingid = $dynamic.children().find('.id').html();
+                            let href = $dynamic.children().find('.ip').val();
+                            let img = $dynamic.children().find('.img').html();
+                            let name = $dynamic.children().find('.name').html();
 
-                            var k = {}
+                            let k = {}
                             k.id = trackingid;
                             k.tracking_code = href;
                             k.icon = img;
@@ -1205,14 +1205,14 @@
 
                 $('.sort').on("click", ".deli", function() {
 
-                    var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+                    let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
 
                 });
 
                 // FIXME DELETE CLIENT DATA
                 $('.dynamic').on("click", '.delete-client', function() {
-                    var clientId = $(this).attr("id");
+                    let clientId = $(this).attr("id");
                     console.log(clientId);
                     $.ajax({
                         type: 'delete',
@@ -1224,8 +1224,8 @@
                                 'Client Deleted Successfully!',
                                 'success'
                             );
-                            var count = data.count;
-                            var clientid = data.clientid;
+                            let count = data.count;
+                            let clientid = data.clientid;
                             // if (count > 0) {
                             window.location.href = "/dashboard/" + clientid;
                             // } else {
@@ -1243,9 +1243,9 @@
                 // FIXME ADD CLIENT
                 $('#add_client').on("click", function() {
 
-                    var clientname = false;
-                    var socialdata = false;
-                    var getcleintname = $('.q0d').val();
+                    let clientname = false;
+                    let socialdata = false;
+                    let getcleintname = $('.q0d').val();
                     console.log(getcleintname);
                     if (!getcleintname) {
                         alert("please enter Your Name");
@@ -1255,16 +1255,16 @@
                     } else {
                         // console.log("its there");
                     }
-                    var $socialdata = $('#add-track-data').children().length;
+                    let $socialdata = $('#add-track-data').children().length;
 
 
-                    var $appendData22 = $('#add-track-data').children();
+                    let $appendData22 = $('#add-track-data').children();
                     for (let index = 0; index < $appendData22.length; index++) {
-                        var $dynamic = $appendData22.eq(index);
-                        var trackingid = $dynamic.children().find('.id').html();
-                        var href = $dynamic.children().find('.ip').val();
-                        var img = $dynamic.children().find('.img').html();
-                        var name = $dynamic.children().find('.name').html();
+                        let $dynamic = $appendData22.eq(index);
+                        let trackingid = $dynamic.children().find('.id').html();
+                        let href = $dynamic.children().find('.ip').val();
+                        let img = $dynamic.children().find('.img').html();
+                        let name = $dynamic.children().find('.name').html();
 
                         if (href === '') {
                             $dynamic.children().eq(0).find('.disit').remove();
@@ -1293,24 +1293,24 @@
 
 
                     function addclientdata() {
-                        var clientobj = {
+                        let clientobj = {
 
                             'trackingList': []
                         };
-                        var clientName = $('.q0d').val();
+                        let clientName = $('.q0d').val();
                         console.log(clientName);
                         clientobj.name = clientName;
 
-                        var $appendData1 = $('#add-track-data').children()
+                        let $appendData1 = $('#add-track-data').children()
                         for (let index = 0; index < $appendData1.length; index++) {
-                            var $dynamic = $appendData1.eq(index);
+                            let $dynamic = $appendData1.eq(index);
                             console.log($dynamic);
-                            var trackingid = $dynamic.children().find('.id').html();
-                            var href = $dynamic.children().find('.ip').val();
-                            var img = $dynamic.children().find('.img').html();
-                            var name = $dynamic.children().find('.name').html();
+                            let trackingid = $dynamic.children().find('.id').html();
+                            let href = $dynamic.children().find('.ip').val();
+                            let img = $dynamic.children().find('.img').html();
+                            let name = $dynamic.children().find('.name').html();
 
-                            var k = {}
+                            let k = {}
                             k.id = trackingid;
                             k.tracking_code = href;
                             k.icon = img;
@@ -1331,7 +1331,7 @@
                             success: function(data) {
 
                                 $('#modal7').modal('hide');
-                                var message = data.data;
+                                let message = data.data;
                                 swal(
                                     'Great!',
                                     message,
@@ -1356,7 +1356,7 @@
 
                 $('#add-track-data').on("click", ".deli", function() {
 
-                    var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+                    let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
                 });
 
@@ -1383,7 +1383,7 @@
                     // console.log(trackingList);
                     // console.log("anskdnsn");
 
-                    var clientCount = <%-JSON.stringify(trackingList) %>;
+                    let clientCount = <%-JSON.stringify(trackingList) %>;
                     // console.log(clientCount);
                     console.log(clientCount);
 
@@ -1396,7 +1396,7 @@
 
                     // #################################################################################################################
 
-                    var $p1 = $('.d1e').children().eq(1);
+                    let $p1 = $('.d1e').children().eq(1);
                     $('.q0e').val(clientName);
                     $('.d1e').children().append(`<span id="clientid" style="display:none">` + clientId + `</span>`);
 
@@ -1416,7 +1416,7 @@
 
 
                     //////////////////
-                    // var count = JSON.parse(trackingList).length;
+                    // let count = JSON.parse(trackingList).length;
                     // if (count > 0) {
 
                     // }
@@ -1476,14 +1476,14 @@
                     // 	$("#editheader").hide();
                     // }
 
-                    var shorturl = $('#input18').val(shortcode);
-                    var indiid = $("#individualid").html(id)
-                    var clientip = $("#fullip").val(website);
-                    var campaign_source = $('#campaign_sourceu').val(source);
-                    var campaign_medium = $('#campaign_mediumu').val(medium);
-                    var campaign_name = $('#campaign_nameu').val(name);
-                    var campaign_term = $('#campaign_termu').val(term);
-                    var campaign_content = $('#campaign_contentu').val(content);
+                    let shorturl = $('#input18').val(shortcode);
+                    let indiid = $("#individualid").html(id)
+                    let clientip = $("#fullip").val(website);
+                    let campaign_source = $('#campaign_sourceu').val(source);
+                    let campaign_medium = $('#campaign_mediumu').val(medium);
+                    let campaign_name = $('#campaign_nameu').val(name);
+                    let campaign_term = $('#campaign_termu').val(term);
+                    let campaign_content = $('#campaign_contentu').val(content);
 
 
 
@@ -1492,16 +1492,16 @@
 
                 $('.saveshort').on("click", function() {
                     console.log("hello");
-                    var from = "shortenurl";
-                    var ide = $("#individualid").html();
+                    let from = "shortenurl";
+                    let ide = $("#individualid").html();
                     ide = ide.trim();
-                    var websiteurl = $("#fullip").val();
-                    var short = $('#input18').val();
-                    var campaign_source = $('#campaign_sourceu').val();
-                    var campaign_medium = $('#campaign_mediumu').val();
-                    var campaign_name = $('#campaign_nameu').val();
-                    var campaign_term = $('#campaign_termu').val();
-                    var campaign_content = $('#campaign_contentu').val();
+                    let websiteurl = $("#fullip").val();
+                    let short = $('#input18').val();
+                    let campaign_source = $('#campaign_sourceu').val();
+                    let campaign_medium = $('#campaign_mediumu').val();
+                    let campaign_name = $('#campaign_nameu').val();
+                    let campaign_term = $('#campaign_termu').val();
+                    let campaign_content = $('#campaign_contentu').val();
                     if (short.length > 5) {
 
                     } else {
@@ -1513,7 +1513,7 @@
 
                         if (!campaign_source) {
                             console.log("empty");
-                            var obj = {};
+                            let obj = {};
                             obj.id = ide;
                             obj.url = websiteurl;
                             obj.shortcode = short;
@@ -1538,7 +1538,7 @@
                                 }
                             });
                         } else {
-                            var obj1 = {
+                            let obj1 = {
 
                             };
 
@@ -1678,25 +1678,25 @@
 
                     $('#shortenurl').on("click", function() {
 
-                        var website = $('#url').val();
-                        var containshttp = website.match(/(^http:\/\/)|(^www)/) != null;
+                        let website = $('#url').val();
+                        let containshttp = website.match(/(^http:\/\/)|(^www)/) != null;
 
-                        // var data312 = CheckIsValidDomain(website);
+                        // let data312 = CheckIsValidDomain(website);
                         // alert(data312);
-                        var value21 = domainCheck(website);
+                        let value21 = domainCheck(website);
                         // alert(value21);
 
 
                         if (value21) {
 
                             if ($('#url').val().startsWith("https://")) {
-                                var n = website.slice(8);
+                                let n = website.slice(8);
                                 doit(n);
                             } else if ($('#url').val().startsWith("http://")) {
-                                var n = website.slice(7);
+                                let n = website.slice(7);
                                 doit(n);
                             } else {
-                                var website = $('#url').val();
+                                let website = $('#url').val();
 
                                 doit(website);
                             }
@@ -1720,7 +1720,7 @@
 
                                 $('#url').val("");
 
-                                var url = data.url;
+                                let url = data.url;
                                 $("#success-url").text("biotree.one/link/" + url);
                                 $("#success-url2").val("biotree.one/link/" + url);
 
@@ -1753,27 +1753,27 @@
 
 
 
-                    var shorts = <%- JSON.stringify(shorturlsList) %>;
+                    let shorts = <%- JSON.stringify(shorturlsList) %>;
                     console.log(shorts);
 
 
 
-                    // for (var l = 0; l < clients.length; l++) {
-                    // 	for (var p = 0; p < clients[l].tracking.length; p++) {
+                    // for (let l = 0; l < clients.length; l++) {
+                    // 	for (let p = 0; p < clients[l].tracking.length; p++) {
 
                     // 		if (clientiddefault === clients[l]._id) {
-                    // 			var icon = clients[l].tracking[p].icon;
-                    // 			var id = clients[l].tracking[p].id;
-                    // 			var trackcode = clients[l].tracking[p].trackcode;
+                    // 			let icon = clients[l].tracking[p].icon;
+                    // 			let id = clients[l].tracking[p].id;
+                    // 			let trackcode = clients[l].tracking[p].trackcode;
 
                     // 			console.log(icon);
-                    // 			var list = trackprint(icon, id, trackcode);
+                    // 			let list = trackprint(icon, id, trackcode);
                     // 			$('.shorturllist').append(list);
 
                     // 		}
                     // 	}
                     // }
-                    // var list = trackprint(clientiddefault);
+                    // let list = trackprint(clientiddefault);
                     // $('.shorturllist').append(list);
 
 
@@ -1787,7 +1787,7 @@
 
 
                 });
-                var temp = "adkasdmkasdksad";
+                let temp = "adkasdmkasdksad";
                 // swal({
                 //     type: "success",
                 //     title: 'Title',

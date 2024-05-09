@@ -1,4 +1,4 @@
-var HTMLElement;
+let HTMLElement;
 
 HTMLElement = require('./HTMLElement');
 

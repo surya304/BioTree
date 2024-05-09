@@ -103,7 +103,7 @@ There are cases where you'd like to show some user feedback or capture what has 
 That's why we fire custom events such as `success` and `error` for you to listen and implement your custom logic.
 
 ```js
-var clipboard = new ClipboardJS('.btn');
+let clipboard = new ClipboardJS('.btn');
 
 clipboard.on('success', function(e) {
     console.info('Action:', e.action);
@@ -162,7 +162,7 @@ new ClipboardJS('.btn', {
 Also, if you are working with single page apps, you may want to manage the lifecycle of the DOM more precisely. Here's how you clean up the events and objects that we create.
 
 ```js
-var clipboard = new ClipboardJS('.btn');
+let clipboard = new ClipboardJS('.btn');
 clipboard.destroy();
 ```
 

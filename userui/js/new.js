@@ -3,9 +3,9 @@ $(function() {
     // $('.droppingtracking').on('click', '.hello', function() {
 
 
-    //     var img = $(this).find('.image1').html();
-    //     var id = $(this).find('.first').html();
-    //     var name = $(this).find('.naming').html();
+    //     let img = $(this).find('.image1').html();
+    //     let id = $(this).find('.first').html();
+    //     let name = $(this).find('.naming').html();
     //     img = img.trim()
     //     id = id.trim();
     //     name = name.trim();
@@ -14,7 +14,7 @@ $(function() {
     //     console.log(name);
 
     //     //////////////
-    //     var listItemToAdda = makelist(img, id, name);
+    //     let listItemToAdda = makelist(img, id, name);
     //     $("#sortable").append(listItemToAdda);
 
 
@@ -27,7 +27,7 @@ $(function() {
 
     // function makelist(add, troop, name) {
 
-    //     var $allData = `<div class="sortableitem u-mt-custom" ><li>
+    //     let $allData = `<div class="sortableitem u-mt-custom" ><li>
     // <div class="row justify-content-left nolo r0">
     // <div class="col-md-10 col-9 r2" >
     // <div class="c-field has-addon-left">
@@ -60,7 +60,7 @@ $(function() {
     // }
     // $('.sort').on("click", ".deli", function() {
 
-    //     var bolo = $(this).parentsUntil('.sortableitem').parent().remove();
+    //     let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
 
     // });
 
@@ -74,17 +74,17 @@ $(function() {
     // $(".sendparameter").on("click", function () {
     //     console.log("hello");
     //     // href="create-shorturl"
-    //     var value = $('#clientid').val();
+    //     let value = $('#clientid').val();
     //     console.log(value);
     //     window.location = '/create-shorturl?clientid=' + value;
     // });
     // ###################################send id on create short url link 
 
 
-    // var fullData = JSON.parse(socialmediaList);
+    // let fullData = JSON.parse(socialmediaList);
     // nba1
     $('.utmbtn').on("click", function() {
-            var website = $('.inputing').val();
+            let website = $('.inputing').val();
             $('.v0').val(website);
         })
         // ////////////////////////////// copy to clipboard button

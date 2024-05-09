@@ -1,4 +1,4 @@
-// var clipboard = new Clipboard('.btn');
+// let clipboard = new Clipboard('.btn');
 
 // clipboard.on('success', function (e) {
 //     console.info('Action:', e.action);

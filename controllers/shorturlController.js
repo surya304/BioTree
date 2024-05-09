@@ -1,18 +1,18 @@
-var User = require('../models/user')
-var UserShortURL = require('../models/user_shorturl')
-var UserSocialMedia = require('../models/user_socialmedia')
-var UserTracking = require('../models/user_tracking')
-var Tracking = require('../models/tracking')
-var dataTracking = require('../models/datatracking')
-var UserLink = require('../models/user_link')
-var ShortURL = require('../models/shorturl')
-var Client = require('../models/client')
-var SocialMedia = require('../models/socialmedia')
-var express = require('express')
-var router = express.Router()
-var randomize = require('randomatic')
-var moment = require('moment')
-var async = require('async')
+let User = require('../models/user')
+let UserShortURL = require('../models/user_shorturl')
+let UserSocialMedia = require('../models/user_socialmedia')
+let UserTracking = require('../models/user_tracking')
+let Tracking = require('../models/tracking')
+let dataTracking = require('../models/datatracking')
+let UserLink = require('../models/user_link')
+let ShortURL = require('../models/shorturl')
+let Client = require('../models/client')
+let SocialMedia = require('../models/socialmedia')
+let express = require('express')
+let router = express.Router()
+let randomize = require('randomatic')
+let moment = require('moment')
+let async = require('async')
     // STATIC DATA 1 time insertion
 
 
@@ -29,8 +29,8 @@ router.get('/404', function(req, res) {
 
 router.get('/create-shorturl/', requireLogin, function(req, res) {
 
-        // var userid = req.body.userid;
-        // var shorturl = req.body.shorturl;
+        // let userid = req.body.userid;
+        // let shorturl = req.body.shorturl;
 
         Tracking.find({
             is_del: false
@@ -38,7 +38,7 @@ router.get('/create-shorturl/', requireLogin, function(req, res) {
 
 
 
-            var shortcode = randomize('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 5)
+            let shortcode = randomize('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 5)
 
             console.log(shortcode)
 
@@ -143,26 +143,26 @@ router.get('/create-shorturl/', requireLogin, function(req, res) {
     })
     /// ///////////////////////////////////////////////////////////////
 router.post('/create-instabio', requireLogin, function(req, res) {
-    var client = req.body.client
-    var shortcode = req.body.shortcode
-    var type = req.body.type
-    var socialmedia = req.body.socialmedia;
+    let client = req.body.client
+    let shortcode = req.body.shortcode
+    let type = req.body.type
+    let socialmedia = req.body.socialmedia;
     console.log("###############################################################################");
     console.log(socialmedia, "socialmedia");
     console.log("###############################################################################");
 
-    var links = req.body.links
-    var title = req.body.title
-    var bio = req.body.bio
-    var img = req.body.img
-    var dashimg = req.body.dashimg
-    var bg_color = req.body.bg_color
-    var rounded_border = req.body.rounded_border
-    var trackingList = req.body.trackingList;
+    let links = req.body.links
+    let title = req.body.title
+    let bio = req.body.bio
+    let img = req.body.img
+    let dashimg = req.body.dashimg
+    let bg_color = req.body.bg_color
+    let rounded_border = req.body.rounded_border
+    let trackingList = req.body.trackingList;
 
-    var clicks = req.body.clicks
+    let clicks = req.body.clicks
 
-    var instaObj = new UserShortURL({
+    let instaObj = new UserShortURL({
 
         user: req.session.user._id,
         shortcode: shortcode,
@@ -195,7 +195,7 @@ router.post('/create-instabio', requireLogin, function(req, res) {
             res.end()
         } else {
             console.log('Insta Bio Created')
-            var client_id = result._id
+            let client_id = result._id
 
             res.status(200).send({
                 data: 'Insta Bio Added Successfully'
@@ -210,16 +210,16 @@ router.post('/create-instabio', requireLogin, function(req, res) {
 /// ////////////////////////////////////////////////////////////////
 
 // router.get('/dashboard', requireLogin, function(req, res) {
-//     var url = req.url
-//     var userid = req.session.user._id
+//     let url = req.url
+//     let userid = req.session.user._id
 //     console.log(userid)
 //         /// ///////###################################prinitng random images
-//     var description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
+//     let description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
 //         'app-icon6.png', 'app-icon7.png'
 //     ]
-//     var size = description.length
-//     var x = Math.floor(size * Math.random())
-//     var imaged = '/userui/img/' + description[x];
+//     let size = description.length
+//     let x = Math.floor(size * Math.random())
+//     let imaged = '/userui/img/' + description[x];
 
 
 //     Client.find({
@@ -236,7 +236,7 @@ router.post('/create-instabio', requireLogin, function(req, res) {
 //             })
 //             res.end()
 //         } else {
-//             var count = clientsList.length
+//             let count = clientsList.length
 
 //             Tracking.find({
 //                 is_del: false
@@ -262,7 +262,7 @@ router.post('/create-instabio', requireLogin, function(req, res) {
 
 router.post('/getclientcount', requireLogin, function(req, res) {
         // console.log("motherfucker");
-        var userid = req.session.user._id
+        let userid = req.session.user._id
         Client.find({
             is_del: false,
             user: userid
@@ -276,8 +276,8 @@ router.post('/getclientcount', requireLogin, function(req, res) {
                 })
                 res.end()
             } else {
-                var count = clientsList.length
-                var newClientsList = [];
+                let count = clientsList.length
+                let newClientsList = [];
                 console.log(count);
 
                 if (count == 0) {
@@ -301,7 +301,7 @@ router.post('/getclientcount', requireLogin, function(req, res) {
     // FIXME Dashboard
 
 router.get('/dashboard', requireLogin, function(req, res) {
-    var userid = req.session.user._id;
+    let userid = req.session.user._id;
 
     // Client.find({
     //     is_del: false,
@@ -316,8 +316,8 @@ router.get('/dashboard', requireLogin, function(req, res) {
     //         })
     //         res.end()
     //     } else {
-    //         var count = clientsList.length
-    //         var newClientsList = [];
+    //         let count = clientsList.length
+    //         let newClientsList = [];
     //         console.log(count);
     //         if (count > 0) {
     //             res.redirect('/dashboard/' + clientsList[0]._id);
@@ -365,9 +365,9 @@ router.get('/dashboard', requireLogin, function(req, res) {
 
 // //////////////////////////
 router.post('/savesocialorlink', function(req, res) {
-    var type = req.body.type;
-    var id = req.body.id;
-    var recordid = req.body.recordid;
+    let type = req.body.type;
+    let id = req.body.id;
+    let recordid = req.body.recordid;
     console.log(id, "id");
     console.log(recordid, "recordid");
 
@@ -375,13 +375,13 @@ router.post('/savesocialorlink', function(req, res) {
 
 
     UserShortURL.findById(recordid).exec(function(err1, result) {
-        var updateClicks1 = "";
+        let updateClicks1 = "";
 
         if (type === "social") {
 
-            var hat = result.socialmedia;
+            let hat = result.socialmedia;
         } else {
-            var hat = result.links;
+            let hat = result.links;
 
         }
 
@@ -396,10 +396,10 @@ router.post('/savesocialorlink', function(req, res) {
 
             async.each(hat, function(entry, callback) {
 
-                    var upDateusername = "";
+                    let upDateusername = "";
                     if (entry.id == id) {
                         console.log(entry, "entry");
-                        var resultcount = entry.clicks;
+                        let resultcount = entry.clicks;
                         updateClicks1 = (Number(resultcount)) + 1;
 
 
@@ -453,10 +453,10 @@ router.post('/savesocialorlink', function(req, res) {
     //     } else {
 
 
-    //         var clicks = 1;
+    //         let clicks = 1;
     //         if (result41) {
 
-    //             var resultcount = result41.clicks;
+    //             let resultcount = result41.clicks;
     //             console.log(resultcount, "resultcount");
 
     //             result41.clicks = Number(resultcount) + 1;
@@ -501,7 +501,7 @@ router.post('/savesocialorlink', function(req, res) {
 
 
 router.post('/savetrackingclicks', function(req, res) {
-    var shortcode = req.body.shortcode;
+    let shortcode = req.body.shortcode;
 
     // ///////////////////////////////
 
@@ -523,10 +523,10 @@ router.post('/savetrackingclicks', function(req, res) {
         } else {
 
 
-            var clicks = 1;
+            let clicks = 1;
             if (result41) {
 
-                var resultcount = result41.clicks;
+                let resultcount = result41.clicks;
                 console.log(resultcount, "resultcount");
 
                 result41.clicks = Number(resultcount) + 1;
@@ -592,12 +592,15 @@ router.post('/savetrackingclicks', function(req, res) {
 
 
 
+
+
+
 router.get('/link/:id', function(req, res) {
 
         // Next, paste the code into the global footer of your domain either before or after the <body> tag.
         // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        var url = req.url;
-        var shortcode = req.params.id;
+        let url = req.url;
+        let shortcode = req.params.id;
 
         console.log(req.params, "params");
 
@@ -652,16 +655,16 @@ router.get('/steps', requireLogin, function(req, res) {
 
         // });
 
-        var url = req.url
-        var userid = req.session.user._id
+        let url = req.url
+        let userid = req.session.user._id
         console.log(userid)
             /// ///////###################################prinitng random images
-        var description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
+        let description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
             'app-icon6.png', 'app-icon7.png'
         ]
-        var size = description.length
-        var x = Math.floor(size * Math.random())
-        var imaged = '/userui/img/' + description[x]
+        let size = description.length
+        let x = Math.floor(size * Math.random())
+        let imaged = '/userui/img/' + description[x]
 
         // //////##############################
 
@@ -679,7 +682,7 @@ router.get('/steps', requireLogin, function(req, res) {
                 })
                 res.end()
             } else {
-                var count = clientsList.length
+                let count = clientsList.length
 
                 Tracking.find({
                     is_del: false
@@ -705,8 +708,8 @@ router.get('/steps', requireLogin, function(req, res) {
     // ############################steps page######################/
 
 router.get('/analytics', requireLogin, function(req, res) {
-    var url = req.url
-    var userid = req.session.user._id
+    let url = req.url
+    let userid = req.session.user._id
 
     Client.find({
         is_del: false,
@@ -721,7 +724,7 @@ router.get('/analytics', requireLogin, function(req, res) {
             })
             res.end()
         } else {
-            var count = clientsList.length
+            let count = clientsList.length
 
             Tracking.find({
                 is_del: false
@@ -783,9 +786,9 @@ router.get('/analytics', requireLogin, function(req, res) {
 
 // router.get('/analytics', requireLogin, function(req, res) {
 router.get('/analytics/:clientid', requireLogin, function(req, res) {
-    var url = req.url;
-    var userid = req.session.user._id;
-    var clientid = req.params.clientid;
+    let url = req.url;
+    let userid = req.session.user._id;
+    let clientid = req.params.clientid;
     if (clientid === "allclients") {
         Client.find({
             is_del: false,
@@ -800,8 +803,8 @@ router.get('/analytics/:clientid', requireLogin, function(req, res) {
                 })
                 res.end()
             } else {
-                var count = clientsList.length
-                var newClientsList = []
+                let count = clientsList.length
+                let newClientsList = []
                 Tracking.find({
                     is_del: false
                 }, function(errTracking, trackingResult) {
@@ -812,24 +815,24 @@ router.get('/analytics/:clientid', requireLogin, function(req, res) {
                         // console.log(trackingResult, "trackingResult");
                         // console.log(shorturlsList, "shorturlsList");
                         // ///////////////////////
-                        var clientResult = {
+                        let clientResult = {
                             "name": "allclients"
                         }
 
-                        // / var d = alldata[index].created_at;
-                        // var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-                        var newshort31 = [];
+                        // / let d = alldata[index].created_at;
+                        // let strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                        let newshort31 = [];
 
                         for (let o = 0; o < shorturlsList.length; o++) {
                             const type = shorturlsList[o].type;
                             const shortcode = shorturlsList[o].shortcode;
                             const tracking = shorturlsList[o].tracking;
                             const _id = shorturlsList[o]._id;
-                            var d = shorturlsList[o].created_at;
-                            var clicks = shorturlsList[o].clicks;
+                            let d = shorturlsList[o].created_at;
+                            let clicks = shorturlsList[o].clicks;
 
-                            var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-                            var k = {};
+                            let strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                            let k = {};
                             k.type = type;
                             k.shortcode = shortcode;
                             k.tracking = tracking;
@@ -922,8 +925,8 @@ router.get('/analytics/:clientid', requireLogin, function(req, res) {
                     })
                     res.end()
                 } else {
-                    var count = clientsList.length
-                    var newClientsList = []
+                    let count = clientsList.length
+                    let newClientsList = []
 
 
                     Tracking.find({
@@ -952,14 +955,14 @@ router.get('/analytics/:clientid', requireLogin, function(req, res) {
                                         res.end()
                                     } else {
                                         console.log(clientResult);
-                                        var newshort = [];
+                                        let newshort = [];
 
 
                                         for (let index = 0; index < shorturlsList.length; index++) {
                                             const element = shorturlsList[index].created_at;
-                                            var d = shorturlsList[index].created_at;
-                                            var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-                                            var k = {};
+                                            let d = shorturlsList[index].created_at;
+                                            let strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                                            let k = {};
                                             k.id = "#" + shorturlsList[index]._id;
                                             k.id1 = shorturlsList[index]._id;
 
@@ -969,18 +972,18 @@ router.get('/analytics/:clientid', requireLogin, function(req, res) {
                                             newshort.push(k);
                                         }
                                         console.log("###############################################");
-                                        var newshort31 = [];
+                                        let newshort31 = [];
 
                                         for (let o = 0; o < shorturlsList.length; o++) {
                                             const type = shorturlsList[o].type;
                                             const shortcode = shorturlsList[o].shortcode;
                                             const tracking = shorturlsList[o].tracking;
                                             const _id = shorturlsList[o]._id;
-                                            var d = shorturlsList[o].created_at;
-                                            var clicks = shorturlsList[o].clicks;
+                                            let d = shorturlsList[o].created_at;
+                                            let clicks = shorturlsList[o].clicks;
 
-                                            var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-                                            var k = {};
+                                            let strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                                            let k = {};
                                             k.type = type;
                                             k.shortcode = shortcode;
                                             k.tracking = tracking;
@@ -1067,12 +1070,12 @@ router.get('/analytics/:clientid', requireLogin, function(req, res) {
 // dashboard page date###########################################################################
 
 router.post('/create-client', requireLogin, function(req, res) {
-    var client = req.body.name
-    var trackingList = req.body.trackingList
+    let client = req.body.name
+    let trackingList = req.body.trackingList
 
     console.log(trackingList)
 
-    var clientObj = new Client({
+    let clientObj = new Client({
         user: req.session.user._id,
         name: client,
         tracking: trackingList,
@@ -1093,11 +1096,11 @@ router.post('/create-client', requireLogin, function(req, res) {
             res.end()
         } else {
             console.log('Client Created')
-            var client_id = result._id
+            let client_id = result._id
 
             // if(trackingList!=undefined)
             // {
-            // 		var clientTrackingObj = new ClientTracking({
+            // 		let clientTrackingObj = new ClientTracking({
             // 			user: req.session.user._id,
             // 			client: client_id,
             // 			tracking: trackingList,
@@ -1140,10 +1143,10 @@ router.post('/create-client', requireLogin, function(req, res) {
 
 router.put('/update-client', requireLogin, function(req, res) {
         console.log("sndklsandkasnld");
-        var id = req.body.clientId;
-        var name = req.body.name;
+        let id = req.body.clientId;
+        let name = req.body.name;
         console.log(id);
-        var trackingList = req.body.trackingList;
+        let trackingList = req.body.trackingList;
         console.log(name, "name");
         Client.findById(id, function(err, clientResult) {
             console.log(clientResult, "clientResult");
@@ -1180,7 +1183,7 @@ router.put('/update-client', requireLogin, function(req, res) {
     })
     // FIXME Delete client
 router.delete('/delete-client/:id', requireLogin, function(req, res) {
-    var id = req.params.id
+    let id = req.params.id
     console.log(id);
     Client.find({
         is_del: false,
@@ -1223,7 +1226,7 @@ router.delete('/delete-client/:id', requireLogin, function(req, res) {
                                 // //////////////////////////
                                 async.each(result420, function(entry2, callback) {
 
-                                        var id41 = entry2._id;
+                                        let id41 = entry2._id;
                                         UserShortURL.findById(id41).exec(function(err6, result21) {
                                             console.log(result21, "indidelete");
                                             if (err43) {
@@ -1241,11 +1244,11 @@ router.delete('/delete-client/:id', requireLogin, function(req, res) {
                                     function(err43) {
                                         console.log('deleted');
 
-                                        var count = clientsList.length
-                                        var newClientsList = [];
+                                        let count = clientsList.length
+                                        let newClientsList = [];
                                         console.log(count);
 
-                                        var clientId;
+                                        let clientId;
                                         if (count > 0) {
 
                                             clientId = clientsList[0]._id;
@@ -1284,15 +1287,15 @@ router.delete('/delete-client/:id', requireLogin, function(req, res) {
 })
 
 router.post('/create-shorturl', requireLogin, function(req, res) {
-    var url = req.body.url;
-    var from = req.body.from;
-    var client = req.body.client;
-    var website = req.body.website;
-    var dashimg = req.body.dashimg;
-    var clicks = req.body.clicks;
+    let url = req.body.url;
+    let from = req.body.from;
+    let client = req.body.client;
+    let website = req.body.website;
+    let dashimg = req.body.dashimg;
+    let clicks = req.body.clicks;
 
 
-    var shortcode = randomize('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 5)
+    let shortcode = randomize('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 5)
     console.log(shortcode)
     UserShortURL.find({
         shortcode: shortcode
@@ -1307,7 +1310,7 @@ router.post('/create-shorturl', requireLogin, function(req, res) {
             res.end()
         } else {
             if (list.length == 0) {
-                var shortURLObj = {}
+                let shortURLObj = {}
 
                 if (from == 'shortenurl') {
                     shortURLObj = new UserShortURL({
@@ -1324,13 +1327,13 @@ router.post('/create-shorturl', requireLogin, function(req, res) {
 
                     })
                 } else if (from == 'shortenurl_utm') {
-                    var campaign_source = req.body.campaign_source
-                    var campaign_medium = req.body.campaign_medium
-                    var campaign_name = req.body.campaign_name
-                    var campaign_term = req.body.campaign_term
-                    var campaign_content = req.body.campaign_content
-                    var utm_url = req.body.utm_url
-                    var clicks21 = req.body.clicks;
+                    let campaign_source = req.body.campaign_source
+                    let campaign_medium = req.body.campaign_medium
+                    let campaign_name = req.body.campaign_name
+                    let campaign_term = req.body.campaign_term
+                    let campaign_content = req.body.campaign_content
+                    let utm_url = req.body.utm_url
+                    let clicks21 = req.body.clicks;
 
 
 
@@ -1366,7 +1369,7 @@ router.post('/create-shorturl', requireLogin, function(req, res) {
                         res.end()
                     } else {
                         console.log('ShortURL Created')
-                        var client_id = result._id
+                        let client_id = result._id
 
                         res.status(200).send({
                             data: 'ShortURL Created Successfully',
@@ -1392,12 +1395,12 @@ router.post('/create-shorturl', requireLogin, function(req, res) {
 })
 
 router.put('/update-shorturl', requireLogin, function(req, res) {
-    var id = req.body.id;
-    // var url = req.body.url;
-    var from = req.body.from
-        // var client = req.body.client;
-    var website = req.body.url
-    var shortcode = req.body.shortcode
+    let id = req.body.id;
+    // let url = req.body.url;
+    let from = req.body.from
+        // let client = req.body.client;
+    let website = req.body.url
+    let shortcode = req.body.shortcode
     console.log(id)
         // console.log(url);
     console.log(from)
@@ -1420,11 +1423,11 @@ router.put('/update-shorturl', requireLogin, function(req, res) {
                 shorturlResult.shortcode = shortcode
                     // shorturlResult.client = client;
             } else if (from == 'shortenurl_utm') {
-                var campaign_source = req.body.campaign_source
-                var campaign_medium = req.body.campaign_medium
-                var campaign_name = req.body.campaign_name
-                var campaign_term = req.body.campaign_term
-                var campaign_content = req.body.campaign_content
+                let campaign_source = req.body.campaign_source
+                let campaign_medium = req.body.campaign_medium
+                let campaign_name = req.body.campaign_name
+                let campaign_term = req.body.campaign_term
+                let campaign_content = req.body.campaign_content
 
                 // shorturlResult.client = client;
                 shorturlResult.website = website
@@ -1458,7 +1461,7 @@ router.put('/update-shorturl', requireLogin, function(req, res) {
 })
 
 router.delete('/delete-shorturl/:id', requireLogin, function(req, res) {
-    var id = req.params.id
+    let id = req.params.id
 
     UserShortURL.findById(id, function(err, result) {
         if (err) {
@@ -1492,33 +1495,33 @@ router.delete('/delete-shorturl/:id', requireLogin, function(req, res) {
 })
 
 router.post('/dashboard-input-url', requireLogin, function(req, res) {
-    var LinkUrl = req.body.input
-    var utmUrl = req.body.fullutmurl
+    let LinkUrl = req.body.input
+    let utmUrl = req.body.fullutmurl
     console.log(LinkUrl)
     console.log(utmUrl)
 })
 
 router.post('/dashboard-individual-url-edit', requireLogin, function(req, res) {
-    var input = req.body.input
-    var shortUrl = req.body.short
+    let input = req.body.input
+    let shortUrl = req.body.short
     console.log(input)
     console.log(shortUrl)
 })
 
 router.post('/dashboard-individual-url-tracking', requireLogin, function(req, res) {
-    var trackingdata = req.body.tracking
+    let trackingdata = req.body.tracking
     console.log(trackingdata)
 })
 
 router.get('/short-url-onEnter/:short', requireLogin, function(req, res) {
-        var trackingdata = req.params.short
+        let trackingdata = req.params.short
 
         console.log(trackingdata)
     })
     // nba
     // router.get('/instabio/:id', requireLogin, function (req, res) {
-    // 	var url = req.url;
-    // 	var id = req.params.id;
+    // 	let url = req.url;
+    // 	let id = req.params.id;
     // 	console.log(id);
 
 // 	UserShortURL.findById(id, function (err, data) {
@@ -1544,9 +1547,9 @@ router.get('/short-url-onEnter/:short', requireLogin, function(req, res) {
 // ///////////////////////
 // FIXME GET Instabio
 router.get('/instabio/:id', requireLogin, function(req, res) {
-    var url = req.url
-    var id = req.params.id
-    var userid = req.session.user._id
+    let url = req.url
+    let id = req.params.id
+    let userid = req.session.user._id
 
     console.log(userid);
 
@@ -1622,7 +1625,7 @@ router.get('/instabio/:id', requireLogin, function(req, res) {
 
 
 router.put('/updateclicks', function(req, res) {
-    var id = req.body.id
+    let id = req.body.id
 
 
     UserShortURL.findById(id, function(err, result) {
@@ -1654,17 +1657,17 @@ router.put('/updateclicks', function(req, res) {
 
 /// /////////////////////////////////////
 router.put('/update-instabio', requireLogin, function(req, res) {
-    var id = req.body.id
-    var shortcode = req.body.shortcode
-    var socialmedia = req.body.socialmedia
-    var links = req.body.links
-    var title = req.body.title
-    var bio = req.body.bio
-    var img = req.body.img
-    var trackingList = req.body.trackingList;
+    let id = req.body.id
+    let shortcode = req.body.shortcode
+    let socialmedia = req.body.socialmedia
+    let links = req.body.links
+    let title = req.body.title
+    let bio = req.body.bio
+    let img = req.body.img
+    let trackingList = req.body.trackingList;
 
-    var bg_color = req.body.bg_color
-    var rounded_border = req.body.rounded_border
+    let bg_color = req.body.bg_color
+    let rounded_border = req.body.rounded_border
     UserShortURL.findById(id, function(err, result) {
         console.log(result)
 
@@ -1703,7 +1706,7 @@ router.put('/update-instabio', requireLogin, function(req, res) {
 // dashboard page date###########################################################################
 
 router.get('/getSocialMediaList', requireLogin, function(req, res) {
-    var url = req.url
+    let url = req.url
     SocialMedia.find({
         is_del: false
     }, function(err, result) {
@@ -1736,15 +1739,15 @@ router.get('/getSocialMediaList', requireLogin, function(req, res) {
 })
 
 router.get('/shorturl/:id', requireLogin, function(req, res) {
-    var id = req.params.id
+    let id = req.params.id
 
     if (req.session.user != undefined) // User not logged in
     {
         res.redirect('/login')
     } else // User Logged in
     {
-        var userid = req.session.user._id
-        var query = {
+        let userid = req.session.user._id
+        let query = {
             user: userid,
             shorturl: id,
             is_del: false
@@ -1766,8 +1769,8 @@ router.get('/shorturl/:id', requireLogin, function(req, res) {
                 } else // URL exists and is linked to the user. Edit option can be given
                 {
                     // Query UserLink, UserTracking and UserSocialMedia to get list
-                    var shorturlID = result._id
-                    var respObj = {}
+                    let shorturlID = result._id
+                    let respObj = {}
 
                     respObj.profile = result
 
@@ -1833,7 +1836,7 @@ router.get('/shorturl/:id', requireLogin, function(req, res) {
 })
 
 router.get('/check-shorturl/:id', requireLogin, function(req, res) {
-    var id = req.params.id
+    let id = req.params.id
     console.log(id)
     UserShortURL.find({
         shortcode: id,
@@ -1871,17 +1874,17 @@ router.get('/check-shorturl/:id', requireLogin, function(req, res) {
 
 // router.post('/create-shorturl', requireLogin, function (req, res) {
 //
-// 	var url = req.url;
-// 	var title = req.body.profile.name;
-// 	var bio = req.body.profile.bio;
-// 	var img = '';
-// 	var bg_color = req.body.style.bg_color;
-// 	var rect_border = req.body.style.rectangle_border;
-// 	var rounded_border = req.body.style.rounded_border;
-// 	var socialmediaList = req.body.socialmedia;
-// 	var trackingList = req.body.tracking;
-// 	var linksList = req.body.links;
-// 	var shorturl = req.body.shorturl;
+// 	let url = req.url;
+// 	let title = req.body.profile.name;
+// 	let bio = req.body.profile.bio;
+// 	let img = '';
+// 	let bg_color = req.body.style.bg_color;
+// 	let rect_border = req.body.style.rectangle_border;
+// 	let rounded_border = req.body.style.rounded_border;
+// 	let socialmediaList = req.body.socialmedia;
+// 	let trackingList = req.body.tracking;
+// 	let linksList = req.body.links;
+// 	let shorturl = req.body.shorturl;
 //
 // 	console.log(shorturl);
 //
@@ -1906,7 +1909,7 @@ router.get('/check-shorturl/:id', requireLogin, function(req, res) {
 // 			{
 // 				console.log('Short URL already created dumbass');
 // 			} else {
-// 				var userShorturlObj = new UserShortURL({
+// 				let userShorturlObj = new UserShortURL({
 // 					user: req.session.user._id,
 // 					shorturl: shorturl,
 // 					title: title,
@@ -1937,15 +1940,15 @@ router.get('/check-shorturl/:id', requireLogin, function(req, res) {
 // 						});
 // 						res.end();
 //
-// 						var shorturlID = result._id;
-// 						var socialArray = [];
-// 						var linksArray = [];
-// 						var trackingArray = [];
+// 						let shorturlID = result._id;
+// 						let socialArray = [];
+// 						let linksArray = [];
+// 						let trackingArray = [];
 //
 // 						if (socialmediaList.length > 0) {
-// 							for (var i = 0; i < socialmediaList.length; i++) {
+// 							for (let i = 0; i < socialmediaList.length; i++) {
 //
-// 								var obj = {};
+// 								let obj = {};
 // 								obj.user = req.session.user._id;
 // 								obj.shorturl = shorturlID;
 // 								obj.socialmedia = socialmediaList[i].id;
@@ -1968,9 +1971,9 @@ router.get('/check-shorturl/:id', requireLogin, function(req, res) {
 //
 //
 // 						if (linksList.length > 0) {
-// 							for (var i = 0; i < linksList.length; i++) {
+// 							for (let i = 0; i < linksList.length; i++) {
 //
-// 								var obj = {};
+// 								let obj = {};
 // 								obj.user = req.session.user._id;
 // 								obj.shorturl = shorturlID;
 // 								obj.url = linksList[i].link;
@@ -1993,9 +1996,9 @@ router.get('/check-shorturl/:id', requireLogin, function(req, res) {
 // 						}
 //
 // 						if (trackingList.length > 0) {
-// 							for (var i = 0; i < trackingList.length; i++) {
+// 							for (let i = 0; i < trackingList.length; i++) {
 //
-// 								var obj = {};
+// 								let obj = {};
 // 								obj.user = req.session.user._id;
 // 								obj.shorturl = shorturlID;
 // 								obj.tracking = trackingList[i].id;
@@ -2026,7 +2029,7 @@ router.get('/check-shorturl/:id', requireLogin, function(req, res) {
 // });
 
 router.post('/create-testturl', requireLogin, function(req, res) {
-        var title = false
+        let title = false
 
         if (title) {
             res.status(200).send({
@@ -2045,13 +2048,13 @@ router.post('/create-testturl', requireLogin, function(req, res) {
     // //////////////////////shorturl update nba
 
 router.put('/shorturl/:id', requireLogin, function(req, res) {
-    var url = req.url
-    var id = req.params.id
-    var messenger = req.body.messenger
-    var socialmedia = req.body.socialmedia
-    var links = req.body.links
-    var bg_color = req.body.bg_color
-    var button_format = req.body.button_format
+    let url = req.url
+    let id = req.params.id
+    let messenger = req.body.messenger
+    let socialmedia = req.body.socialmedia
+    let links = req.body.links
+    let bg_color = req.body.bg_color
+    let button_format = req.body.button_format
 
     UserShortURL.findById(id, function(err, data) {
         if (err) {
@@ -2067,14 +2070,14 @@ router.put('/shorturl/:id', requireLogin, function(req, res) {
 
             data.save(function(err) {
                 if (err) {
-                    var x = {
+                    let x = {
                         success: '',
                         error: 'Please enter all details.'
                     }
                     res.send(x)
                 } else {
                     console.log('ShortURL Updated')
-                    var x = {
+                    let x = {
                         success: 'ShortURL Updated Successfully',
                         error: ''
                     }

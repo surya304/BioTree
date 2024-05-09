@@ -94,7 +94,7 @@
 
     <script type="text/javascript">
         function myFunction81() {
-            var x = document.getElementById("input1");
+            let x = document.getElementById("input1");
             if (x.type === "password") {
                 x.type = "text";
             } else {
@@ -103,7 +103,7 @@
         }
 
         function myFunction91() {
-            var x = document.getElementById("input2");
+            let x = document.getElementById("input2");
             if (x.type === "password") {
                 x.type = "text";
             } else {
@@ -115,7 +115,7 @@
 
             function check_password() {
 
-                var password_length = $("#input1").val().length;
+                let password_length = $("#input1").val().length;
 
                 if (password_length < 5) {
                     $("#password_error_message").html(' <i class="fa fa-times-circle"></i> Please Enter At least 5 characters');
@@ -130,8 +130,8 @@
             function check_retype_password() {
 
 
-                var password = $("#input1").val();
-                var retype_password = $("#input2").val();
+                let password = $("#input1").val();
+                let retype_password = $("#input2").val();
 
 
                 if (password != retype_password) {
@@ -145,7 +145,7 @@
             }
 
             $.urlParam = function(name) {
-                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location
+                let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location
                     .href);
                 if (results == null) {
                     return null;
@@ -192,12 +192,12 @@
             function confirmthat() {
 
 
-                var objotp = {};
+                let objotp = {};
 
 
 
-                var password = $("#input1").val();
-                var retype_password = $("#input2").val();
+                let password = $("#input1").val();
+                let retype_password = $("#input2").val();
                 console.log(password);
                 console.log(retype_password);
                 objotp.password = password;
@@ -205,7 +205,7 @@
 
 
 
-                var key = $.urlParam('key');
+                let key = $.urlParam('key');
                 objotp.key = key;
 
 

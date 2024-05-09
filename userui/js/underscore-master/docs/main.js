@@ -1,7 +1,7 @@
 (function() {
-  var functions = document.querySelectorAll('[data-name]');
-  var sections = document.querySelectorAll('.searchable_section');
-  var searchInput = document.getElementById('function_filter');
+  let functions = document.querySelectorAll('[data-name]');
+  let sections = document.querySelectorAll('.searchable_section');
+  let searchInput = document.getElementById('function_filter');
 
   function searchValue() {
     return searchInput.value.trim().replace(/^_\.?/, '');
@@ -14,9 +14,9 @@
   }
 
   function doesMatch(element) {
-    var name = element.getAttribute('data-name');
-    var aliases = element.getAttribute('data-aliases') || '';
-    var value = searchValue();
+    let name = element.getAttribute('data-name');
+    let aliases = element.getAttribute('data-aliases') || '';
+    let value = searchValue();
     return strIn(value, name) || strIn(value, aliases);
   }
 
@@ -27,18 +27,18 @@
   function filterToc() {
     _.each(functions, filterElement);
 
-    var emptySearch = searchValue() === '';
+    let emptySearch = searchValue() === '';
 
     // Hide the titles of empty sections
     _.each(sections, function(section) {
-      var sectionFunctions = section.querySelectorAll('[data-name]');
-      var showSection = emptySearch || _.some(sectionFunctions, doesMatch);
+      let sectionFunctions = section.querySelectorAll('[data-name]');
+      let showSection = emptySearch || _.some(sectionFunctions, doesMatch);
       section.style.display = showSection ? '' : 'none';
     });
   }
 
   function gotoFirst() {
-    var firstFunction = _.find(functions, doesMatch);
+    let firstFunction = _.find(functions, doesMatch);
     if (firstFunction) {
       window.location.hash = firstFunction.getAttribute('data-name');
       searchInput.focus();

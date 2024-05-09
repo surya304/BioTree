@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var styleSchema = new Schema({
+let styleSchema = new Schema({
   title : { type: String},
   bio : { type: String},
   img : { type: String },
@@ -20,6 +20,6 @@ var styleSchema = new Schema({
 });
 
 
-var Style = mongoose.model('Style', styleSchema);
+let Style = mongoose.model('Style', styleSchema);
 
 module.exports = Style;

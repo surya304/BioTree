@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 // create a schema
-var usershorturlSchema = new Schema({
+let usershorturlSchema = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -100,5 +100,5 @@ var usershorturlSchema = new Schema({
     created_at: Date,
     updated_at: Date
 });
-var UserShortURL = mongoose.model('UserShortURL', usershorturlSchema);
+let UserShortURL = mongoose.model('UserShortURL', usershorturlSchema);
 module.exports = UserShortURL;

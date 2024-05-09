@@ -1,7 +1,7 @@
-var _ = require('./');
+let _ = require('./');
 
 // Browsers to run on Sauce Labs platforms
-var sauceBrowsers = _.reduce([
+let sauceBrowsers = _.reduce([
   ['firefox', '35'],
   ['firefox', '30'],
   ['firefox', '21'],
@@ -30,7 +30,7 @@ var sauceBrowsers = _.reduce([
 
 ], function(memo, platform) {
   // internet explorer -> ie
-  var label = platform[0].split(' ');
+  let label = platform[0].split(' ');
   if (label.length > 1) {
     label = _.invoke(label, 'charAt', 0)
   }

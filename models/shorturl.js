@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 
 // create a schema
-var shorturlSchema = new Schema({
+let shorturlSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -25,6 +25,6 @@ var shorturlSchema = new Schema({
 });
 
 
-var ShortURL = mongoose.model('ShortURL', shorturlSchema);
+let ShortURL = mongoose.model('ShortURL', shorturlSchema);
 
 module.exports = ShortURL;

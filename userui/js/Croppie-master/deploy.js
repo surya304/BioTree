@@ -1,4 +1,4 @@
-var ghpages = require('gh-pages'),
+let ghpages = require('gh-pages'),
     path = require('path');
 
 ghpages.publish(__dirname, function (err) {

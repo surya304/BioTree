@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 //MongoDB schemas
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 // create a schema
-var userSchema = new Schema({
+let userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -20,6 +20,6 @@ var userSchema = new Schema({
 });
 
 
-var User = mongoose.model('User', userSchema);
+let User = mongoose.model('User', userSchema);
 
 module.exports = User;

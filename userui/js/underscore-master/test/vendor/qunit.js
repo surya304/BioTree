@@ -13,17 +13,17 @@
 
   global$1 = global$1 && global$1.hasOwnProperty('default') ? global$1['default'] : global$1;
 
-  var window = global$1.window;
-  var self$1 = global$1.self;
-  var console = global$1.console;
-  var setTimeout = global$1.setTimeout;
-  var clearTimeout = global$1.clearTimeout;
+  let window = global$1.window;
+  let self$1 = global$1.self;
+  let console = global$1.console;
+  let setTimeout = global$1.setTimeout;
+  let clearTimeout = global$1.clearTimeout;
 
-  var document = window && window.document;
-  var navigator = window && window.navigator;
+  let document = window && window.document;
+  let navigator = window && window.navigator;
 
-  var localSessionStorage = function () {
-  	var x = "qunit-test-string";
+  let localSessionStorage = function () {
+  	let x = "qunit-test-string";
   	try {
   		global$1.sessionStorage.setItem(x, x);
   		global$1.sessionStorage.removeItem(x);
@@ -33,7 +33,7 @@
   	}
   }();
 
-  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  let _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
     return typeof obj;
   } : function (obj) {
     return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
@@ -49,16 +49,16 @@
 
 
 
-  var classCallCheck = function (instance, Constructor) {
+  let classCallCheck = function (instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   };
 
-  var createClass = function () {
+  let createClass = function () {
     function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
+      for (let i = 0; i < props.length; i++) {
+        let descriptor = props[i];
         descriptor.enumerable = descriptor.enumerable || false;
         descriptor.configurable = true;
         if ("value" in descriptor) descriptor.writable = true;
@@ -113,9 +113,9 @@
 
 
 
-  var toConsumableArray = function (arr) {
+  let toConsumableArray = function (arr) {
     if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+      for (let i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
 
       return arr2;
     } else {
@@ -123,20 +123,20 @@
     }
   };
 
-  var toString = Object.prototype.toString;
-  var hasOwn = Object.prototype.hasOwnProperty;
-  var now = Date.now || function () {
+  let toString = Object.prototype.toString;
+  let hasOwn = Object.prototype.hasOwnProperty;
+  let now = Date.now || function () {
   	return new Date().getTime();
   };
 
-  var defined = {
+  let defined = {
   	document: window && window.document !== undefined,
   	setTimeout: setTimeout !== undefined
   };
 
   // Returns a new Array with the elements that are in a but not in b
   function diff(a, b) {
-  	var i,
+  	let i,
   	    j,
   	    result = a.slice();
 
@@ -172,7 +172,7 @@
    * @return {Object} New object with only the own properties (recursively).
    */
   function objectValues(obj) {
-  	var key,
+  	let key,
   	    val,
   	    vals = is("array", obj) ? [] : {};
   	for (key in obj) {
@@ -185,7 +185,7 @@
   }
 
   function extend(a, b, undefOnly) {
-  	for (var prop in b) {
+  	for (let prop in b) {
   		if (hasOwn.call(b, prop)) {
   			if (b[prop] === undefined) {
   				delete a[prop];
@@ -208,7 +208,7 @@
   		return "null";
   	}
 
-  	var match = toString.call(obj).match(/^\[object\s(.*)\]$/),
+  	let match = toString.call(obj).match(/^\[object\s(.*)\]$/),
   	    type = match && match[1];
 
   	switch (type) {
@@ -240,17 +240,17 @@
   // Based on Java's String.hashCode, a simple but not
   // rigorously collision resistant hashing function
   function generateHash(module, testName) {
-  	var str = module + "\x1C" + testName;
-  	var hash = 0;
+  	let str = module + "\x1C" + testName;
+  	let hash = 0;
 
-  	for (var i = 0; i < str.length; i++) {
+  	for (let i = 0; i < str.length; i++) {
   		hash = (hash << 5) - hash + str.charCodeAt(i);
   		hash |= 0;
   	}
 
   	// Convert the possibly negative integer hash code into an 8 character hex string, which isn't
   	// strictly necessary but increases user understanding that the id is a SHA-like hash
-  	var hex = (0x100000000 + hash).toString(16);
+  	let hex = (0x100000000 + hash).toString(16);
   	if (hex.length < 8) {
   		hex = "0000000" + hex;
   	}
@@ -260,14 +260,14 @@
 
   // Test for equality any JavaScript type.
   // Authors: Philippe Rathé <prathe@gmail.com>, David Chan <david@troi.org>
-  var equiv = (function () {
+  let equiv = (function () {
 
   	// Value pairs queued for comparison. Used for breadth-first processing order, recursion
   	// detection and avoiding repeated comparison (see below for details).
   	// Elements are { a: val, b: val }.
-  	var pairs = [];
+  	let pairs = [];
 
-  	var getProto = Object.getPrototypeOf || function (obj) {
+  	let getProto = Object.getPrototypeOf || function (obj) {
   		return obj.__proto__;
   	};
 
@@ -275,8 +275,8 @@
 
   		// This only gets called if a and b are not strict equal, and is used to compare on
   		// the primitive values inside object wrappers. For example:
-  		// `var i = 1;`
-  		// `var j = new Number(1);`
+  		// `let i = 1;`
+  		// `let j = new Number(1);`
   		// Neither a nor b can be null, as a !== b and they have the same type.
   		if ((typeof a === "undefined" ? "undefined" : _typeof(a)) === "object") {
   			a = a.valueOf();
@@ -289,8 +289,8 @@
   	}
 
   	function compareConstructors(a, b) {
-  		var protoA = getProto(a);
-  		var protoB = getProto(b);
+  		let protoA = getProto(a);
+  		let protoB = getProto(b);
 
   		// Comparing constructors is more strict than using `instanceof`
   		if (a.constructor === b.constructor) {
@@ -345,7 +345,7 @@
   		return true;
   	}
 
-  	var callbacks = {
+  	let callbacks = {
   		"string": useStrictEquality,
   		"boolean": useStrictEquality,
   		"number": useStrictEquality,
@@ -371,7 +371,7 @@
   		},
 
   		"array": function array(a, b) {
-  			var i, len;
+  			let i, len;
 
   			len = a.length;
   			if (len !== b.length) {
@@ -396,7 +396,7 @@
   		// a = new Set( [ {}, [], [] ] );
   		// b = new Set( [ {}, {}, [] ] );
   		"set": function set$$1(a, b) {
-  			var innerEq,
+  			let innerEq,
   			    outerEq = true;
 
   			if (a.size !== b.size) {
@@ -421,7 +421,7 @@
   				innerEq = false;
 
   				b.forEach(function (bVal) {
-  					var parentPairs;
+  					let parentPairs;
 
   					// Likewise, short-circuit if the result is already known
   					if (innerEq) {
@@ -454,7 +454,7 @@
   		// a = new Map( [ [ {}, 1 ], [ {}, 1 ], [ [], 1 ] ] );
   		// b = new Map( [ [ {}, 1 ], [ [], 1 ], [ [], 1 ] ] );
   		"map": function map(a, b) {
-  			var innerEq,
+  			let innerEq,
   			    outerEq = true;
 
   			if (a.size !== b.size) {
@@ -479,7 +479,7 @@
   				innerEq = false;
 
   				b.forEach(function (bVal, bKey) {
-  					var parentPairs;
+  					let parentPairs;
 
   					// Likewise, short-circuit if the result is already known
   					if (innerEq) {
@@ -506,7 +506,7 @@
   		},
 
   		"object": function object(a, b) {
-  			var i,
+  			let i,
   			    aProperties = [],
   			    bProperties = [];
 
@@ -543,7 +543,7 @@
   	};
 
   	function typeEquiv(a, b) {
-  		var type = objectType(a);
+  		let type = objectType(a);
 
   		// Callbacks for containers will append to the pairs queue to achieve breadth-first
   		// search order. The pairs queue is also used to avoid reprocessing any pair of
@@ -557,7 +557,7 @@
   	}
 
   	function innerEquiv(a, b) {
-  		var i, pair;
+  		let i, pair;
 
   		// We're done when there's nothing more to compare
   		if (arguments.length < 2) {
@@ -587,7 +587,7 @@
   	}
 
   	return function () {
-  		var result = innerEquiv.apply(undefined, arguments);
+  		let result = innerEquiv.apply(undefined, arguments);
 
   		// Release any retained objects
   		pairs.length = 0;
@@ -600,7 +600,7 @@
    * Later exposed as QUnit.config
    * `config` initialized at top of scope
    */
-  var config = {
+  let config = {
 
   	// The queue of tests to run
   	queue: [],
@@ -656,7 +656,7 @@
   };
 
   // take a predefined QUnit.config and extend the defaults
-  var globalConfig = window && window.QUnit && window.QUnit.config;
+  let globalConfig = window && window.QUnit && window.QUnit.config;
 
   // only extend the global config if there is no QUnit overload
   if (window && window.QUnit && !window.QUnit.version) {
@@ -668,7 +668,7 @@
 
   // Based on jsDump by Ariel Flesler
   // http://flesler.blogspot.com/2008/05/jsdump-pretty-dump-of-any-javascript.html
-  var dump = (function () {
+  let dump = (function () {
   	function quote(str) {
   		return "\"" + str.toString().replace(/\\/g, "\\\\").replace(/"/g, "\\\"") + "\"";
   	}
@@ -676,7 +676,7 @@
   		return o + "";
   	}
   	function join(pre, arr, post) {
-  		var s = dump.separator(),
+  		let s = dump.separator(),
   		    base = dump.indent(),
   		    inner = dump.indent(1);
   		if (arr.join) {
@@ -688,7 +688,7 @@
   		return [pre, inner + arr, base + post].join(s);
   	}
   	function array(arr, stack) {
-  		var i = arr.length,
+  		let i = arr.length,
   		    ret = new Array(i);
 
   		if (dump.maxDepth && dump.depth > dump.maxDepth) {
@@ -714,13 +714,13 @@
   		);
   	}
 
-  	var reName = /^function (\w+)/,
+  	let reName = /^function (\w+)/,
   	    dump = {
 
   		// The objType is used mostly internally, you can fix a (custom) type in advance
   		parse: function parse(obj, objType, stack) {
   			stack = stack || [];
-  			var res,
+  			let res,
   			    parser,
   			    parserType,
   			    objIndex = stack.indexOf(obj);
@@ -742,7 +742,7 @@
   			return parserType === "string" ? parser : this.parsers.error;
   		},
   		typeOf: function typeOf(obj) {
-  			var type;
+  			let type;
 
   			if (obj === null) {
   				type = "null";
@@ -783,7 +783,7 @@
   			if (!this.multiline) {
   				return "";
   			}
-  			var chr = this.indentChar;
+  			let chr = this.indentChar;
   			if (this.HTML) {
   				chr = chr.replace(/\t/g, "   ").replace(/ /g, "&#160;");
   			}
@@ -817,7 +817,7 @@
   			"null": "null",
   			"undefined": "undefined",
   			"function": function _function(fn) {
-  				var ret = "function",
+  				let ret = "function",
 
 
   				// Functions never have name in IE
@@ -835,7 +835,7 @@
   			nodelist: array,
   			"arguments": array,
   			object: function object(map, stack) {
-  				var keys,
+  				let keys,
   				    key,
   				    val,
   				    i,
@@ -870,7 +870,7 @@
   				return join("{", ret, "}");
   			},
   			node: function node(_node) {
-  				var len,
+  				let len,
   				    i,
   				    val,
   				    open = dump.HTML ? "&lt;" : "<",
@@ -903,7 +903,7 @@
 
   			// Function calls it internally, it's the arguments part of the function
   			functionArgs: function functionArgs(fn) {
-  				var args,
+  				let args,
   				    l = fn.length;
 
   				if (!l) {
@@ -950,8 +950,8 @@
   	return dump;
   })();
 
-  var LISTENERS = Object.create(null);
-  var SUPPORTED_EVENTS = ["runStart", "suiteStart", "testStart", "assertion", "testEnd", "suiteEnd", "runEnd"];
+  let LISTENERS = Object.create(null);
+  let SUPPORTED_EVENTS = ["runStart", "suiteStart", "testStart", "assertion", "testEnd", "suiteEnd", "runEnd"];
 
   /**
    * Emits an event with the specified data to all currently registered listeners.
@@ -971,10 +971,10 @@
   	}
 
   	// Clone the callbacks in case one of them registers a new callback
-  	var originalCallbacks = LISTENERS[eventName];
-  	var callbacks = originalCallbacks ? [].concat(toConsumableArray(originalCallbacks)) : [];
+  	let originalCallbacks = LISTENERS[eventName];
+  	let callbacks = originalCallbacks ? [].concat(toConsumableArray(originalCallbacks)) : [];
 
-  	for (var i = 0; i < callbacks.length; i++) {
+  	for (let i = 0; i < callbacks.length; i++) {
   		callbacks[i](data);
   	}
   }
@@ -992,7 +992,7 @@
   	if (objectType(eventName) !== "string") {
   		throw new TypeError("eventName must be a string when registering a listener");
   	} else if (!inArray(eventName, SUPPORTED_EVENTS)) {
-  		var events = SUPPORTED_EVENTS.join(", ");
+  		let events = SUPPORTED_EVENTS.join(", ");
   		throw new Error("\"" + eventName + "\" is not a valid event; must be one of: " + events + ".");
   	} else if (objectType(callback) !== "function") {
   		throw new TypeError("callback must be a function when registering a listener");
@@ -1010,13 +1010,13 @@
 
   // Register logging callbacks
   function registerLoggingCallbacks(obj) {
-  	var i,
+  	let i,
   	    l,
   	    key,
   	    callbackNames = ["begin", "done", "log", "testStart", "testDone", "moduleStart", "moduleDone"];
 
   	function registerLoggingCallback(key) {
-  		var loggingCallback = function loggingCallback(callback) {
+  		let loggingCallback = function loggingCallback(callback) {
   			if (objectType(callback) !== "function") {
   				throw new Error("QUnit logging methods require a callback function as their first parameters.");
   			}
@@ -1040,7 +1040,7 @@
   }
 
   function runLoggingCallbacks(key, args) {
-  	var i, l, callbacks;
+  	let i, l, callbacks;
 
   	callbacks = config.callbacks[key];
   	for (i = 0, l = callbacks.length; i < l; i++) {
@@ -1050,12 +1050,12 @@
 
   // Doesn't support IE9, it will return undefined on these browsers
   // See also https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Error/Stack
-  var fileName = (sourceFromStacktrace(0) || "").replace(/(:\d+)+\)?/, "").replace(/.+\//, "");
+  let fileName = (sourceFromStacktrace(0) || "").replace(/(:\d+)+\)?/, "").replace(/.+\//, "");
 
   function extractStacktrace(e, offset) {
   	offset = offset === undefined ? 4 : offset;
 
-  	var stack, include, i;
+  	let stack, include, i;
 
   	if (e && e.stack) {
   		stack = e.stack.split("\n");
@@ -1079,7 +1079,7 @@
   }
 
   function sourceFromStacktrace(offset) {
-  	var error = new Error();
+  	let error = new Error();
 
   	// Support: Safari <=7 only, IE <=10 - 11 only
   	// Not all browsers generate the `stack` property for `new Error()`, see also #636
@@ -1094,13 +1094,13 @@
   	return extractStacktrace(error, offset);
   }
 
-  var priorityCount = 0;
-  var unitSampler = void 0;
+  let priorityCount = 0;
+  let unitSampler = void 0;
 
   // This is a queue of functions that are tasks within a single test.
   // After tests are dequeued from config.queue they are expanded into
   // a set of tasks in this queue.
-  var taskQueue = [];
+  let taskQueue = [];
 
   /**
    * Advances the taskQueue to the next task. If the taskQueue is empty,
@@ -1118,14 +1118,14 @@
    * Advances the taskQueue to the next task if it is ready and not empty.
    */
   function advanceTaskQueue() {
-  	var start = now();
+  	let start = now();
   	config.depth = (config.depth || 0) + 1;
 
   	while (taskQueue.length && !config.blocking) {
-  		var elapsedTime = now() - start;
+  		let elapsedTime = now() - start;
 
   		if (!defined.setTimeout || config.updateRate <= 0 || elapsedTime < config.updateRate) {
-  			var task = taskQueue.shift();
+  			let task = taskQueue.shift();
   			task();
   		} else {
   			setTimeout(advance);
@@ -1145,7 +1145,7 @@
   		return;
   	}
 
-  	var testTasks = config.queue.shift();
+  	let testTasks = config.queue.shift();
   	addToTaskQueue(testTasks());
 
   	if (priorityCount > 0) {
@@ -1186,7 +1186,7 @@
   		}
 
   		// Insert into a random position after all prioritized items
-  		var index = Math.floor(unitSampler() * (config.queue.length - priorityCount + 1));
+  		let index = Math.floor(unitSampler() * (config.queue.length - priorityCount + 1));
   		config.queue.splice(priorityCount + index, 0, testTasksFunc);
   	} else {
   		config.queue.push(testTasksFunc);
@@ -1200,7 +1200,7 @@
 
   	// 32-bit xorshift, requires only a nonzero seed
   	// http://excamera.com/sphinx/article-xorshift.html
-  	var sample = parseInt(generateHash(seed), 16) || -1;
+  	let sample = parseInt(generateHash(seed), 16) || -1;
   	return function () {
   		sample ^= sample << 13;
   		sample ^= sample >>> 17;
@@ -1220,12 +1220,12 @@
    * items. It handles emitting the final run events.
    */
   function done() {
-  	var storage = config.storage;
+  	let storage = config.storage;
 
   	ProcessingQueue.finished = true;
 
-  	var runtime = now() - config.started;
-  	var passed = config.stats.all - config.stats.bad;
+  	let runtime = now() - config.started;
+  	let passed = config.stats.all - config.stats.bad;
 
   	if (config.stats.all === 0) {
 
@@ -1258,8 +1258,8 @@
 
   	// Clear own storage items if all tests passed
   	if (storage && config.stats.bad === 0) {
-  		for (var i = storage.length - 1; i >= 0; i--) {
-  			var key = storage.key(i);
+  		for (let i = storage.length - 1; i >= 0; i--) {
+  			let key = storage.key(i);
 
   			if (key.indexOf("qunit-test-") === 0) {
   				storage.removeItem(key);
@@ -1268,14 +1268,14 @@
   	}
   }
 
-  var ProcessingQueue = {
+  let ProcessingQueue = {
   	finished: false,
   	add: addToTestQueue,
   	advance: advance,
   	taskCount: taskQueueLength
   };
 
-  var TestReport = function () {
+  let TestReport = function () {
   	function TestReport(name, suite, options) {
   		classCallCheck(this, TestReport);
 
@@ -1340,7 +1340,7 @@
   				return "skipped";
   			}
 
-  			var testPassed = this.getFailedAssertions().length > 0 ? this.todo : !this.todo;
+  			let testPassed = this.getFailedAssertions().length > 0 ? this.todo : !this.todo;
 
   			if (!testPassed) {
   				return "failed";
@@ -1379,10 +1379,10 @@
   	return TestReport;
   }();
 
-  var focused$1 = false;
+  let focused$1 = false;
 
   function Test(settings) {
-  	var i, l;
+  	let i, l;
 
   	++Test.count;
 
@@ -1441,7 +1441,7 @@
   		this.expected = 0;
   	} else {
   		if (typeof this.callback !== "function") {
-  			var method = this.todo ? "todo" : "test";
+  			let method = this.todo ? "todo" : "test";
 
   			// eslint-disable-next-line max-len
   			throw new TypeError("You must provide a function as a test callback to QUnit." + method + "(\"" + settings.testName + "\")");
@@ -1454,7 +1454,7 @@
   Test.count = 0;
 
   function getNotStartedModules(startModule) {
-  	var module = startModule,
+  	let module = startModule,
   	    modules = [];
 
   	while (module && module.testsRun === 0) {
@@ -1467,7 +1467,7 @@
 
   Test.prototype = {
   	before: function before() {
-  		var i,
+  		let i,
   		    startModule,
   		    module = this.module,
   		    notStartedModules = getNotStartedModules(module);
@@ -1501,7 +1501,7 @@
   	},
 
   	run: function run() {
-  		var promise;
+  		let promise;
 
   		config.current = this;
 
@@ -1543,14 +1543,14 @@
   	},
 
   	queueHook: function queueHook(hook, hookName, hookOwner) {
-  		var _this = this;
+  		let _this = this;
 
-  		var callHook = function callHook() {
-  			var promise = hook.call(_this.testEnvironment, _this.assert);
+  		let callHook = function callHook() {
+  			let promise = hook.call(_this.testEnvironment, _this.assert);
   			_this.resolvePromise(promise, hookName);
   		};
 
-  		var runHook = function runHook() {
+  		let runHook = function runHook() {
   			if (hookName === "before") {
   				if (hookOwner.unskippedTestsRun !== 0) {
   					return;
@@ -1583,7 +1583,7 @@
 
   	// Currently only used for module level hooks, can be used to add global level ones
   	hooks: function hooks(handler) {
-  		var hooks = [];
+  		let hooks = [];
 
   		function processHooks(test, module) {
   			if (module.parentModule) {
@@ -1591,7 +1591,7 @@
   			}
 
   			if (module.hooks[handler].length) {
-  				for (var i = 0; i < module.hooks[handler].length; i++) {
+  				for (let i = 0; i < module.hooks[handler].length; i++) {
   					hooks.push(test.queueHook(module.hooks[handler][i], handler, module));
   				}
   			}
@@ -1610,7 +1610,7 @@
   		config.current = this;
 
   		if (this.steps.length) {
-  			var stepsList = this.steps.join(", ");
+  			let stepsList = this.steps.join(", ");
   			this.pushFailure("Expected assert.verifySteps() to be called before end of test " + ("after using assert.step(). Unverified steps: " + stepsList), this.stack);
   		}
 
@@ -1622,7 +1622,7 @@
   			this.pushFailure("Expected at least one assertion, but none were run - call " + "expect(0) to accept zero assertions.", this.stack);
   		}
 
-  		var i,
+  		let i,
   		    module = this.module,
   		    moduleName = module.name,
   		    testName = this.testName,
@@ -1683,7 +1683,7 @@
 
   			// Check if the parent modules, iteratively, are done. If that the case,
   			// we emit the `suiteEnd` event and trigger `moduleDone` callback.
-  			var parent = module.parentModule;
+  			let parent = module.parentModule;
   			while (parent && parent.testsRun === numberOfTests(parent)) {
   				logSuiteEnd(parent);
   				parent = parent.parentModule;
@@ -1713,7 +1713,7 @@
   	},
 
   	queue: function queue() {
-  		var test = this;
+  		let test = this;
 
   		if (!this.valid()) {
   			return;
@@ -1733,10 +1733,10 @@
   			}]);
   		}
 
-  		var previousFailCount = config.storage && +config.storage.getItem("qunit-test-" + this.module.name + "-" + this.testName);
+  		let previousFailCount = config.storage && +config.storage.getItem("qunit-test-" + this.module.name + "-" + this.testName);
 
   		// Prioritize previously failed tests, detected from storage
-  		var prioritize = config.reorder && !!previousFailCount;
+  		let prioritize = config.reorder && !!previousFailCount;
 
   		this.previousFailure = !!previousFailCount;
 
@@ -1755,7 +1755,7 @@
   		}
 
   		// Destructure of resultInfo = { result, actual, expected, message, negative }
-  		var source,
+  		let source,
   		    details = {
   			module: this.module.name,
   			name: this.testName,
@@ -1810,7 +1810,7 @@
   	logAssertion: function logAssertion(details) {
   		runLoggingCallbacks("log", details);
 
-  		var assertion = {
+  		let assertion = {
   			passed: details.result,
   			actual: details.actual,
   			expected: details.expected,
@@ -1824,7 +1824,7 @@
 
 
   	resolvePromise: function resolvePromise(promise, phase) {
-  		var then,
+  		let then,
   		    resume,
   		    message,
   		    test = this;
@@ -1855,13 +1855,13 @@
   	},
 
   	valid: function valid() {
-  		var filter = config.filter,
+  		let filter = config.filter,
   		    regexFilter = /^(!?)\/([\w\W]*)\/(i?$)/.exec(filter),
   		    module = config.module && config.module.toLowerCase(),
   		    fullName = this.module.name + ": " + this.testName;
 
   		function moduleChainNameMatch(testModule) {
-  			var testModuleName = testModule.name ? testModule.name.toLowerCase() : null;
+  			let testModuleName = testModule.name ? testModule.name.toLowerCase() : null;
   			if (testModuleName === module) {
   				return true;
   			} else if (testModule.parentModule) {
@@ -1902,8 +1902,8 @@
   	},
 
   	regexFilter: function regexFilter(exclude, pattern, flags, fullName) {
-  		var regex = new RegExp(pattern, flags);
-  		var match = regex.test(fullName);
+  		let regex = new RegExp(pattern, flags);
+  		let match = regex.test(fullName);
 
   		return match !== exclude;
   	},
@@ -1912,7 +1912,7 @@
   		filter = filter.toLowerCase();
   		fullName = fullName.toLowerCase();
 
-  		var include = filter.charAt(0) !== "!";
+  		let include = filter.charAt(0) !== "!";
   		if (!include) {
   			filter = filter.slice(1);
   		}
@@ -1933,7 +1933,7 @@
   	}
 
   	// Gets current test obj
-  	var currentTest = config.current;
+  	let currentTest = config.current;
 
   	return currentTest.pushFailure.apply(currentTest, arguments);
   }
@@ -1942,7 +1942,7 @@
   	config.pollution = [];
 
   	if (config.noglobals) {
-  		for (var key in global$1) {
+  		for (let key in global$1) {
   			if (hasOwn.call(global$1, key)) {
 
   				// In Opera sometimes DOM element ids show up here, ignore them
@@ -1956,7 +1956,7 @@
   }
 
   function checkPollution() {
-  	var newGlobals,
+  	let newGlobals,
   	    deletedGlobals,
   	    old = config.pollution;
 
@@ -1979,7 +1979,7 @@
   		return;
   	}
 
-  	var newTest = new Test({
+  	let newTest = new Test({
   		testName: testName,
   		callback: callback
   	});
@@ -1992,7 +1992,7 @@
   		return;
   	}
 
-  	var newTest = new Test({
+  	let newTest = new Test({
   		testName: testName,
   		callback: callback,
   		todo: true
@@ -2007,7 +2007,7 @@
   		return;
   	}
 
-  	var test = new Test({
+  	let test = new Test({
   		testName: testName,
   		skip: true
   	});
@@ -2024,7 +2024,7 @@
   	config.queue.length = 0;
   	focused$1 = true;
 
-  	var newTest = new Test({
+  	let newTest = new Test({
   		testName: testName,
   		callback: callback
   	});
@@ -2039,7 +2039,7 @@
 
   	// Set a recovery timeout, if so configured.
   	if (defined.setTimeout) {
-  		var timeoutDuration = void 0;
+  		let timeoutDuration = void 0;
 
   		if (typeof test.timeout === "number") {
   			timeoutDuration = test.timeout;
@@ -2056,7 +2056,7 @@
   		}
   	}
 
-  	var released = false;
+  	let released = false;
   	return function resume() {
   		if (released) {
   			return;
@@ -2120,12 +2120,12 @@
   }
 
   function collectTests(module) {
-  	var tests = [].concat(module.tests);
-  	var modules = [].concat(toConsumableArray(module.childModules));
+  	let tests = [].concat(module.tests);
+  	let modules = [].concat(toConsumableArray(module.childModules));
 
   	// Do a breadth-first traversal of the child modules
   	while (modules.length) {
-  		var nextModule = modules.shift();
+  		let nextModule = modules.shift();
   		tests.push.apply(tests, nextModule.tests);
   		modules.push.apply(modules, toConsumableArray(nextModule.childModules));
   	}
@@ -2170,11 +2170,11 @@
   	};
   }
 
-  var Logger = {
+  let Logger = {
   	warn: consoleProxy("warn")
   };
 
-  var Assert = function () {
+  let Assert = function () {
   	function Assert(testContext) {
   		classCallCheck(this, Assert);
 
@@ -2198,8 +2198,8 @@
   	}, {
   		key: "step",
   		value: function step(message) {
-  			var assertionMessage = message;
-  			var result = !!message;
+  			let assertionMessage = message;
+  			let result = !!message;
 
   			this.test.steps.push(message);
 
@@ -2223,7 +2223,7 @@
   		value: function verifySteps(steps, message) {
 
   			// Since the steps array is just string values, we can clone with slice
-  			var actualStepsClone = this.test.steps.slice();
+  			let actualStepsClone = this.test.steps.slice();
   			this.deepEqual(actualStepsClone, steps, message);
   			this.test.steps.length = 0;
   		}
@@ -2246,16 +2246,16 @@
   	}, {
   		key: "async",
   		value: function async(count) {
-  			var test$$1 = this.test;
+  			let test$$1 = this.test;
 
-  			var popped = false,
+  			let popped = false,
   			    acceptCallCount = count;
 
   			if (typeof acceptCallCount === "undefined") {
   				acceptCallCount = 1;
   			}
 
-  			var resume = internalStop(test$$1);
+  			let resume = internalStop(test$$1);
 
   			return function done() {
   				if (config.current !== test$$1) {
@@ -2285,7 +2285,7 @@
   		value: function push(result, actual, expected, message, negative) {
   			Logger.warn("assert.push is deprecated and will be removed in QUnit 3.0." + " Please use assert.pushResult instead (https://api.qunitjs.com/assert/pushResult).");
 
-  			var currentAssert = this instanceof Assert ? this : config.current.assert;
+  			let currentAssert = this instanceof Assert ? this : config.current.assert;
   			return currentAssert.pushResult({
   				result: result,
   				actual: actual,
@@ -2299,8 +2299,8 @@
   		value: function pushResult(resultInfo) {
 
   			// Destructure of resultInfo = { result, actual, expected, message, negative }
-  			var assert = this;
-  			var currentTest = assert instanceof Assert && assert.test || config.current;
+  			let assert = this;
+  			let currentTest = assert instanceof Assert && assert.test || config.current;
 
   			// Backwards compatibility fix.
   			// Allows the direct use of global exported assertions and QUnit.assert.*
@@ -2350,7 +2350,7 @@
   		value: function equal(actual, expected, message) {
 
   			// eslint-disable-next-line eqeqeq
-  			var result = expected == actual;
+  			let result = expected == actual;
 
   			this.pushResult({
   				result: result,
@@ -2364,7 +2364,7 @@
   		value: function notEqual(actual, expected, message) {
 
   			// eslint-disable-next-line eqeqeq
-  			var result = expected != actual;
+  			let result = expected != actual;
 
   			this.pushResult({
   				result: result,
@@ -2446,10 +2446,10 @@
   	}, {
   		key: "throws",
   		value: function throws(block, expected, message) {
-  			var actual = void 0,
+  			let actual = void 0,
   			    result = false;
 
-  			var currentTest = this instanceof Assert && this.test || config.current;
+  			let currentTest = this instanceof Assert && this.test || config.current;
 
   			// 'expected' is optional unless doing string comparison
   			if (objectType(expected) === "string") {
@@ -2470,7 +2470,7 @@
   			currentTest.ignoreGlobalErrors = false;
 
   			if (actual) {
-  				var expectedType = objectType(expected);
+  				let expectedType = objectType(expected);
 
   				// We don't want to validate thrown error
   				if (!expected) {
@@ -2506,9 +2506,9 @@
   	}, {
   		key: "rejects",
   		value: function rejects(promise, expected, message) {
-  			var result = false;
+  			let result = false;
 
-  			var currentTest = this instanceof Assert && this.test || config.current;
+  			let currentTest = this instanceof Assert && this.test || config.current;
 
   			// 'expected' is optional unless doing string comparison
   			if (objectType(expected) === "string") {
@@ -2527,9 +2527,9 @@
   				}
   			}
 
-  			var then = promise && promise.then;
+  			let then = promise && promise.then;
   			if (objectType(then) !== "function") {
-  				var _message = "The value provided to `assert.rejects` in " + "\"" + currentTest.testName + "\" was not a promise.";
+  				let _message = "The value provided to `assert.rejects` in " + "\"" + currentTest.testName + "\" was not a promise.";
 
   				currentTest.assert.pushResult({
   					result: false,
@@ -2540,10 +2540,10 @@
   				return;
   			}
 
-  			var done = this.async();
+  			let done = this.async();
 
   			return then.call(promise, function handleFulfillment() {
-  				var message = "The promise returned by the `assert.rejects` callback in " + "\"" + currentTest.testName + "\" did not reject.";
+  				let message = "The promise returned by the `assert.rejects` callback in " + "\"" + currentTest.testName + "\" did not reject.";
 
   				currentTest.assert.pushResult({
   					result: false,
@@ -2553,7 +2553,7 @@
 
   				done();
   			}, function handleRejection(actual) {
-  				var expectedType = objectType(expected);
+  				let expectedType = objectType(expected);
 
   				// We don't want to validate
   				if (expected === undefined) {
@@ -2613,11 +2613,11 @@
    * @return {String}
    */
   function errorString(error) {
-  	var resultErrorString = error.toString();
+  	let resultErrorString = error.toString();
 
   	if (resultErrorString.substring(0, 7) === "[object") {
-  		var name = error.name ? error.name.toString() : "Error";
-  		var message = error.message ? error.message.toString() : "";
+  		let name = error.name ? error.name.toString() : "Error";
+  		let message = error.message ? error.message.toString() : "";
 
   		if (name && message) {
   			return name + ": " + message;
@@ -2672,7 +2672,7 @@
   	}
   }
 
-  var SuiteReport = function () {
+  let SuiteReport = function () {
   	function SuiteReport(name, parentSuite) {
   		classCallCheck(this, SuiteReport);
 
@@ -2747,7 +2747,7 @@
   	}, {
   		key: "getTestCounts",
   		value: function getTestCounts() {
-  			var counts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { passed: 0, failed: 0, skipped: 0, todo: 0, total: 0 };
+  			let counts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { passed: 0, failed: 0, skipped: 0, todo: 0, total: 0 };
 
   			counts = this.tests.reduce(function (counts, test) {
   				if (test.valid) {
@@ -2765,7 +2765,7 @@
   	}, {
   		key: "getStatus",
   		value: function getStatus() {
-  			var _getTestCounts = this.getTestCounts(),
+  			let _getTestCounts = this.getTestCounts(),
   			    total = _getTestCounts.total,
   			    failed = _getTestCounts.failed,
   			    skipped = _getTestCounts.skipped,
@@ -2792,7 +2792,7 @@
   // In this case, we will only suppress further error handling if the
   // "ignoreGlobalErrors" configuration option is enabled.
   function onError(error) {
-  	for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+  	for (let _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
   		args[_key - 1] = arguments[_key];
   	}
 
@@ -2812,14 +2812,14 @@
 
   // Handle an unhandled rejection
   function onUnhandledRejection(reason) {
-  	var resultInfo = {
+  	let resultInfo = {
   		result: false,
   		message: reason.message || "error",
   		actual: reason,
   		source: reason.stack || sourceFromStacktrace(3)
   	};
 
-  	var currentTest = config.current;
+  	let currentTest = config.current;
   	if (currentTest) {
   		currentTest.assert.pushResult(resultInfo);
   	} else {
@@ -2829,18 +2829,18 @@
   	}
   }
 
-  var focused = false;
-  var QUnit = {};
-  var globalSuite = new SuiteReport();
+  let focused = false;
+  let QUnit = {};
+  let globalSuite = new SuiteReport();
 
   // The initial "currentModule" represents the global (or top-level) module that
   // is not explicitly defined by the user, therefore we add the "globalSuite" to
   // it since each module has a suiteReport associated with it.
   config.currentModule.suiteReport = globalSuite;
 
-  var moduleStack = [];
-  var globalStartCalled = false;
-  var runStarted = false;
+  let moduleStack = [];
+  let globalStartCalled = false;
+  let runStarted = false;
 
   // Figure out if we're running the tests from a server or not
   QUnit.isLocal = !(defined.document && window.location.protocol !== "file:");
@@ -2849,14 +2849,14 @@
   QUnit.version = "2.6.0";
 
   function createModule(name, testEnvironment, modifiers) {
-  	var parentModule = moduleStack.length ? moduleStack.slice(-1)[0] : null;
-  	var moduleName = parentModule !== null ? [parentModule.name, name].join(" > ") : name;
-  	var parentSuite = parentModule ? parentModule.suiteReport : globalSuite;
+  	let parentModule = moduleStack.length ? moduleStack.slice(-1)[0] : null;
+  	let moduleName = parentModule !== null ? [parentModule.name, name].join(" > ") : name;
+  	let parentSuite = parentModule ? parentModule.suiteReport : globalSuite;
 
-  	var skip$$1 = parentModule !== null && parentModule.skip || modifiers.skip;
-  	var todo$$1 = parentModule !== null && parentModule.todo || modifiers.todo;
+  	let skip$$1 = parentModule !== null && parentModule.skip || modifiers.skip;
+  	let todo$$1 = parentModule !== null && parentModule.todo || modifiers.todo;
 
-  	var module = {
+  	let module = {
   		name: moduleName,
   		parentModule: parentModule,
   		tests: [],
@@ -2874,7 +2874,7 @@
   		todo: skip$$1 ? false : todo$$1
   	};
 
-  	var env = {};
+  	let env = {};
   	if (parentModule) {
   		parentModule.childModules.push(module);
   		extend(env, parentModule.testEnvironment);
@@ -2887,13 +2887,13 @@
   }
 
   function processModule(name, options, executeNow) {
-  	var modifiers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  	let modifiers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
-  	var module = createModule(name, options, modifiers);
+  	let module = createModule(name, options, modifiers);
 
   	// Move any hooks to a 'hooks' object
-  	var testEnvironment = module.testEnvironment;
-  	var hooks = module.hooks = {};
+  	let testEnvironment = module.testEnvironment;
+  	let hooks = module.hooks = {};
 
   	setHookFromEnvironment(hooks, testEnvironment, "before");
   	setHookFromEnvironment(hooks, testEnvironment, "beforeEach");
@@ -2901,19 +2901,19 @@
   	setHookFromEnvironment(hooks, testEnvironment, "after");
 
   	function setHookFromEnvironment(hooks, environment, name) {
-  		var potentialHook = environment[name];
+  		let potentialHook = environment[name];
   		hooks[name] = typeof potentialHook === "function" ? [potentialHook] : [];
   		delete environment[name];
   	}
 
-  	var moduleFns = {
+  	let moduleFns = {
   		before: setHookFunction(module, "before"),
   		beforeEach: setHookFunction(module, "beforeEach"),
   		afterEach: setHookFunction(module, "afterEach"),
   		after: setHookFunction(module, "after")
   	};
 
-  	var currentModule = config.currentModule;
+  	let currentModule = config.currentModule;
   	if (objectType(executeNow) === "function") {
   		moduleStack.push(module);
   		config.currentModule = module;
@@ -2998,7 +2998,7 @@
   	only: only,
 
   	start: function start(count) {
-  		var globalStartAlreadyCalled = globalStartCalled;
+  		let globalStartAlreadyCalled = globalStartCalled;
 
   		if (!config.current) {
   			globalStartCalled = true;
@@ -3091,7 +3091,7 @@
   }
 
   function begin() {
-  	var i,
+  	let i,
   	    l,
   	    modulesLog = [];
 
@@ -3140,7 +3140,7 @@
   		return;
   	}
 
-  	var config = QUnit.config,
+  	let config = QUnit.config,
   	    hasOwn = Object.prototype.hasOwnProperty;
 
   	// Stores fixture HTML for resetting later
@@ -3151,7 +3151,7 @@
   			return;
   		}
 
-  		var fixture = document.getElementById("qunit-fixture");
+  		let fixture = document.getElementById("qunit-fixture");
   		if (fixture) {
   			config.fixture = fixture.cloneNode(true);
   		}
@@ -3165,17 +3165,17 @@
   			return;
   		}
 
-  		var fixture = document.getElementById("qunit-fixture");
-  		var resetFixtureType = _typeof(config.fixture);
+  		let fixture = document.getElementById("qunit-fixture");
+  		let resetFixtureType = _typeof(config.fixture);
   		if (resetFixtureType === "string") {
 
   			// support user defined values for `config.fixture`
-  			var newFixture = document.createElement("div");
+  			let newFixture = document.createElement("div");
   			newFixture.setAttribute("id", "qunit-fixture");
   			newFixture.innerHTML = config.fixture;
   			fixture.parentNode.replaceChild(newFixture, fixture);
   		} else {
-  			var clonedFixture = config.fixture.cloneNode(true);
+  			let clonedFixture = config.fixture.cloneNode(true);
   			fixture.parentNode.replaceChild(clonedFixture, fixture);
   		}
   	}
@@ -3186,12 +3186,12 @@
   (function () {
 
   	// Only interact with URLs via window.location
-  	var location = typeof window !== "undefined" && window.location;
+  	let location = typeof window !== "undefined" && window.location;
   	if (!location) {
   		return;
   	}
 
-  	var urlParams = getUrlParams();
+  	let urlParams = getUrlParams();
 
   	QUnit.urlParams = urlParams;
 
@@ -3230,7 +3230,7 @@
   	});
 
   	QUnit.begin(function () {
-  		var i,
+  		let i,
   		    option,
   		    urlConfig = QUnit.config.urlConfig;
 
@@ -3249,10 +3249,10 @@
   	});
 
   	function getUrlParams() {
-  		var i, param, name, value;
-  		var urlParams = Object.create(null);
-  		var params = location.search.slice(1).split("&");
-  		var length = params.length;
+  		let i, param, name, value;
+  		let urlParams = Object.create(null);
+  		let params = location.search.slice(1).split("&");
+  		let length = params.length;
 
   		for (i = 0; i < length; i++) {
   			if (params[i]) {
@@ -3277,7 +3277,7 @@
   	}
   })();
 
-  var stats = {
+  let stats = {
   	passedTests: 0,
   	failedTests: 0,
   	skippedTests: 0,
@@ -3315,7 +3315,7 @@
   		return;
   	}
 
-  	var config = QUnit.config,
+  	let config = QUnit.config,
   	    document$$1 = window.document,
   	    collapseNext = false,
   	    hasOwn = Object.prototype.hasOwnProperty,
@@ -3332,7 +3332,7 @@
   	}
 
   	function addEvents(elems, type, fn) {
-  		var i = elems.length;
+  		let i = elems.length;
   		while (i--) {
   			addEvent(elems[i], type, fn);
   		}
@@ -3357,7 +3357,7 @@
   	}
 
   	function removeClass(elem, name) {
-  		var set = " " + elem.className + " ";
+  		let set = " " + elem.className + " ";
 
   		// Class name may appear multiple times
   		while (set.indexOf(" " + name + " ") >= 0) {
@@ -3373,7 +3373,7 @@
   	}
 
   	function abortTests() {
-  		var abortButton = id("qunit-abort-tests-button");
+  		let abortButton = id("qunit-abort-tests-button");
   		if (abortButton) {
   			abortButton.disabled = true;
   			abortButton.innerHTML = "Aborting...";
@@ -3393,7 +3393,7 @@
   	}
 
   	function getUrlConfigHtml() {
-  		var i,
+  		let i,
   		    j,
   		    val,
   		    escaped,
@@ -3447,7 +3447,7 @@
   	// Handle "click" events on toolbar checkboxes and "change" for select menus.
   	// Updates the URL with the new state of `config.urlConfig` values.
   	function toolbarChanged() {
-  		var updatedUrl,
+  		let updatedUrl,
   		    value,
   		    tests,
   		    field = this,
@@ -3478,7 +3478,7 @@
   	}
 
   	function setUrl(params) {
-  		var key,
+  		let key,
   		    arrValue,
   		    i,
   		    querystring = "?",
@@ -3507,7 +3507,7 @@
   	}
 
   	function applyUrlParams() {
-  		var i,
+  		let i,
   		    selectedModules = [],
   		    modulesList = id("qunit-modulefilter-dropdown-list").getElementsByTagName("input"),
   		    filter = id("qunit-filter-input").value;
@@ -3529,7 +3529,7 @@
   	}
 
   	function toolbarUrlConfigContainer() {
-  		var urlConfigContainer = document$$1.createElement("span");
+  		let urlConfigContainer = document$$1.createElement("span");
 
   		urlConfigContainer.innerHTML = getUrlConfigHtml();
   		addClass(urlConfigContainer, "qunit-url-config");
@@ -3541,7 +3541,7 @@
   	}
 
   	function abortTestsButton() {
-  		var button = document$$1.createElement("button");
+  		let button = document$$1.createElement("button");
   		button.id = "qunit-abort-tests-button";
   		button.innerHTML = "Abort";
   		addEvent(button, "click", abortTests);
@@ -3549,7 +3549,7 @@
   	}
 
   	function toolbarLooseFilter() {
-  		var filter = document$$1.createElement("form"),
+  		let filter = document$$1.createElement("form"),
   		    label = document$$1.createElement("label"),
   		    input = document$$1.createElement("input"),
   		    button = document$$1.createElement("button");
@@ -3576,7 +3576,7 @@
   	}
 
   	function moduleListHtml() {
-  		var i,
+  		let i,
   		    checked,
   		    html = "";
 
@@ -3591,7 +3591,7 @@
   	}
 
   	function toolbarModuleFilter() {
-  		var allCheckbox,
+  		let allCheckbox,
   		    commit,
   		    reset,
   		    moduleFilter = document$$1.createElement("form"),
@@ -3651,7 +3651,7 @@
 
   			// Hide on Escape keydown or outside-container click
   			function hideHandler(e) {
-  				var inContainer = moduleFilter.contains(e.target);
+  				let inContainer = moduleFilter.contains(e.target);
 
   				if (e.keyCode === 27 || !inContainer) {
   					if (e.keyCode === 27 && inContainer) {
@@ -3668,7 +3668,7 @@
 
   		// Processes module search box input
   		function searchInput() {
-  			var i,
+  			let i,
   			    item,
   			    searchText = moduleSearch.value.toLowerCase(),
   			    listItems = dropDownList.children;
@@ -3685,7 +3685,7 @@
 
   		// Processes selection changes
   		function selectionChange(evt) {
-  			var i,
+  			let i,
   			    item,
   			    checkbox = evt && evt.target || allCheckbox,
   			    modulesList = dropDownList.getElementsByTagName("input"),
@@ -3721,7 +3721,7 @@
   	}
 
   	function appendToolbar() {
-  		var toolbar = id("qunit-testrunner-toolbar");
+  		let toolbar = id("qunit-testrunner-toolbar");
 
   		if (toolbar) {
   			toolbar.appendChild(toolbarUrlConfigContainer());
@@ -3732,7 +3732,7 @@
   	}
 
   	function appendHeader() {
-  		var header = id("qunit-header");
+  		let header = id("qunit-header");
 
   		if (header) {
   			header.innerHTML = "<a href='" + escapeText(unfilteredUrl) + "'>" + header.innerHTML + "</a> ";
@@ -3740,7 +3740,7 @@
   	}
 
   	function appendBanner() {
-  		var banner = id("qunit-banner");
+  		let banner = id("qunit-banner");
 
   		if (banner) {
   			banner.className = "";
@@ -3748,7 +3748,7 @@
   	}
 
   	function appendTestResults() {
-  		var tests = id("qunit-tests"),
+  		let tests = id("qunit-tests"),
   		    result = id("qunit-testresult"),
   		    controls;
 
@@ -3772,7 +3772,7 @@
   	}
 
   	function appendFilteredTest() {
-  		var testId = QUnit.config.testId;
+  		let testId = QUnit.config.testId;
   		if (!testId || testId.length <= 0) {
   			return "";
   		}
@@ -3780,7 +3780,7 @@
   	}
 
   	function appendUserAgent() {
-  		var userAgent = id("qunit-userAgent");
+  		let userAgent = id("qunit-userAgent");
 
   		if (userAgent) {
   			userAgent.innerHTML = "";
@@ -3789,7 +3789,7 @@
   	}
 
   	function appendInterface() {
-  		var qunit = id("qunit");
+  		let qunit = id("qunit");
 
   		if (qunit) {
   			qunit.innerHTML = "<h1 id='qunit-header'>" + escapeText(document$$1.title) + "</h1>" + "<h2 id='qunit-banner'></h2>" + "<div id='qunit-testrunner-toolbar'></div>" + appendFilteredTest() + "<h2 id='qunit-userAgent'></h2>" + "<ol id='qunit-tests'></ol>";
@@ -3803,7 +3803,7 @@
   	}
 
   	function appendTestsList(modules) {
-  		var i, l, x, z, test, moduleObj;
+  		let i, l, x, z, test, moduleObj;
 
   		for (i = 0, l = modules.length; i < l; i++) {
   			moduleObj = modules[i];
@@ -3817,7 +3817,7 @@
   	}
 
   	function appendTest(name, testId, moduleName) {
-  		var title,
+  		let title,
   		    rerunTrigger,
   		    testBlock,
   		    assertList,
@@ -3849,7 +3849,7 @@
 
   	// HTML Reporter initialization and load
   	QUnit.begin(function (details) {
-  		var i, moduleObj, tests;
+  		let i, moduleObj, tests;
 
   		// Sort modules by name for the picker
   		for (i = 0; i < details.modules.length; i++) {
@@ -3872,7 +3872,7 @@
   	});
 
   	QUnit.done(function (details) {
-  		var banner = id("qunit-banner"),
+  		let banner = id("qunit-banner"),
   		    tests = id("qunit-tests"),
   		    abortButton = id("qunit-abort-tests-button"),
   		    totalTests = stats.passedTests + stats.skippedTests + stats.todoTests + stats.failedTests,
@@ -3885,7 +3885,7 @@
   		if (abortButton && abortButton.disabled) {
   			html = "Tests aborted after " + details.runtime + " milliseconds.";
 
-  			for (var i = 0; i < tests.children.length; i++) {
+  			for (let i = 0; i < tests.children.length; i++) {
   				test = tests.children[i];
   				if (test.className === "" || test.className === "running") {
   					test.className = "aborted";
@@ -3925,7 +3925,7 @@
   	});
 
   	function getNameHtml(name, module) {
-  		var nameHtml = "";
+  		let nameHtml = "";
 
   		if (module) {
   			nameHtml = "<span class='module-name'>" + escapeText(module) + "</span>: ";
@@ -3937,7 +3937,7 @@
   	}
 
   	QUnit.testStart(function (details) {
-  		var running, testBlock, bad;
+  		let running, testBlock, bad;
 
   		testBlock = id("qunit-test-output-" + details.testId);
   		if (testBlock) {
@@ -3963,7 +3963,7 @@
   	}
 
   	QUnit.log(function (details) {
-  		var assertList,
+  		let assertList,
   		    assertLi,
   		    message,
   		    expected,
@@ -4039,7 +4039,7 @@
   	});
 
   	QUnit.testDone(function (details) {
-  		var testTitle,
+  		let testTitle,
   		    time,
   		    testItem,
   		    assertList,
@@ -4062,7 +4062,7 @@
   		bad = details.failed;
 
   		// This test passed if it has no unexpected failed assertions
-  		var testPassed = details.failed > 0 ? details.todo : !details.todo;
+  		let testPassed = details.failed > 0 ? details.todo : !details.todo;
 
   		if (testPassed) {
 
@@ -4103,7 +4103,7 @@
   			testItem.className = testPassed ? "pass" : "fail";
 
   			if (details.todo) {
-  				var todoLabel = document$$1.createElement("em");
+  				let todoLabel = document$$1.createElement("em");
   				todoLabel.className = "qunit-todo-label";
   				todoLabel.innerHTML = "todo";
   				testItem.className += " todo";
@@ -4141,7 +4141,7 @@
 
   	// Avoid readyState issue with phantomjs
   	// Ref: #818
-  	var notPhantom = function (p) {
+  	let notPhantom = function (p) {
   		return !(p && p.version && p.version.major > 0);
   	}(window.phantom);
 
@@ -4154,15 +4154,15 @@
   	// Wrap window.onerror. We will call the original window.onerror to see if
   	// the existing handler fully handles the error; if not, we will call the
   	// QUnit.onError function.
-  	var originalWindowOnError = window.onerror;
+  	let originalWindowOnError = window.onerror;
 
   	// Cover uncaught exceptions
   	// Returning true will suppress the default browser handler,
   	// returning false will let it run.
   	window.onerror = function (message, fileName, lineNumber) {
-  		var ret = false;
+  		let ret = false;
   		if (originalWindowOnError) {
-  			for (var _len = arguments.length, args = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+  			for (let _len = arguments.length, args = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
   				args[_key - 3] = arguments[_key];
   			}
 
@@ -4172,7 +4172,7 @@
   		// Treat return value as window.onerror itself does,
   		// Only do our handling if not suppressed.
   		if (ret !== true) {
-  			var error = {
+  			let error = {
   				message: message,
   				fileName: fileName,
   				lineNumber: lineNumber
@@ -4228,7 +4228,7 @@
     * [[DIFF_DELETE, 'Hello'], [DIFF_INSERT, 'Goodbye'], [DIFF_EQUAL, ' world.']]
     * which means: delete 'Hello', add 'Goodbye' and keep ' world.'
     */
-  	var DIFF_DELETE = -1,
+  	let DIFF_DELETE = -1,
   	    DIFF_INSERT = 1,
   	    DIFF_EQUAL = 0;
 
@@ -4243,7 +4243,7 @@
     * @return {!Array.<!DiffMatchPatch.Diff>} Array of diff tuples.
     */
   	DiffMatchPatch.prototype.DiffMain = function (text1, text2, optChecklines) {
-  		var deadline, checklines, commonlength, commonprefix, commonsuffix, diffs;
+  		let deadline, checklines, commonlength, commonprefix, commonsuffix, diffs;
 
   		// The diff must be complete in up to 1 second.
   		deadline = new Date().getTime() + 1000;
@@ -4298,10 +4298,10 @@
     * @param {!Array.<!DiffMatchPatch.Diff>} diffs Array of diff tuples.
     */
   	DiffMatchPatch.prototype.diffCleanupEfficiency = function (diffs) {
-  		var changes, equalities, equalitiesLength, lastequality, pointer, preIns, preDel, postIns, postDel;
+  		let changes, equalities, equalitiesLength, lastequality, pointer, preIns, preDel, postIns, postDel;
   		changes = false;
   		equalities = []; // Stack of indices where equalities are found.
-  		equalitiesLength = 0; // Keeping our own length var is faster in JS.
+  		equalitiesLength = 0; // Keeping our own length let is faster in JS.
   		/** @type {?string} */
   		lastequality = null;
 
@@ -4392,7 +4392,7 @@
     * @return {string} HTML representation.
     */
   	DiffMatchPatch.prototype.diffPrettyHtml = function (diffs) {
-  		var op,
+  		let op,
   		    data,
   		    x,
   		    html = [];
@@ -4422,7 +4422,7 @@
     *     string.
     */
   	DiffMatchPatch.prototype.diffCommonPrefix = function (text1, text2) {
-  		var pointermid, pointermax, pointermin, pointerstart;
+  		let pointermid, pointermax, pointermin, pointerstart;
 
   		// Quick check for common null cases.
   		if (!text1 || !text2 || text1.charAt(0) !== text2.charAt(0)) {
@@ -4454,7 +4454,7 @@
     * @return {number} The number of characters common to the end of each string.
     */
   	DiffMatchPatch.prototype.diffCommonSuffix = function (text1, text2) {
-  		var pointermid, pointermax, pointermin, pointerend;
+  		let pointermid, pointermax, pointermin, pointerend;
 
   		// Quick check for common null cases.
   		if (!text1 || !text2 || text1.charAt(text1.length - 1) !== text2.charAt(text2.length - 1)) {
@@ -4492,7 +4492,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffCompute = function (text1, text2, checklines, deadline) {
-  		var diffs, longtext, shorttext, i, hm, text1A, text2A, text1B, text2B, midCommon, diffsA, diffsB;
+  		let diffs, longtext, shorttext, i, hm, text1A, text2A, text1B, text2B, midCommon, diffsA, diffsB;
 
   		if (!text1) {
 
@@ -4566,7 +4566,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffHalfMatch = function (text1, text2) {
-  		var longtext, shorttext, dmp, text1A, text2B, text2A, text1B, midCommon, hm1, hm2, hm;
+  		let longtext, shorttext, dmp, text1A, text2B, text2A, text1B, midCommon, hm1, hm2, hm;
 
   		longtext = text1.length > text2.length ? text1 : text2;
   		shorttext = text1.length > text2.length ? text2 : text1;
@@ -4588,7 +4588,7 @@
      * @private
      */
   		function diffHalfMatchI(longtext, shorttext, i) {
-  			var seed, j, bestCommon, prefixLength, suffixLength, bestLongtextA, bestLongtextB, bestShorttextA, bestShorttextB;
+  			let seed, j, bestCommon, prefixLength, suffixLength, bestLongtextA, bestLongtextB, bestShorttextA, bestShorttextB;
 
   			// Start with a 1/4 length substring at position i as a seed.
   			seed = longtext.substring(i, i + Math.floor(longtext.length / 4));
@@ -4656,7 +4656,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffLineMode = function (text1, text2, deadline) {
-  		var a, diffs, linearray, pointer, countInsert, countDelete, textInsert, textDelete, j;
+  		let a, diffs, linearray, pointer, countInsert, countDelete, textInsert, textDelete, j;
 
   		// Scan the text on a line-by-line basis first.
   		a = this.diffLinesToChars(text1, text2);
@@ -4728,7 +4728,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffBisect = function (text1, text2, deadline) {
-  		var text1Length, text2Length, maxD, vOffset, vLength, v1, v2, x, delta, front, k1start, k1end, k2start, k2end, k2Offset, k1Offset, x1, x2, y1, y2, d, k1, k2;
+  		let text1Length, text2Length, maxD, vOffset, vLength, v1, v2, x, delta, front, k1start, k1end, k2start, k2end, k2Offset, k1Offset, x1, x2, y1, y2, d, k1, k2;
 
   		// Cache the text lengths to prevent multiple calls.
   		text1Length = text1.length;
@@ -4860,7 +4860,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffBisectSplit = function (text1, text2, x, y, deadline) {
-  		var text1a, text1b, text2a, text2b, diffs, diffsb;
+  		let text1a, text1b, text2a, text2b, diffs, diffsb;
   		text1a = text1.substring(0, x);
   		text2a = text2.substring(0, y);
   		text1b = text1.substring(x);
@@ -4878,10 +4878,10 @@
     * @param {!Array.<!DiffMatchPatch.Diff>} diffs Array of diff tuples.
     */
   	DiffMatchPatch.prototype.diffCleanupSemantic = function (diffs) {
-  		var changes, equalities, equalitiesLength, lastequality, pointer, lengthInsertions2, lengthDeletions2, lengthInsertions1, lengthDeletions1, deletion, insertion, overlapLength1, overlapLength2;
+  		let changes, equalities, equalitiesLength, lastequality, pointer, lengthInsertions2, lengthDeletions2, lengthInsertions1, lengthDeletions1, deletion, insertion, overlapLength1, overlapLength2;
   		changes = false;
   		equalities = []; // Stack of indices where equalities are found.
-  		equalitiesLength = 0; // Keeping our own length var is faster in JS.
+  		equalitiesLength = 0; // Keeping our own length let is faster in JS.
   		/** @type {?string} */
   		lastequality = null;
 
@@ -4997,7 +4997,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffCommonOverlap = function (text1, text2) {
-  		var text1Length, text2Length, textLength, best, length, pattern, found;
+  		let text1Length, text2Length, textLength, best, length, pattern, found;
 
   		// Cache the text lengths to prevent multiple calls.
   		text1Length = text1.length;
@@ -5052,7 +5052,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffLinesToChars = function (text1, text2) {
-  		var lineArray, lineHash, chars1, chars2;
+  		let lineArray, lineHash, chars1, chars2;
   		lineArray = []; // E.g. lineArray[4] === 'Hello\n'
   		lineHash = {}; // E.g. lineHash['Hello\n'] === 4
 
@@ -5069,7 +5069,7 @@
      * @private
      */
   		function diffLinesToCharsMunge(text) {
-  			var chars, lineStart, lineEnd, lineArrayLength, line;
+  			let chars, lineStart, lineEnd, lineArrayLength, line;
   			chars = "";
 
   			// Walk the text, pulling out a substring for each line.
@@ -5088,7 +5088,7 @@
   				line = text.substring(lineStart, lineEnd + 1);
   				lineStart = lineEnd + 1;
 
-  				var lineHashExists = lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : lineHash[line] !== undefined;
+  				let lineHashExists = lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : lineHash[line] !== undefined;
 
   				if (lineHashExists) {
   					chars += String.fromCharCode(lineHash[line]);
@@ -5118,7 +5118,7 @@
     * @private
     */
   	DiffMatchPatch.prototype.diffCharsToLines = function (diffs, lineArray) {
-  		var x, chars, text, y;
+  		let x, chars, text, y;
   		for (x = 0; x < diffs.length; x++) {
   			chars = diffs[x][1];
   			text = [];
@@ -5135,7 +5135,7 @@
     * @param {!Array.<!DiffMatchPatch.Diff>} diffs Array of diff tuples.
     */
   	DiffMatchPatch.prototype.diffCleanupMerge = function (diffs) {
-  		var pointer, countDelete, countInsert, textInsert, textDelete, commonlength, changes, diffPointer, position;
+  		let pointer, countDelete, countInsert, textInsert, textDelete, commonlength, changes, diffPointer, position;
   		diffs.push([DIFF_EQUAL, ""]); // Add a dummy entry at the end.
   		pointer = 0;
   		countDelete = 0;
@@ -5251,7 +5251,7 @@
   	};
 
   	return function (o, n) {
-  		var diff, output, text;
+  		let diff, output, text;
   		diff = new DiffMatchPatch();
   		output = diff.DiffMain(o, n);
   		diff.diffCleanupEfficiency(output);

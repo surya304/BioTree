@@ -33,9 +33,9 @@
         $(function() {
             // $('.getclientid').on("click", function() {
             //     console.log("dumb ass");
-            //     var id = $(this).prev().val();
+            //     let id = $(this).prev().val();
             //     console.log(id);
-            //     var name = $(this).html();
+            //     let name = $(this).html();
             //     name = name.trim();
             //     console.log(name);
             //     $('.printclientvalue').html(name);
@@ -44,24 +44,24 @@
 
 
             // /////////////////////////////////////////
-            // var one = <%- JSON.stringify(linkclicks)%>;
-            // var two = <%- JSON.stringify(totallinkscreated)%>;
-            var shorturlsList = <%- JSON.stringify(shorturlsList)%>;
-            var indiclientdata = <%- JSON.stringify(indiclientdata)%>;
+            // let one = <%- JSON.stringify(linkclicks)%>;
+            // let two = <%- JSON.stringify(totallinkscreated)%>;
+            let shorturlsList = <%- JSON.stringify(shorturlsList)%>;
+            let indiclientdata = <%- JSON.stringify(indiclientdata)%>;
 
 
-            // var four = <%- JSON.stringify(pixelsconnected)%>;
+            // let four = <%- JSON.stringify(pixelsconnected)%>;
             // $('.u1').html(one);
             // $('.u2').html(two);
             console.log(indiclientdata, "asd");
 
-            var sum1 = 0;
+            let sum1 = 0;
             for (let j = 0; j < shorturlsList.length; j++) {
 
                 sum1 += +Number(shorturlsList[j].clicks);
             }
 
-            var result = shorturlsList.filter(function(o1) {
+            let result = shorturlsList.filter(function(o1) {
                 return o1.type === "instabio";
 
 
@@ -71,12 +71,12 @@
             $('.u3').html(sum1);
             // clientsList
             <%if (from === "allclients") { %>
-            var sum2 = 0;
+            let sum2 = 0;
             for (let j = 0; j < shorturlsList.length; j++) {
 
                 sum2 += +Number(shorturlsList[j].tracking.length);
             }
-            var fullclients = <%- JSON.stringify(clientsList)%>;
+            let fullclients = <%- JSON.stringify(clientsList)%>;
 
             console.log(fullclients, "fullclients");
             $('.u4').html(sum2);
@@ -90,21 +90,21 @@
             <% } %>
 
 
-            var analytics = <%- JSON.stringify(clientsanalyticslist)%>;
+            let analytics = <%- JSON.stringify(clientsanalyticslist)%>;
             console.log(analytics);
 
             for (let index = 0; index < analytics.length; index++) {
                 const element = analytics[index];
-                var url = element.shorturl;
-                var icons = element.pixelsicons[index];
-                var clicks = element.clicks;
-                var source = element.source;
-                var medium = element.medium;
-                var name = element.name;
-                var date = element.date;
+                let url = element.shorturl;
+                let icons = element.pixelsicons[index];
+                let clicks = element.clicks;
+                let source = element.source;
+                let medium = element.medium;
+                let name = element.name;
+                let date = element.date;
                 for (let index1 = 0; index1 < analytics[index].pixelsicons.length; index1++) {
-                    var see = analytics[index].pixelsicons[index1].icon;
-                    var listitemtoadd = makelist(url, see, clicks, source, medium, name, date);
+                    let see = analytics[index].pixelsicons[index1].icon;
+                    let listitemtoadd = makelist(url, see, clicks, source, medium, name, date);
                     // $('.appendtbdata').append(listitemtoadd);
 
                 }
@@ -116,7 +116,7 @@
 
                 console.log(see);
                 console.log(clicks);
-                var $alldata = '<tr class="c-table__row">' +
+                let $alldata = '<tr class="c-table__row">' +
                     '                                <td class="c-table__cell">' +
                     '                                    Tap.sr' + url + '</td>' +
                     '                                <td class="c-table__cell">' +
@@ -189,7 +189,7 @@
 
 
 
-                                <% for(var i=0; i < clientsList.length; i++) { %>
+                                <% for(let i=0; i < clientsList.length; i++) { %>
                                     <input type="text" value="<%=clientsList[i]._id%>" id="clientlist" style="display:none">
                                     <a class="c-dropdown__item text-center getclientid" style="font-size:13px;" href="/analytics/<%=clientsList[i]._id%> ">
                                         <%=clientsList[i].name %>
@@ -387,7 +387,7 @@
                                 <td class="c-table__cell">
                                 </td>
                             </tr> -->
-                            <% for(var i=0; i < shorturlsList.length; i++) { %>
+                            <% for(let i=0; i < shorturlsList.length; i++) { %>
                                 <tr class="c-table__row">
 
                                     <td class="c-table__cell">
@@ -427,7 +427,7 @@
                                                                     <i class="fa fa-rocket overlapicon"></i> -->
                                         <% if (shorturlsList[i].type === "instabio" ) { %>
 
-                                            <% for (var j = 0; j < shorturlsList[i].tracking.length; j++) {%>
+                                            <% for (let j = 0; j < shorturlsList[i].tracking.length; j++) {%>
 
                                                 <i style="font-size: 14px;" class="<%=shorturlsList[i].tracking[j].icon%>  overlapicon"></i>
                                                 <% } %>
@@ -476,7 +476,7 @@
         }
 
         function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
+            let auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function() {});
             auth2.disconnect();
             window.location.href = "/login";
@@ -486,7 +486,7 @@
         $(function() {
 
 
-            var clientCount = <%-JSON.stringify(datedata) %>;
+            let clientCount = <%-JSON.stringify(datedata) %>;
             console.log(clientCount);
 
 

@@ -1,4 +1,4 @@
-var document;
+let document;
 
 document = require('./document');
 

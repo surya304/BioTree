@@ -35,16 +35,16 @@
   // ============================================================
 
   function transitionEnd() {
-    var el = document.createElement('bootstrap')
+    let el = document.createElement('bootstrap')
 
-    var transEndEventNames = {
+    let transEndEventNames = {
       WebkitTransition : 'webkitTransitionEnd',
       MozTransition    : 'transitionend',
       OTransition      : 'oTransitionEnd otransitionend',
       transition       : 'transitionend'
     }
 
-    for (var name in transEndEventNames) {
+    for (let name in transEndEventNames) {
       if (el.style[name] !== undefined) {
         return { end: transEndEventNames[name] }
       }
@@ -55,10 +55,10 @@
 
   // http://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
+    let called = false
+    let $el = this
     $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    let callback = function () { if (!called) $($el).trigger($.support.transition.end) }
     setTimeout(callback, duration)
     return this
   }
@@ -95,7 +95,7 @@
   // TOOLTIP PUBLIC CLASS DEFINITION
   // ===============================
 
-  var Tooltip = function (element, options) {
+  let Tooltip = function (element, options) {
     this.type       = null
     this.options    = null
     this.enabled    = null
@@ -139,16 +139,16 @@
       throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
     }
 
-    var triggers = this.options.trigger.split(' ')
+    let triggers = this.options.trigger.split(' ')
 
-    for (var i = triggers.length; i--;) {
-      var trigger = triggers[i]
+    for (let i = triggers.length; i--;) {
+      let trigger = triggers[i]
 
       if (trigger == 'click') {
         this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
       } else if (trigger != 'manual') {
-        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
-        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
+        let eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+        let eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
 
         this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
         this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
@@ -178,8 +178,8 @@
   }
 
   Tooltip.prototype.getDelegateOptions = function () {
-    var options  = {}
-    var defaults = this.getDefaults()
+    let options  = {}
+    let defaults = this.getDefaults()
 
     this._options && $.each(this._options, function (key, value) {
       if (defaults[key] != value) options[key] = value
@@ -189,7 +189,7 @@
   }
 
   Tooltip.prototype.enter = function (obj) {
-    var self = obj instanceof this.constructor ?
+    let self = obj instanceof this.constructor ?
       obj : $(obj.currentTarget).data('bs.' + this.type)
 
     if (!self) {
@@ -218,7 +218,7 @@
   }
 
   Tooltip.prototype.isInStateTrue = function () {
-    for (var key in this.inState) {
+    for (let key in this.inState) {
       if (this.inState[key]) return true
     }
 
@@ -226,7 +226,7 @@
   }
 
   Tooltip.prototype.leave = function (obj) {
-    var self = obj instanceof this.constructor ?
+    let self = obj instanceof this.constructor ?
       obj : $(obj.currentTarget).data('bs.' + this.type)
 
     if (!self) {
@@ -252,18 +252,18 @@
   }
 
   Tooltip.prototype.show = function () {
-    var e = $.Event('show.bs.' + this.type)
+    let e = $.Event('show.bs.' + this.type)
 
     if (this.hasContent() && this.enabled) {
       this.$element.trigger(e)
 
-      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
+      let inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
       if (e.isDefaultPrevented() || !inDom) return
-      var that = this
+      let that = this
 
-      var $tip = this.tip()
+      let $tip = this.tip()
 
-      var tipId = this.getUID(this.type)
+      let tipId = this.getUID(this.type)
 
       this.setContent()
       $tip.attr('id', tipId)
@@ -271,12 +271,12 @@
 
       if (this.options.animation) $tip.addClass('fade')
 
-      var placement = typeof this.options.placement == 'function' ?
+      let placement = typeof this.options.placement == 'function' ?
         this.options.placement.call(this, $tip[0], this.$element[0]) :
         this.options.placement
 
-      var autoToken = /\s?auto?\s?/i
-      var autoPlace = autoToken.test(placement)
+      let autoToken = /\s?auto?\s?/i
+      let autoPlace = autoToken.test(placement)
       if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
 
       $tip
@@ -288,13 +288,13 @@
       this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
       this.$element.trigger('inserted.bs.' + this.type)
 
-      var pos          = this.getPosition()
-      var actualWidth  = $tip[0].offsetWidth
-      var actualHeight = $tip[0].offsetHeight
+      let pos          = this.getPosition()
+      let actualWidth  = $tip[0].offsetWidth
+      let actualHeight = $tip[0].offsetHeight
 
       if (autoPlace) {
-        var orgPlacement = placement
-        var viewportDim = this.getPosition(this.$viewport)
+        let orgPlacement = placement
+        let viewportDim = this.getPosition(this.$viewport)
 
         placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
                     placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
@@ -307,12 +307,12 @@
           .addClass(placement)
       }
 
-      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
+      let calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
 
       this.applyPlacement(calculatedOffset, placement)
 
-      var complete = function () {
-        var prevHoverState = that.hoverState
+      let complete = function () {
+        let prevHoverState = that.hoverState
         that.$element.trigger('shown.bs.' + that.type)
         that.hoverState = null
 
@@ -328,13 +328,13 @@
   }
 
   Tooltip.prototype.applyPlacement = function (offset, placement) {
-    var $tip   = this.tip()
-    var width  = $tip[0].offsetWidth
-    var height = $tip[0].offsetHeight
+    let $tip   = this.tip()
+    let width  = $tip[0].offsetWidth
+    let height = $tip[0].offsetHeight
 
     // manually read margins because getBoundingClientRect includes difference
-    var marginTop = parseInt($tip.css('margin-top'), 10)
-    var marginLeft = parseInt($tip.css('margin-left'), 10)
+    let marginTop = parseInt($tip.css('margin-top'), 10)
+    let marginLeft = parseInt($tip.css('margin-left'), 10)
 
     // we must check for NaN for ie 8/9
     if (isNaN(marginTop))  marginTop  = 0
@@ -357,21 +357,21 @@
     $tip.addClass('in')
 
     // check to see if placing tip in new offset caused the tip to resize itself
-    var actualWidth  = $tip[0].offsetWidth
-    var actualHeight = $tip[0].offsetHeight
+    let actualWidth  = $tip[0].offsetWidth
+    let actualHeight = $tip[0].offsetHeight
 
     if (placement == 'top' && actualHeight != height) {
       offset.top = offset.top + height - actualHeight
     }
 
-    var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
+    let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
 
     if (delta.left) offset.left += delta.left
     else offset.top += delta.top
 
-    var isVertical          = /top|bottom/.test(placement)
-    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
-    var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
+    let isVertical          = /top|bottom/.test(placement)
+    let arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
+    let arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
 
     $tip.offset(offset)
     this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
@@ -384,17 +384,17 @@
   }
 
   Tooltip.prototype.setContent = function () {
-    var $tip  = this.tip()
-    var title = this.getTitle()
+    let $tip  = this.tip()
+    let title = this.getTitle()
 
     $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
     $tip.removeClass('fade in top bottom left right')
   }
 
   Tooltip.prototype.hide = function (callback) {
-    var that = this
-    var $tip = $(this.$tip)
-    var e    = $.Event('hide.bs.' + this.type)
+    let that = this
+    let $tip = $(this.$tip)
+    let e    = $.Event('hide.bs.' + this.type)
 
     function complete() {
       if (that.hoverState != 'in') $tip.detach()
@@ -424,7 +424,7 @@
   }
 
   Tooltip.prototype.fixTitle = function () {
-    var $e = this.$element
+    let $e = this.$element
     if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {
       $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
     }
@@ -437,20 +437,20 @@
   Tooltip.prototype.getPosition = function ($element) {
     $element   = $element || this.$element
 
-    var el     = $element[0]
-    var isBody = el.tagName == 'BODY'
+    let el     = $element[0]
+    let isBody = el.tagName == 'BODY'
 
-    var elRect    = el.getBoundingClientRect()
+    let elRect    = el.getBoundingClientRect()
     if (elRect.width == null) {
       // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
       elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
     }
-    var isSvg = window.SVGElement && el instanceof window.SVGElement
+    let isSvg = window.SVGElement && el instanceof window.SVGElement
     // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
     // See https://github.com/twbs/bootstrap/issues/20280
-    var elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
-    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
-    var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
+    let elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
+    let scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+    let outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
 
     return $.extend({}, elRect, scroll, outerDims, elOffset)
   }
@@ -464,23 +464,23 @@
   }
 
   Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
-    var delta = { top: 0, left: 0 }
+    let delta = { top: 0, left: 0 }
     if (!this.$viewport) return delta
 
-    var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
-    var viewportDimensions = this.getPosition(this.$viewport)
+    let viewportPadding = this.options.viewport && this.options.viewport.padding || 0
+    let viewportDimensions = this.getPosition(this.$viewport)
 
     if (/right|left/.test(placement)) {
-      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
-      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
+      let topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
+      let bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
       if (topEdgeOffset < viewportDimensions.top) { // top overflow
         delta.top = viewportDimensions.top - topEdgeOffset
       } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
         delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
       }
     } else {
-      var leftEdgeOffset  = pos.left - viewportPadding
-      var rightEdgeOffset = pos.left + viewportPadding + actualWidth
+      let leftEdgeOffset  = pos.left - viewportPadding
+      let rightEdgeOffset = pos.left + viewportPadding + actualWidth
       if (leftEdgeOffset < viewportDimensions.left) { // left overflow
         delta.left = viewportDimensions.left - leftEdgeOffset
       } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
@@ -492,9 +492,9 @@
   }
 
   Tooltip.prototype.getTitle = function () {
-    var title
-    var $e = this.$element
-    var o  = this.options
+    let title
+    let $e = this.$element
+    let o  = this.options
 
     title = $e.attr('data-original-title')
       || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
@@ -535,7 +535,7 @@
   }
 
   Tooltip.prototype.toggle = function (e) {
-    var self = this
+    let self = this
     if (e) {
       self = $(e.currentTarget).data('bs.' + this.type)
       if (!self) {
@@ -554,7 +554,7 @@
   }
 
   Tooltip.prototype.destroy = function () {
-    var that = this
+    let that = this
     clearTimeout(this.timeout)
     this.hide(function () {
       that.$element.off('.' + that.type).removeData('bs.' + that.type)
@@ -574,9 +574,9 @@
 
   function Plugin(option) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.tooltip')
-      var options = typeof option == 'object' && option
+      let $this   = $(this)
+      let data    = $this.data('bs.tooltip')
+      let options = typeof option == 'object' && option
 
       if (!data && /destroy|hide/.test(option)) return
       if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
@@ -584,7 +584,7 @@
     })
   }
 
-  var old = $.fn.tooltip
+  let old = $.fn.tooltip
 
   $.fn.tooltip             = Plugin
   $.fn.tooltip.Constructor = Tooltip
@@ -615,7 +615,7 @@
   // POPOVER PUBLIC CLASS DEFINITION
   // ===============================
 
-  var Popover = function (element, options) {
+  let Popover = function (element, options) {
     this.init('popover', element, options)
   }
 
@@ -643,9 +643,9 @@
   }
 
   Popover.prototype.setContent = function () {
-    var $tip    = this.tip()
-    var title   = this.getTitle()
-    var content = this.getContent()
+    let $tip    = this.tip()
+    let title   = this.getTitle()
+    let content = this.getContent()
 
     $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
     $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
@@ -664,8 +664,8 @@
   }
 
   Popover.prototype.getContent = function () {
-    var $e = this.$element
-    var o  = this.options
+    let $e = this.$element
+    let o  = this.options
 
     return $e.attr('data-content')
       || (typeof o.content == 'function' ?
@@ -683,9 +683,9 @@
 
   function Plugin(option) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.popover')
-      var options = typeof option == 'object' && option
+      let $this   = $(this)
+      let data    = $this.data('bs.popover')
+      let options = typeof option == 'object' && option
 
       if (!data && /destroy|hide/.test(option)) return
       if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
@@ -693,7 +693,7 @@
     })
   }
 
-  var old = $.fn.popover
+  let old = $.fn.popover
 
   $.fn.popover             = Plugin
   $.fn.popover.Constructor = Popover
@@ -709,7 +709,7 @@
 
 }(jQuery);
 
-var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+let bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 (function(window, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -722,12 +722,12 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     return window.Tour = factory(window.jQuery);
   }
 })(window, function($) {
-  var Tour, document;
+  let Tour, document;
   document = window.document;
   Tour = (function() {
     function Tour(options) {
       this._showPopoverAndOverlay = bind(this._showPopoverAndOverlay, this);
-      var storage;
+      let storage;
       try {
         storage = window.localStorage;
       } catch (error) {
@@ -773,7 +773,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     }
 
     Tour.prototype.addSteps = function(steps) {
-      var j, len, step;
+      let j, len, step;
       for (j = 0, len = steps.length; j < len; j++) {
         step = steps[j];
         this.addStep(step);
@@ -850,7 +850,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.start = function(force) {
-      var promise;
+      let promise;
       if (force == null) {
         force = false;
       }
@@ -865,25 +865,25 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.next = function() {
-      var promise;
+      let promise;
       promise = this.hideStep(this._current, this._current + 1);
       return this._callOnPromiseDone(promise, this._showNextStep);
     };
 
     Tour.prototype.prev = function() {
-      var promise;
+      let promise;
       promise = this.hideStep(this._current, this._current - 1);
       return this._callOnPromiseDone(promise, this._showPrevStep);
     };
 
     Tour.prototype.goTo = function(i) {
-      var promise;
+      let promise;
       promise = this.hideStep(this._current, i);
       return this._callOnPromiseDone(promise, this.showStep, i);
     };
 
     Tour.prototype.end = function() {
-      var endHelper, promise;
+      let endHelper, promise;
       endHelper = (function(_this) {
         return function(e) {
           $(document).off("click.tour-" + _this._options.name);
@@ -915,7 +915,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.pause = function() {
-      var step;
+      let step;
       step = this.getStep(this._current);
       if (!(step && step.duration)) {
         return this;
@@ -930,7 +930,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.resume = function() {
-      var step;
+      let step;
       step = this.getStep(this._current);
       if (!(step && step.duration)) {
         return this;
@@ -954,7 +954,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.hideStep = function(i, iNext) {
-      var hideDelay, hideStepHelper, promise, step;
+      let hideDelay, hideStepHelper, promise, step;
       step = this.getStep(i);
       if (!step) {
         return;
@@ -963,7 +963,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
       promise = this._makePromise(step.onHide != null ? step.onHide(this, i) : void 0);
       hideStepHelper = (function(_this) {
         return function(e) {
-          var $element, next_step;
+          let $element, next_step;
           $element = $(step.element);
           if (!($element.data('bs.popover') || $element.data('popover'))) {
             $element = $('body');
@@ -998,7 +998,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype.showStep = function(i) {
-      var path, promise, showDelay, showStepHelper, skipToPrevious, step;
+      let path, promise, showDelay, showStepHelper, skipToPrevious, step;
       if (this.ended()) {
         this._debug('Tour ended, showStep prevented.');
         return this;
@@ -1084,7 +1084,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._setState = function(key, value) {
-      var e, keyName;
+      let e, keyName;
       if (this._options.storage) {
         keyName = this._options.name + "_" + key;
         try {
@@ -1105,7 +1105,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._removeState = function(key) {
-      var keyName;
+      let keyName;
       if (this._options.storage) {
         keyName = this._options.name + "_" + key;
         this._options.storage.removeItem(keyName);
@@ -1118,7 +1118,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._getState = function(key) {
-      var keyName, value;
+      let keyName, value;
       if (this._options.storage) {
         keyName = this._options.name + "_" + key;
         value = this._options.storage.getItem(keyName);
@@ -1135,7 +1135,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showNextStep = function() {
-      var promise, showNextStepHelper, step;
+      let promise, showNextStepHelper, step;
       step = this.getStep(this._current);
       showNextStepHelper = (function(_this) {
         return function(e) {
@@ -1147,7 +1147,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showPrevStep = function() {
-      var promise, showPrevStepHelper, step;
+      let promise, showPrevStepHelper, step;
       step = this.getStep(this._current);
       showPrevStepHelper = (function(_this) {
         return function(e) {
@@ -1165,7 +1165,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._isRedirect = function(host, path, location) {
-      var currentPath;
+      let currentPath;
       if ((host != null) && host !== '' && (({}.toString.call(host) === '[object RegExp]' && !host.test(location.origin)) || ({}.toString.call(host) === '[object String]' && this._isHostDifferent(host, location)))) {
         return true;
       }
@@ -1189,7 +1189,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._isJustPathHashDifferent = function(host, path, location) {
-      var currentPath;
+      let currentPath;
       if ((host != null) && host !== '') {
         if (this._isHostDifferent(host, location)) {
           return false;
@@ -1203,7 +1203,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._redirect = function(step, i, path) {
-      var href;
+      let href;
       if ($.isFunction(step.redirect)) {
         return step.redirect.call(this, path);
       } else {
@@ -1231,7 +1231,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showPopoverAndOverlay = function(i) {
-      var step;
+      let step;
       if (this.getCurrentStep() !== i || this.ended()) {
         return;
       }
@@ -1247,7 +1247,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showPopover = function(step, i) {
-      var $element, $tip, isOrphan, options, shouldAddSmart;
+      let $element, $tip, isOrphan, options, shouldAddSmart;
       $(".tour-" + this._options.name).remove();
       options = $.extend({}, this._options);
       isOrphan = this._isOrphan(step);
@@ -1296,7 +1296,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._template = function(step, i) {
-      var $navigation, $next, $prev, $resume, $template, template;
+      let $navigation, $next, $prev, $resume, $template, template;
       template = step.template;
       if (this._isOrphan(step) && {}.toString.call(step.orphan) !== '[object Boolean]') {
         template = step.orphan;
@@ -1334,7 +1334,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._reposition = function($tip, step) {
-      var offsetBottom, offsetHeight, offsetRight, offsetWidth, originalLeft, originalTop, tipOffset;
+      let offsetBottom, offsetHeight, offsetRight, offsetWidth, originalLeft, originalTop, tipOffset;
       offsetWidth = $tip[0].offsetWidth;
       offsetHeight = $tip[0].offsetHeight;
       tipOffset = $tip.offset();
@@ -1375,7 +1375,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._scrollIntoView = function(i) {
-      var $element, $window, counter, height, offsetTop, scrollTop, step, windowHeight;
+      let $element, $window, counter, height, offsetTop, scrollTop, step, windowHeight;
       step = this.getStep(i);
       $element = $(step.element);
       if (!$element.length) {
@@ -1426,7 +1426,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._initMouseNavigation = function() {
-      var _this;
+      let _this;
       _this = this;
       return $(document).off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='prev']").off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='next']").off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='end']").off("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='pause-resume']").on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='next']", (function(_this) {
         return function(e) {
@@ -1446,7 +1446,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
           return _this.end();
         };
       })(this)).on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='pause-resume']", function(e) {
-        var $this;
+        let $this;
         e.preventDefault();
         $this = $(this);
         $this.text(_this._paused ? $this.data('pause-text') : $this.data('resume-text'));
@@ -1507,7 +1507,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showBackground = function(step, data) {
-      var $backdrop, base, height, j, len, pos, ref, results, width;
+      let $backdrop, base, height, j, len, pos, ref, results, width;
       height = $(document).height();
       width = $(document).width();
       ref = ['top', 'bottom', 'left', 'right'];
@@ -1551,7 +1551,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._showOverlayElement = function(step) {
-      var $backdropElement, elementData;
+      let $backdropElement, elementData;
       $backdropElement = $(step.backdropElement);
       if ($backdropElement.length === 0) {
         elementData = {
@@ -1577,7 +1577,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._hideOverlayElement = function(step) {
-      var $backdrop, pos, ref;
+      let $backdrop, pos, ref;
       $(step.backdropElement).removeClass('tour-step-backdrop');
       ref = this.backdrops;
       for (pos in ref) {
@@ -1650,7 +1650,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._getParams = function(path, start) {
-      var j, len, param, params, paramsObject;
+      let j, len, param, params, paramsObject;
       params = path.split(start);
       if (params.length === 1) {
         return {};
@@ -1666,7 +1666,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
     };
 
     Tour.prototype._equal = function(obj1, obj2) {
-      var j, k, len, obj1Keys, obj2Keys, v;
+      let j, k, len, obj1Keys, obj2Keys, v;
       if ({}.toString.call(obj1) === '[object Object]' && {}.toString.call(obj2) === '[object Object]') {
         obj1Keys = Object.keys(obj1);
         obj2Keys = Object.keys(obj2);
