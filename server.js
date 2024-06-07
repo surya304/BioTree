@@ -60,7 +60,9 @@ app.use(cookieParser());
 
 
 
+
 const dburl = process.env.DB_URL;
+
     
     mongoose.connect(dburl, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, function(error, db) {
         if (!error) {
@@ -68,8 +70,8 @@ const dburl = process.env.DB_URL;
         } else {
             console.log("Error connecting to database", error);
         }
-
     });
+
 
 
 
