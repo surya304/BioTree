@@ -5,7 +5,7 @@ mongoose.Promise = require('bluebird');
 let Schema = mongoose.Schema;
 
 
-// create a schema
+// create a schema for user tracking 
 let userTrackingSchema = new Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
   tracking: {type: mongoose.Schema.Types.ObjectId, ref: 'Tracking', required: true},
