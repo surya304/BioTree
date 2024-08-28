@@ -110,31 +110,31 @@ function requireClientLogin(req, res, next) {
 // app.get('/', csrfProtection,(req, res) => {
 //     res.render('login'); // Render the "Login.ejs" template
 //   });
-  
-
-
-app.get('*', csrfProtection, function(req, res) {
-
-
-
-
-
-    if (!req.session.client) {
-
-        res.redirect('/login')
-    } else {
-        res.redirect('/dashboard')
-
-    }
-
-
-});
-// write a test route and render test page
-
-router.get('/test', function(req, res) {
+app.get('/test', function(req, res) {
     res.render('test');
 }
 );
+
+
+
+// app.get('*', csrfProtection, function(req, res) {
+
+
+
+
+
+//     if (!req.session.client) {
+
+//         res.redirect('/login')
+//     } else {
+//         res.redirect('/dashboard')
+
+//     }
+
+
+// });
+// write a test route and render test page
+
 
 
 
