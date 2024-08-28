@@ -122,16 +122,19 @@ app.get('*', csrfProtection, function(req, res) {
     if (!req.session.client) {
 
         res.redirect('/login')
-        // res.render('login');
     } else {
         res.redirect('/dashboard')
-        // res.render('dashboard');
 
     }
 
 
 });
+// write a test route and render test page
 
+router.get('/test', function(req, res) {
+    res.render('test');
+}
+);
 
 
 
