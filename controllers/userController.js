@@ -838,11 +838,7 @@ router.post('/login', function(req, res) {
 
             bcrypt.compare(password, user.password, function(err1, result) {
                 if (result == true) {
-                    // delete user[password];
-                    // let payload = { subject : user._id };
-                    // let token = jwt.sign(payload,'rahasyam#18');
-                    // console.log(token);
-                    // res.status(200).send({ data: token });
+                
                     req.session.user = user;
                     req.session.client = user;
 

@@ -1,4 +1,3 @@
-alert("a")
 $(document).ready(function() {
     if ($("#email").val().length > 0) {
         // console.log("empty email");
@@ -47,34 +46,12 @@ $(document).ready(function() {
 
                     console.log(data, "aaa")
 
-                    // $.ajax({
-                    //     type: 'POST',
-                    //     url: '/getclientcount',
-                    //     success: function(data) {
-
-                    //         let count = data.id;
-                    //         if (count == 0) {
-                    //             window.location.href = "/steps";
-                    //         } else {
-                    //             window.location.href = "/dashboard/" + count + "";
-                    //         }
-                    //     },
-                    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    //         alert(textStatus + errorThrown);
-                    //     }
-                    // });
-
+                  
 
 
                     window.location.href = "/dashboard";
 
-                    // let error = data.error;
-                    // let success = data.success;
-                    // if (error != undefined) {
-                    //     alert(error + "asidaisd");
-                    // } else {
-                    //     window.location.href = "/dashboard";
-                    // }
+                   
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     // alert(textStatus + errorThrown);
