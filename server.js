@@ -1,35 +1,29 @@
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const session = require('client-sessions');
+const mongoose = require('mongoose');
+const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const methodOverride = require('method-override');
+const logger = require('morgan');
 require('dotenv').config();
 
-let express = require('express');
-let methodOverride = require('method-override');
-let session = require('client-sessions');
-let bodyParser = require('body-parser');
-let mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-let app = express();
-let multer = require('multer');
-let https = require('https');
-let fs = require('fs');
-let csrf = require('csurf');
-let cookieParser = require('cookie-parser');
-let request = require('request');
-let helmet = require('helmet')
-let querystring = require('querystring');
-let router = express.Router();
+const app = express();
+const port = process.env.PORT || 3000;
 
-
-// setup route middlewares
-let csrfProtection = csrf({
-    cookie: true
-});
-
-let parseForm = bodyParser.urlencoded({
-    extended: false
-});
-
-
-
+// Set view engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Middleware
+app.use(logger('dev'));
+app.use(helmet());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(cookieParser());
+app.use(methodOverride('_method'));
 app.use(session({
     cookieName: 'session',
     secret: 'PIGINNL&&89001998&*9090dhhu4873edbybjcvm',
@@ -38,105 +32,37 @@ app.use(session({
     httpOnly: true
 }));
 
-let port = 3000;
+// Static files
+app.use('/adminui', express.static(path.join(__dirname, 'adminui')));
+app.use('/userui', express.static(path.join(__dirname, 'userui')));
 
+// CSRF Protection
+const csrfProtection = csrf({ cookie: true });
+app.use(csrfProtection);
 
-app.listen(process.env.PORT || port);
+// Database connection
+mongoose.connect(process.env.DB_URL, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, (error) => {
+    if (!error) {
+        console.log("Connected to database");
+    } else {
+        console.log("Error connecting to database", error);
+    }
+});
 
-console.log('Running on Port - ' + port);
-
-app.use('/adminui', express.static(__dirname + '/adminui/'));
-app.use('/userui', express.static(__dirname + '/userui/'));
-app.use(helmet())
-app.use(methodOverride('_method'));
-app.use(bodyParser.json({
-    limit: '50mb'
-}));
-app.use(bodyParser.urlencoded({
-    limit: '50mb',
-    extended: true
-}));
-app.use(cookieParser());
-
-
-
-
-const dburl = process.env.DB_URL;
-
-    
-    mongoose.connect(dburl, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, function(error, db) {
-        if (!error) {
-            console.log("Connected to database");
-        } else {
-            console.log("Error connecting to database", error);
-        }
-    });
-
-
-
-
-
-
-
+// Routes
 app.use(require("./controllers/userController"));
 app.use(require("./controllers/shorturlController"));
 
-
-function requireLogin(req, res, next) {
-    if (!req.session.user) {
-        res.redirect('/admin/login');
-    } else {
-        next();
-    }
-};
-
-const logger = require('morgan');
-
-app.use(logger('dev'));
-
-function requireClientLogin(req, res, next) {
+// Default route
+app.get('*', csrfProtection, (req, res) => {
     if (!req.session.client) {
         res.redirect('/login');
     } else {
-        next();
+        res.redirect('/dashboard');
     }
-};
-
-
-// Email Related Stuff
-
-
-// Define routes
-// app.get('/', csrfProtection,(req, res) => {
-//     res.render('login'); // Render the "Login.ejs" template
-//   });
-
-
-
-app.get('*', csrfProtection, function(req, res) {
-
-
-
-
-
-    if (!req.session.client) {
-
-        res.redirect('/login')
-    } else {
-        res.redirect('/dashboard')
-
-    }
-
-
 });
-// write a test route and render test page
 
-
-
-
-app.use(bodyParser.urlencoded({ extended: true }))
- 
-
-
-
-
+// Start server
+app.listen(port, () => {
+    console.log('Running on Port - ' + port);
+});
