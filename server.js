@@ -36,12 +36,7 @@ app.use(session({
 app.use('/adminui', express.static(path.join(__dirname, 'adminui')));
 app.use('/userui', express.static(path.join(__dirname, 'userui')));
 
-const cors = require('cors');
 
-app.use(cors({
-    origin: 'https://bio-tree-orpin.vercel.app', // Replace with your frontend domain
-    credentials: true
-}));
 
 // CSRF Protection
 const csrfProtection = csrf({ cookie: true });
