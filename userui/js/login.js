@@ -1,3 +1,4 @@
+alert("a")
 $(document).ready(function() {
     if ($("#email").val().length > 0) {
         // console.log("empty email");
@@ -51,7 +52,13 @@ $(document).ready(function() {
 
                     window.location.href = "/dashboard";
 
-                   
+                    // let error = data.error;
+                    // let success = data.success;
+                    // if (error != undefined) {
+                    //     alert(error + "asidaisd");
+                    // } else {
+                    //     window.location.href = "/dashboard";
+                    // }
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     // alert(textStatus + errorThrown);

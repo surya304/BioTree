@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
     <title>Log in</title>
     <meta name="description" content="Dashboard UI Kit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +33,6 @@
    <script type="text/javascript">
     $(document).ready(function() {
         // Get CSRF token from meta tag or hidden input
-        let csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $("#login").click(function(e) {
             e.preventDefault();
@@ -40,7 +40,6 @@
             let data = {
                 email: $("#email").val(),
                 password: $("#password").val(),
-                _csrf: csrfToken // Include CSRF token
             };
 
             if ($("#email").val().length == 0) {
