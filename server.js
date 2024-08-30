@@ -73,13 +73,10 @@ const dburl = process.env.DB_URL;
     });
 
 
-
-
-
-
-
 app.use(require("./controllers/userController"));
-app.use(require("./controllers/shorturlController"));
+app.use(require("./controllers/shorturlController"));   
+app.use(require("./controllers/ImageUpload"));
+
 
 
 function requireLogin(req, res, next) {

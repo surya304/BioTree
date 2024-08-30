@@ -37,322 +37,100 @@
 
 
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            $("#preview").hide();
-            $('#next-btn').on("click", function() {
-
-                $("#nav-home-tab").trigger("click");
-            });
-
-            $('#polo').on("click", function() {
-                let name = $(this).html();
-                console.log(name);
-                if (name === "see preview") {
-                    $(this).html("hide preview");
-                } else if (name === "hide preview") {
-                    $(this).html("see preview");
-                }
-                $(".c-navbar").toggle();
-                $("#preview").slideToggle();
-                $('.whole').toggle();
-            });
-
-            // for (let index = 0; index < dbdata1.length; index++) {
-            let fromdata = <%- JSON.stringify(from) %>;
-            console.log(fromdata);
-
-            let dbdata = <%- JSON.stringify(socialmediaList) %>;
-            console.table(dbdata);
-
-            <%if (from === "instabio") { %>
-
-
-
-            let dbdata = <%- JSON.stringify(socialmediaList) %>;
-            console.table(dbdata);
-            // }
-            let fullData = <%-JSON.stringify(socialmediaList) %>;
-            // alert(fromdata);
-            let sendeddata = <%-JSON.stringify(sociallists) %>;
-            console.log(sendeddata,"sendeddata");
-
-
-
-            // //////////////////////////////////
-            let props = ['id', 'name'];
-
-            let result = fullData.filter(function(o1) {
-                // filter out (!) items in result2
-                return !sendeddata.some(function(o2) {
-                    return o1._id === o2.id; // assumes unique id
-                });
-            });
-            console.log(result);
-
-
-
-
-            // ***********************************************************************************&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-            for (let j = 0; j < result.length; j++) {
-                let name = result[j].name;
-                let id = result[j]._id;
-                let icon = result[j].icon;
-                let prefixurl = result[j].prefixurl;
-
-
-
-                let adddata = sendsocial(name, id, icon, prefixurl);
-                $(".dropping").append(adddata);
-            }
-
-
-            function sendsocial(name, id, icon, prefixurl) {
-
-
-                let $mylet =
-                    '<a class="c-dropdown__item dropdown-item form-check form-check-inline hello"  style="padding:4px 5px 0 5px;"  data-name="' + name + '" data-prefixurl="' + prefixurl + '" data-icon="' + icon + '" data-id="' + id + '">' +
-                    '        <label class="iconbox1">' +
-                    '            <i  id="dropdownicon" ></i>' +
-                    '            </label>' +
-                    '    <span class="naming" style="display:none">' + name + '</span>' +
-                    '            <label class="form-check-label mx-auto" for="inlineCheckbox1" style="margin-left:8px;font-size:13px;font-weight: 100;position: relative;color:black">' +
-                    name + '</label>' +
-                    '            <label style="display: none" class="first ">' + id + '</label>' +
-                    '            <span style="display:none" class="icon image1">' + icon + '</span>' +
-                    '            <i class="fa fa-plus-square-o fa-2x pull-right" style="font-size:15px;padding-top:6px"></i>' +
-                    '        </a>';
-
-
-
-
-
-
-                return $myvar;
-
-            }
-            // #################################################################################print social data get icon and name using id
-          
-            console.log(sendeddata,"sendeddata")
-
-            for (let d = 0; d < sendeddata.length; d++) {
-                let savedid = sendeddata[d].id;
-                let savedusername = sendeddata[d].username;
-                let img = sendeddata[d].icon;
-                let prefixurl = sendeddata[d].url;
-                let name = sendeddata[d].name;
-
-                console.log(sendeddata[d]);
-
-
-                let listItemToAdda = makesocial(img, savedid, name, prefixurl, savedusername);;
-                $('#sortable').append(listItemToAdda);
-
-            }
-
-            function makesocial(img, savedid, name, prefixurl, savedusername) {
-
-            
-                let $allData = `<div class="sortableitem u-mt-custom" ><li>
-    
-    <div class="row justify-content-left nolo r0">
-    <div class="col-md-10 col-9 r2" >
-    <div class="c-field has-addon-left">
-            <span class="c-field__addon" id="sizing-addon1"><i class="` +
-                    img +
-                    `" style="font-size:20px;color:#fff"></i></span>
-    <label class="c-field__label u-hidden-visually" for="input9">Disabled Input</label>
-    <input class="c-input ip inputborder"  id="input1" type="text" placeholder="Place Your Link Here" value="` + savedusername + `">
-    </div>
-    </div>
-     <div class="col-md-1 col-1 r3"> 
-     <div class="pull-right">
-    <span class="url" style="display:none">` + prefixurl + `</span>
-
-    <span class="naming" style="display:none">` + name + `</span>
-     <span class="findp" style="display:none">` + savedid + `</span>
-     <span class="image1" style="display:none">` + img + `</span>
-    <a class="btn del"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-    <span class="find" style="display:none">` + savedid + `</span>
-    </div></div>
-    <div class="col-md-1 col-1 text-center r4" style="padding-top:5px;">
- <div class="pull-left">
-
-    <i class="fa fa-bars" aria-hidden="true" style="font-size:15px;"></i>
-    <span class="naming" style="display:none">` + name + `</span>
-        </div>
-
-    </div></li></div>`;
-
-                return $allData;
-
-            }
-
-
-            // ------------------------------------------------font color style
-
-            let previewcolor = <%-JSON.stringify(backgroundcolor) %>;
-            console.log(previewcolor);
-            if (previewcolor !== "purewhite") {
-                // set white color to all buttons
-                let $a1 = $('.flex-name');
-                let $a2 = $('.flex-bio');
-                let $a3 = $('.button-area');
-                let $a4 = $('.button-area1');
-                let $a5 = $('.flex-name1');
-                let $image = $(".e1");
-                $a1.addClass('white');
-                $a2.addClass('white');
-                $a3.addClass('white');
-                $a4.addClass('white');
-                $a5.addClass('white');
-                $image.attr('src', '/userui/biotree_logo.png');
-            }
-
-
-
-            // ------------------------------------------------font color style
-            // ------------------------------------------check if rounded button is true
-            let bordering = <%-JSON.stringify(border) %>;
-            console.log(bordering);
-
-            if (bordering === true) {
-                // add is-active class
-                $("#secondswitch").trigger('click');
-                $('.p0').addClass('is-active');
-
-            } else {
-                // remove is-active class
-
-            }
-
-
-            // #################################################################################print social data
-            // #########################################################
-
-
-            <% } %>
-
-
-            // ##################################################
-
-
-         
-
-            function checkit() {
-                let $a3 = $('.button-area');
-                let $a4 = $('.button-area1');
-                if ($a3.hasClass('rounded')) {
-                    console.log("do nothing");
-
-                } else {
-                    $a3.addClass('rectangle');
-                    $a4.addClass('rectangle');
-                }
-            }
-
-
-            $('[data-toggle="tooltip"]').tooltip();
-            $('[data-toggle="popover"]').popover();
-
-
-            $('.copybutton').on('click', function() {
-                let data = document.getElementById('shortcoding1');
-
-                console.log(data);
-                data.select();
-                document.execCommand("copy");
-
-
-            })
-
-
-
-            // /////////////////////set client id so that you can save
-
-            $.urlParam = function(name) {
-                let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-                if (results == null) {
-                    return null;
-                }
-
-                return decodeURI(results[1]) || 0;
-            }
-
-
-
-
-
-
-
-
-        });
-    </script>
+  
 
     <style>
         @import url("https://use.typekit.net/foj0sle.css");
+    </style>
+
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
     </style>
 </head>
 
 
 <body>
-    <header class="c-navbar">
-        <%if (from === "instabio") { %>
 
-            <a class="c-navbar__brand" href="/dashboard" id="setclientid">
-                <img src="/userui/biotree_logo.png" alt="Dashboard's Logo">
-            </a>
-            <% } else { %>
+ 
 
-                <a class="c-navbar__brand " href="/dashboard" id="setclientid">
-                    <img src="/userui/biotree_logo.png" alt="Dashboard's Logo">
-                </a>
-
-                <% } %>
-
-                    <!-- Navigation items that will be collapes and toggle in small viewports -->
-                    <nav class="c-nav collapse" id="main-nav">
-                        <ul class="c-nav__list">
-                            <!-- <li class="c-nav__item">
-					<a class="c-nav__link" href="#!">Client Name</a>
-				</li> -->
-                            <li class="c-nav__item">
-
-                                <input type="hidden" id="getclientid">
-
-                            </li>
-
-                            <li class="c-nav__item">
-
+            <header class="navbar navbar-static-top" style="border-bottom: 2px solid #fff;background-color: #fff;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/dashboard">
+                            <img src="/userui/biotree_logo.png" alt="Dashboard's Logo" style="height: 30px;">
+                        </a>
+                    </div>
+        
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user" aria-hidden="true" style="font-size:25px;color:grey"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/profile">Profile</a></li>
+                                    <li><a href="/logout" onclick="signOut();">Sign out</a></li>
+                                </ul>
                             </li>
                         </ul>
-                    </nav>
-                    <!-- // Navigation items  -->
-
-                    <div class="c-dropdown u-ml-auto dropdown">
-                        <a class="c-avatar c-avatar--xsmall has-dropdown dropdown-toggle" href="#" id="dropdwonMenuAvatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- <img class="c-avatar__img" src="./64.png" alt="User's Profile Picture"> -->
-                            <i class="fa fa-user" aria-hidden="true" style="font-size:25px;color:grey"></i>
-
-                        </a>
-
-                        <div class="c-dropdown__menu dropdown-menu dropdown-menu-right" aria-labelledby="dropdwonMenuAvatar">
-                            <a class="c-dropdown__item dropdown-item" href="/profile"> Profile</a>
-
-
-                            <a class="c-dropdown__item dropdown-item" href="/logout" onclick="signOut();">Sign out</a>
-                            <!-- <a class="c-dropdown__item dropdown-item" href="#">Manage Roles</a> -->
-                        </div>
                     </div>
-
-    </header>
-   
+                </div>
+            </header>
+     
     <div id="preview">
-        <div class="phonebody-internal1 thing" id="<%=backgroundcolor%>">
+        <div class="phonebody-internal1 thing" >
             <div class="flex-image">
                 <div>
-                    <img src="<%=clientimage%>" class="roundimage mx-auto d-block" id="item-img-output1" />
+                    <img  class="roundimage mx-auto d-block" id="item-img-output1" src="https://mybucket4345.s3.amazonaws.com/uploads/1724979630457.jpeg" />
                 </div>
             </div>
             <div class="flex-name">
@@ -411,9 +189,7 @@
                         <li><a class="c-tabs__link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Styles</a></li>
 
                         <li><a class="c-tabs__link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Links</a></li>
-                        <!-- first tab commented seacrh that -->
-                        <!-- secodnd tab tab commented seacrh that -->
-                        <!-- <li><a class="c-tabs__link">Your Li</a></li> -->
+                  
 
                         <div class="row">
                             <div class="col-md-7 col-6" style="padding: 0 5px 0 0;">
@@ -422,7 +198,7 @@
                             <div class="col-md-5 col-6" style="padding: 0;">
                                 <div class="pull-right">
 
-                                    <input class="c-input checkshort" style="border-top:none;border-left:none;border-right:none;padding: 0;margin-top: 13px;border-bottom-left-radius: 0;border-bottom-right-radius: 0;" ; type="text" placeholder="place your link here" value="<%=shortcode%>">
+                                    <input class="c-input checkshort" style="border-top:none;border-left:none;border-right:none;padding: 0;margin-top: 13px;border-bottom-left-radius: 0;border-bottom-right-radius: 0;" ; type="text" placeholder="place your link here" >
                                     <span class="correct c-tooltip c-tooltip--top" aria-label="the link is there" style="float:right; position:relative;bottom:21px; display: none">
 										<i class="fa fa-check u-color-success"></i>
 									</span>
@@ -488,7 +264,7 @@
                                                 <!-- Max allowed - 20 characters -->
                                             </div>
                                             <label class="c-field__label" for="input1">Your Name</label>
-                                            <input class="c-input bioname " type="text" placeholder="Enter your name here" value="<%=name%>">
+                                            <input class="c-input bioname " type="text" id="bioname" placeholder="Enter your name here" >
                                             <span class="number" style="display: none">1</span>
                                         </div>
                                         <div class="c-field biodata">
@@ -496,7 +272,7 @@
                                                 <!-- Max allowed - 140 characters -->
                                             </div>
                                             <label class="c-field__label " for="input1">Your Bio</label>
-                                            <input class="c-input bio" type="text" placeholder="Enter your bio here" value="<%=bio%>">
+                                            <input class="c-input bio" id="bio" type="text" placeholder="Enter your bio here" >
                                             <span class="number" style="display: none">2</span>
 
                                         </div>
@@ -533,28 +309,27 @@
                             <h3 class="head u-mt-small u-mb-small">Button styles</h3>
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <div>
+                                    <!-- <div>
                                         <div class="c-switch buttonstyle p0" id="secondswitch">
                                             <label class="c-switch__label" for="switch1">Rounded Border</label>
                                             <input class="c-switch__input" id="switch2" type="checkbox" checked="checked">
                                         </div>
+                                    </div> -->
+                                    <div class="container">
+                                       
+                                        <label class="switch">
+                                            <input type="checkbox"id="roundedBorderSwitch" >
+                                            <span class="slider"></span>
+                                        </label>
                                     </div>
+                                    <p>
+                                        Rounded Border
+                                    </p>
+
                                 </div>
                                 <div class="col-md-6 col-12 ">
                                     <div class="row">
-                                        <!-- <p class="none restrack" id="edittracking">Edit Your Tracking Pixels:</p>
-                         
-                                        <div class="pull-right">
-
-                                            <a class="c-project__profile c-project__profile--btn c-tooltip c-tooltip--top gettrackdata edittrack" aria-label="Select Your Tracking Pixels Here" data-toggle="modal" data-target="#modal20">
-                                                <i class="fa fa-cog"></i>
-                                            </a>
-                                            <div class="invalid-feedback" id="checktrack">
-                                            </div>
-                                        </div>
- -->
-
-                                        <!-- </div> -->
+                                   
                                     </div>
                                 </div>
                             </div>
@@ -612,7 +387,6 @@
                                 <button class="btn btn-custom colorbutton" id="margo1"></button>
                                 <button class="btn btn-custom colorbutton" id="margo2"></button>
 
-                                <!-- <button class="btn btn-custom colorbutton" id="margo">1</button> -->
 
 
 
@@ -651,127 +425,28 @@
                                             <!-- <a class="btn btn-success dir" href="#">click here</a> -->
                                         </div>
                                         <div class="col-md-6 col-7  text-right firstbtn">
-                                            <div class="c-dropdown dropdown	">
-                                                <button class="c-btn outline has-add dropdown-toggle c-btn-block dropit " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:right">Add
-													New</button>
-                                                <div class="c-dropdown__menu dropdown-menu dropdown-menu-right c-dropdown__menu--large-custom dropping" aria-labelledby="dropdownMenuButton" id="dropdown" style="height:300px;overflow: scroll;">
-
-                                                    <!-- /////////////////////////////////////// -->
-                                                    <% if (	from === "createbio") { %>
-                                                        <% for(let i=2; i < socialmediaList.length; i++) { %>
-
-                                                            <a class="c-dropdown__item dropdown-item form-check form-check-inline hello" href="#" style="padding:4px 5px 0 5px;" data-name="<%=socialmediaList[i].name%>" data-prefixurl="<%=socialmediaList[i].prefixurl%>" data-icon="<%=socialmediaList[i].icon%>" data-id="<%=socialmediaList[i]._id%>">
-                                                                <label class="iconbox1">
-															<i class="<%=socialmediaList[i].icon%>"
-																id="dropdownicon"></i>
-														</label>
-                                                                <span class="url" style="display:none"><%=socialmediaList[i].prefixurl%></span>
-                                                                <span class="naming" style="display:none">
-															<%=socialmediaList[i].name%></span>
-                                                                <label class="form-check-label mx-auto" for="inlineCheckbox1" style="margin-left:8px;font-size:13px;font-weight: 100;position: relative;color:black">
-															<%=socialmediaList[i].name%></label>
-                                                                <label style="display: none" class="first ">
-															<%=socialmediaList[i]._id%></label>
-                                                                <span style="display:none" class="icon image1">
-															<%=socialmediaList[i].icon%></span>
-                                                                <i class="fa fa-plus-square-o fa-2x pull-right" style="font-size:15px;padding-top:6px"></i>
-                                                            </a>
-
-                                                            <% } %>
-                                                                <% } %>
 
 
-                                                                    <!-- //////////////////////// -->
-                                                                    <!-- /////////////////////reminign social lists in dropdown ////////////////////// paul-->
-                                                                    <!-- <% if (	from === "instabio") { %>
-													<% for(let i=0; i < socialmediaList.length; i++) { %>
-													<% for(let h=0; h < sociallists.length; h++) { %>
-													<% if(socialmediaList[i]._id.toString() === sociallists[h].id.toString() ) { %>
-													<p>
-														<%=socialmediaList[i]._id%>
-													</p> -->
-                                                                    <!-- <a class="c-dropdown__item dropdown-item form-check form-check-inline hello" href="#" style="padding:4px 5px 0 5px;">
-														<label class="iconbox1">
-															<i class="<%=socialmediaList[i].icon%>" id="dropdownicon"></i>
-														</label>
-														<span class="naming" style="display:none">
-															<%=socialmediaList[i].name%></span>
-														<label class="form-check-label mx-auto" for="inlineCheckbox1" style="margin-left:8px;font-size:13px;font-weight: 100;position: relative;color:black">
-															<%=socialmediaList[i].name%></label>
-														<label style="display: none" class="first ">
-															<%=socialmediaList[i]._id%></label>
-														<span style="display:none" class="icon image1">
-															<%=socialmediaList[i].icon%></span>
-														<i class="fa fa-plus-square-o fa-2x pull-right" style="font-size:15px;padding-top:6px"></i>
-													</a> -->
-
-                                                                    <!-- <% } else { %>
-
-
-
-													<% } %>
-
-													<% } %>
-													<% } %>
-													<% } %> -->
-
-
-
-                                                                    <!-- /////////////////////instabio////////////////////// -->
-
-                                                                    <!-- dropdown dynamic -->
-                                                </div>
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color: darkblue;background-color: #fff;border:2px solid darkblue">
+                                                    Social Media
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="socialMediaContainer">
+                                                    <!-- <li><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
+                                                    <li><a href="https://www.twitter.com" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+                                                    <li><a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram"></i> Instagram</a></li>
+                                                    <li><a href="https://www.linkedin.com" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a></li> -->
+                                                </ul>
                                             </div>
+
+                                           
                                         </div>
                                     </div>
                                     <div class="bron">
 
-                                        <ul id="sortable" class="sort">
-                                            <!--  -->
-                                            <!--  -->
-                                            <% if (	from === "createbio") { %>
-                                                <% for(let i=0; i < 2; i++) { %>
-                                                    <div class="sortableitem u-mb-custom u-mt-custom">
-                                                        <li>
-                                                            <div class="row justify-content-left nolo r0">
-                                                                <div class="col-md-10 col-9 r2">
-                                                                    <div class="c-field has-addon-left hey">
-                                                                        <span class="c-field__addon" id="sizing-addon1"><i
-																		class="<%=socialmediaList[i].icon%>"
-																		style="font-size:20px;color:#fff"></i></span>
-                                                                        <label class="c-field__label u-hidden-visually" for="input9">Disabled Input</label>
-                                                                        <input class="c-input ip inputborder" id="input1" type="text" placeholder="Place your link here">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-1 col-1 r3">
-                                                                    <div class="pull-right">
-                                                                        <span class="iconname" style="display:none">
-                                                                                    <%=socialmediaList[i].name%></span>
-                                                                        <span class="url" style="display:none">
-                                                                                    <%=socialmediaList[i].prefixurl%></span>
-                                                                        <span class="naming" style="display:none">
-																	<%=socialmediaList[i].name%></span>
-                                                                        <span class="findp" style="display:none">
-																	<%=socialmediaList[i]._id%></span>
-                                                                        <span class="image1" style="display:none">
-																	<%=socialmediaList[i].icon%></span>
-                                                                        <a class="btn del"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-1 col-1 text-left r4" style="padding-top:5px;">
-                                                                    <div class="pull-left">
-                                                                        <i class="fa fa-bars" aria-hidden="true" style="font-size:15px;padding-top:5px;"></i>
-                                                                    </div>
-
-
-                                                                </div>
-                                                        </li>
-                                                        </div>
-                                                        <% } %>
-
-                                                            <% }  %>
-
-                                                                <!--  -->
+                                        <ul id="sortable" class="sort" >
+                                      
                                         </ul>
 
                                         </div>
@@ -794,7 +469,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-6 text-right">
 
-                                                    <button class="c-btn outline  has-add dropdown-toggle c-btn-block linkbtn dropit" id="dropdownMenuButton">Add
+                                                    <button class="c-btn outline has-add dropdown-toggle c-btn-block linkbtn dropit" id="dropdownMenuButton">Add
 													New</button>
                                                     <!-- </div> -->
                                                 </div>
@@ -804,40 +479,7 @@
                                         <!-- --------------------------------------------- -->
                                         <div class="steph">
                                             <ul id="sortable1">
-                                                <% for(let i=0; i < links.length; i++) { %>
-
-                                                    <!-- first -->
-                                                    <div class="row sortableitem u-mt-custom">
-                                                        <!-- <li> -->
-
-                                                        <div class="col-md-5 l0">
-                                                            <div class="c-field ">
-                                                                <input class="c-input resip link inputborder" id="input1" type="text" placeholder="place your link here" value="<%=links[i].link%>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-5 text-right l1">
-                                                            <div class="c-field pull-right">
-                                                                <input class="c-input resipdown title inputborder" id="input1" type="text" placeholder="place your title here" value="<%=links[i].title%>">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-1 l2">
-                                                            <div class="pull-right">
-                                                                <a class="btn del3" style="padding-bottom: 10px;">
-                                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-1 l3">
-
-                                                            <i class=" fa fa-bars" aria-hidden="true" style="font-size:15px;padding-top: 10px"></i>
-
-                                                        </div>
-                                                        <!-- </li> -->
-                                                    </div>
-                                                    <!-- /first -->
-                                                    <% }  %>
-
+                                              
 
                                             </ul>
                                         </div>
@@ -857,7 +499,7 @@
                                         <div class="row">
                                             <% if (	from === "createbio") { %>
                                                 <div class="col-md-12 text-center ">
-                                                    <a class="btn-customcreate creating">
+                                                    <a class="btn-customcreate creating submitButton">
 												Create Bio Link
 											</a>
                                                 </div>
@@ -866,7 +508,7 @@
                                                         <a class="btn-customcreate updating">
 												Update Link
 											</a>
-                                                        <input type="text" id="gettingid" value="<%-id%>" style="display:none">
+                                                        <input type="text" id="gettingid" style="display:none">
                                                     </div>
                                                     <% } %>
 
@@ -887,23 +529,10 @@
                     <div class="contain" id="myNavbar">
                         <!-- <div class="phonebody-external"> -->
                         <div class="phonebody-external" id="big">
-                            <div class="phonebody-internal" id="<%=backgroundcolor%>">
+                            <div class="phonebody-internal" >
                                 <div class="flex-image">
-                                    <!-- <div> <img id="instructionsImg" class="roundimage mx-auto d-block" src="./180.png" /></div> -->
-                                    <!-- <div class="borderit"><canvas class="js-previewcanvas"></canvas></div> -->
-                                    <!-- <div class="thumbnail" id="thumbnail"></div> -->
-                                    <% if (clientimage) { %>
-
-                                        <div>
-                                            <img src="<%=clientimage%>" class="roundimage mx-auto d-block" id="item-img-output1" />
-
-                                        </div>
-
-                                        <% } else { %>
-                                            <div>
-
-                                            </div>
-                                            <% } %>
+                                   
+                                    <div><img  class="roundimage mx-auto d-block" id="item-img-output" /></div>
 
                                 </div>
                                 <div class="flex-name">
@@ -912,26 +541,14 @@
                                     <!-- <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. </div> -->
                                 </div>
                                 <div class="button-area rectangle">
-                                    <!-- <a href="#">This is a Title</a>
-								<a href="#">Button 2</a>
-								<a href="#">Button 3</a>
-								<a href="#">Button 4</a>
-								<a href="#">Button 5</a>
-								<a href="#">Button 6</a> -->
+                                 
                                 </div>
                                 <div class="button-area1 rectangle">
 
 
-                                    <!-- <a href="#">This is a Title this sdia d asdsadsadsa</a>
-								<a href="#">Button 3</a>
-								<a href="#">Button 4</a>
-								<a href="#">Button 5</a>
-								<a href="#">Button 6</a> -->
 
                                 </div>
-                                <!-- <div id="borderdown">
-								<span style="color: transparent;border-bottom: 1px solid #fff;">asdsadsad</span>
-							</div> -->
+                           
                                 <div class="flex-name1 ">
                                     <div>
                                         <span id="line21 ">Powered by</span>
@@ -939,19 +556,7 @@
 
                                     </div>
                                 </div>
-                                <!-- <hr width="50% "> -->
-                                <!-- <div id="borderdown ">
-								<span style="color: transparent;border-top: 1px solid #fff ">asdsadsad</span>
-							</div> -->
-                                <!-- <span id="logo21 ">TapShort</span> -->
-                                <!-- <div class="button-area2 ">
-								<a href="# ">Button 1</a>
-								<a href="# ">Button 2</a>
-								<a href="# ">Button 3</a>
-								<a href="# ">Button 4</a>
-								<a href="# ">Button 5</a>
-								<a href="# ">Button 6</a>
-							</div> -->
+                         
                             </div>
 
                         </div>
@@ -1060,16 +665,18 @@
 
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="/userui/js/sortmobile.js"></script>
-        <script src="/userui/js/appnew.js"></script>
-        <script src="/userui/js/styles.js"></script>
-        <script src="/userui/js/json.js"></script>
 
-        <!-- <script src="/userui/js/clipboard.js-master/dist/clipboard.min.js"></script> -->
-        <!-- <script src="/userui/js/Croppie-master/croppie.min.js"></script> -->
+        <!-- <script src="/userui/js/appnew.js"></script>
+        <script src="/userui/js/styles.js"></script>
+        <script src="/userui/js/json.js"></script> -->
+
+
+
         <script src="/userui/js/bootstrap/bootstrap.min.js"></script>
         <script src="/userui/js/Croppie-master/croppie.min.js"></script>
         <script src="/userui/js/imagepreview.js"></script>
-        <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+
+        <script src="/userui/js/finalscript.js"></script>
         <script>
          
 
@@ -1222,16 +829,15 @@
 
 
 
+$("#next-btn").on("click", function() {
+    triggerTabSwitch();
+    // console.log("clicked");
+});
 
-
-
-
-
-
-
-
-
-                ////////////////////////
+                function triggerTabSwitch() {
+                $('#nav-home-tab').tab('show'); // Using Bootstrap's tab method
+                // $('#nav-home-tab').click(); // Alternatively, you can use this line to programmatically click the tab
+            }
 
 
 

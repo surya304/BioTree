@@ -6,12 +6,7 @@ $(function() {
 
     $style1 = $('.flex-name')
     $('#alert').hide()
-        // if ($('#alert').css('display') == 'none') {
-        //  name = true;
-
-    // } else {
-    //  name = false;
-    // }
+     
     $('.checkshort').on("keyup", function() {
         let value = $(this).val();
         // console.log(value);
@@ -134,43 +129,23 @@ $(function() {
         let a2 = foo1(val)
         $('.flex-bio').append(a2)
     }
-
+    function foo(params) {
+        let data = `<div class="title">` + params + `</div>`
+        return data
+    }
     function foo1(params) {
         let data = `<div>` + params + `</div>`
         return data
     }
 
-    function foo(params) {
-        let data = `<div class="title">` + params + `</div>`
-        return data
-    }
+   
     // console.log(name)
     /// ////////////////////////////////////////////////////////////////////
 
     $style2 = $('.flex-bio')
     $('#alert1').hide()
     let bio = false
-        // if ($('#alert1').css('display') == 'none') {
-        //  bio = true;
-
-    // } else {
-    //  bio = false;
-    // }
-    // $('.bio').on('keyup', function(e) {
-    //     let a1 = $(this).val()
-
-    //     if (a1.length < 100) {
-    //         check2()
-    //         $('#alert1').hide()
-    //             // bio = true;
-    //     } else {
-    //         $('#alert1').show()
-    //         bio = false
-    //     }
-    //     console.log(bio)
-    // })
-
-
+     
 
 
 
@@ -272,20 +247,6 @@ $(function() {
         let $appendData10 = $('#sortable').children()
 
 
-        // for (let index = 0; index < $appendData10.length; index++) {
-        //     let $dynamic = $appendData1.eq(index)
-        //         // console.log($dynamic.children().html());
-        //     const href = $dynamic.children().find('.disit');
-        //     console.log(href);
-
-        //     if (href) {
-        //         alert("error")
-        //     } else {
-        //         alert("goahead");
-        //     }
-
-
-        // }
 
 
         console.log(socialboolean, "socialboolean");
@@ -299,13 +260,7 @@ $(function() {
 
         let childrencount = $("#checktrack").children();
 
-        console.log(childrencount, "childrencount");
-        console.log(childrencount.length);
-
-        let childrencount = $("#checktrack").children();
-
-        console.log(childrencount, "childrencount");
-        console.log();
+     
         if (childrencount.length > 0) {
             swal("Oops...",
                 "Please Fill the Tracking details to continue",
@@ -319,14 +274,7 @@ $(function() {
                 validate();
             }
         }
-        // if (socialboolean == false && hrefboolean == false && linkboolean == false && nameandbio == false && shortlength == false) {
-
-        //     validate()
-
-
-        // } else {
-        //     console.log('checkboolean')
-        // }
+   
     })
 
     function validate() {
@@ -398,10 +346,10 @@ $(function() {
 
         /// ////////////////////// social media
 
-        let $appendData1 = $('#sortable').children()
+        let $appendData54 = $('#sortable').children()
 
-        for (let index = 0; index < $appendData1.length; index++) {
-            let $dynamic = $appendData1.eq(index)
+        for (let index = 0; index < $appendData54.length; index++) {
+            let $dynamic = $appendData54.eq(index)
             let name = $dynamic.find('.naming').html()
             name = name.trim()
             let icon = $dynamic.find('.image1').html()
@@ -432,7 +380,7 @@ $(function() {
         }
 
         /// //////////////////////////////////////////////////////// links to json object
-        let oyy = $('#sortable1').children()
+        let oyy = $('#sortable1ble1').children()
 
         for (let index = 0; index < oyy.length; index++) {
             let $dynamic = oyy.eq(index);
@@ -464,7 +412,6 @@ $(function() {
         for (let index = 0; index < $appendData1.length; index++) {
             let $dynamic = $appendData1.eq(index);
             console.log($dynamic);
-            // let trackingid = $dynamic.children().find('.id').html();
             let href = $dynamic.children().find('.ip').val();
             let img = $dynamic.children().find('.img').html();
             let name = $dynamic.children().find('.name').html();
@@ -490,11 +437,7 @@ $(function() {
                 success: function(data) {
 
 
-                    // swal(
-                    //     'Great!',
-                    //     "Insta Bio is Created",
-                    //     'success'
-                    // );
+                
 
                     $("#success-url").text("biotree.one/link/" + shortUrlCode);
                     $("#success-url2").val("biotree.one/link/" + shortUrlCode);
@@ -502,9 +445,6 @@ $(function() {
 
                     $("#success-modal").trigger("click");
 
-                    // $('.shortthat').show()
-                    // $('#shortcoding').html('Tap.sr/' + shortUrlCode);
-                    // $('#shortcoding1').val('Tap.sr/' + shortUrlCode);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert(textStatus + errorThrown);
@@ -514,14 +454,6 @@ $(function() {
             // ////////////////////////////////////////
 
     }
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
-    // #&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&*************************************************** updating //#endregion
 
     $('.updating').on('click', function(e) {
         // ###########################################social validation
@@ -557,7 +489,7 @@ $(function() {
             let $dynamic = oyy.eq(index)
             const href = $dynamic.children().find('.link').val()
             const title = $dynamic.children().find('.title').val()
-                // console.log($dynamic.append('<span class="alert-danger disit">please Enter the URL here</span>'));
+
 
             if (href === '') {
                 $dynamic.children().eq(1).find('.disit').remove();
@@ -646,10 +578,7 @@ $(function() {
         let personName = $('.flex-name').children().html()
         let personBio = $('.flex-bio').children().html()
         console.log(getImage)
-            // let k = new Object();
-            // k.img = pic;
-            // k.name = personName;
-            // k.bio = personBioupdate
+       
         obj.shortcode = shortUrlCode
         obj.type = 'instabio'
         obj.client = clientidval
@@ -683,9 +612,9 @@ $(function() {
 
         /// ////////////////////// social media
         // FIXME kanye
-        let $appendData1 = $('#sortable').children()
-        for (let index = 0; index < $appendData1.length; index++) {
-            let $dynamic = $appendData1.eq(index)
+        let $appendData1111 = $('#sortable').children()
+        for (let index = 0; index < $appendData1111.length; index++) {
+            let $dynamic = $appendData1111.eq(index)
             let name = $dynamic.find('.naming').html()
             name = name.trim()
             let icon = $dynamic.find('.image1').html()
@@ -747,9 +676,6 @@ $(function() {
 
             obj.trackingList.push(k)
 
-
-
-
         }
         console.log(obj);
 
@@ -758,25 +684,7 @@ $(function() {
             data: obj,
             url: '/update-instabio',
             success: function(data) {
-                // setTimeout(function() {
-                //     swal({
-                //             title: 'Great',
-                //             text: 'Insta Bio is Updated!',
-                //             type: 'success',
-                //             confirmButtonText: 'OK'
-                //         },
-                //         function(isConfirm) {
-                //             if (isConfirm) {
-                //                 window.location.href = "/dashboard";
-                //             }
-                //         })
-                // }, 1000)
-
-                // swal(
-                //     'Great!',
-                //     "Insta Bio is Updated Successfully",
-                //     'success'
-                // );
+          
 
                 $("#success-url").text("biotree.one/link/" + shortUrlCode);
                 $("#success-url2").val("biotree.one/link/" + shortUrlCode);
