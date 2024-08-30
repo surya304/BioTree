@@ -32,6 +32,7 @@ app.use(session({
     httpOnly: true
 }));
 
+<<<<<<< HEAD
 // Static files
 app.use('/adminui', express.static(path.join(__dirname, 'adminui')));
 app.use('/userui', express.static(path.join(__dirname, 'userui')));
@@ -52,8 +53,47 @@ mongoose.connect(process.env.DB_URL, { useUnifiedTopology: true, useCreateIndex:
 });
 
 // Routes
+=======
+let port = 3000;
+
+
+app.listen(process.env.PORT || port);
+
+console.log('Running on Port - ' + port);
+
+app.use('/adminui', express.static(__dirname + '/adminui/'));
+app.use('/userui', express.static(__dirname + '/userui/'));
+app.use(helmet())
+app.use(methodOverride('_method'));
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
+app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true
+}));
+app.use(cookieParser());
+
+
+
+
+const dburl = process.env.DB_URL;
+
+    
+    mongoose.connect(dburl, { useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true }, function(error, db) {
+        if (!error) {
+            console.log("Connected to database");
+        } else {
+            console.log("Error connecting to database", error);
+        }
+    });
+
+
+>>>>>>> new
 app.use(require("./controllers/userController"));
-app.use(require("./controllers/shorturlController"));
+app.use(require("./controllers/shorturlController"));   
+app.use(require("./controllers/ImageUpload"));
+
 
 // Default route
 app.get('*', csrfProtection, (req, res) => {

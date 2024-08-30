@@ -3,8 +3,7 @@ $(function() {
     // console.log("aksndkasdnsandinbsid");
     // createpreview();
     createpreview1();
-    // check1();
-    // check2();
+   
     // ######################################################### image preview################################################################################
     $("#gallery-photo-add").on("click", function() {
         $('.flex-image').empty();
@@ -127,7 +126,6 @@ $(function() {
 
         }
     }
-    // let makeNewListItema1 = function (add, troop, link) {
     function makeNewListItema1(add, link) {
 
 
@@ -193,22 +191,6 @@ $(function() {
         console.log(icon);
 
 
-        // let listItemToAdda = makelistdrop(icon, id, name);
-        // $appendData.append(listItemToAdda);
-        //     let prin = '';
-        //     prin += ` <a class="c-dropdown__item dropdown-item form-check form-check-inline hello" href="#" style="padding:4px 5px 0 5px;">
-        //     <label class="iconbox1">
-        //         <i class="` + icon + `" id="dropdownicon" ></i>
-        //         </label>
-        //     <span class="naming" style="display:none">` + name + `</span>
-        //     <label class="form-check-label mx-auto" for="inlineCheckbox1" style="margin-left:5px;font-size:13px;font-weight: 100;position: relative;bottom: 3px;color:black">` + name + `</label>
-        //     <label style="display: none" class="first ">` + id + `</label>
-        //     <span style="display:none" class="icon image1">` + icon + `</span>
-        //     <i class="fa fa-plus-square-o fa-2x pull-right" style="font-size:15px;padding-top:6px;"></i>
-        // </a>`;
-
-
-
 
         let prin = '';
         prin +=
@@ -233,13 +215,6 @@ $(function() {
         $('.dropping').append(prin);
 
 
-
-
-
-
-
-
-        /////////////////////////////
 
         createpreview();
         let bolo = $(this).parentsUntil('.sortableitem').parent().remove();
@@ -343,25 +318,14 @@ $(function() {
 
             let $dynamic = oyy.eq(index);
 
-            // let number = $dynamic.children().find('.find').html();
-            // console.log(number);
-
             const href = $dynamic.children().find('.link').val();
             const title = $dynamic.children().find('.title').val();
 
-
-            // let listItemToAdda1 = makeNewListItemLink(number, href, title);
-            // $('.button-area1').append(listItemToAdda1);
             let listItemToAdda1 = makeNewListItemLink(href, title);
             $('.button-area1').append(listItemToAdda1);
 
 
-
-
-
         }
-
-
 
     }
     $data.on("click", ".del3", function() {
@@ -417,102 +381,6 @@ $(function() {
 
 
 
-
-
-    // /////////////////////////checkshorturl
-
-
-
-
-
-
-
-
-    // /////////////////////////////
-    // ############################################################################style page#########################################################################################
-    // **************************************************************************style page**********************************************************************************
-
-
-    // $style1 = $('.flex-name');
-    // $("#alert").hide();
-    // let name = false;
-    // $('.bioname').on("keyup", function (e) {
-
-    //     let a1 = $(this).val();
-    //     if (a1.length < 20) {
-    //         check1();
-    //         $("#alert").hide();
-    //         name = true;
-
-    //     } else {
-    //         $("#alert").show();
-    //     }
-    //     console.log(name);
-
-
-    // });
-
-
-
-
-    // function check1() {
-
-    //     $(".flex-name").empty();
-
-    //     let val = $('.bioname').val();
-
-    //     let a2 = foo(val);
-    //     $(".flex-name").append(a2);
-
-
-    // }
-
-    // function foo(params) {
-    //     let data = `<div class="title">` + params + `</div>`;
-    //     return data;
-
-    // }
-
-    // ///////////////////////////////////////////////////////////////////////
-
-    // $style2 = $('.flex-bio');
-    // $("#alert1").hide();
-    // let bio = false;
-    // $('.bio').on("keyup", function (e) {
-
-
-    //     let a1 = $(this).val();
-
-    //     if (a1.length < 100) {
-    //         check2();
-    //         $("#alert1").hide();
-    //         bio = true;
-
-    //     } else {
-    //         $("#alert1").show();
-    //     }
-    //     console.log(name);
-
-
-    // });
-
-    // function check2() {
-    //     $('.flex-bio').empty();
-    //     let val = $('.bio').val();
-
-    //     let a2 = foo1(val);
-    //     $('.flex-bio').append(a2);
-
-
-    // }
-
-    // function foo1(params) {
-
-    //     let data = `<div>` + params + `</div>`;
-    //     return data;
-
-    // }
-    ////////////////////////////////////flex image
     $('.deleteimage').on("click", function() {
         $(".flex-image").empty();
     });
@@ -694,10 +562,7 @@ $(function() {
 
     $('.hello1').on('click', function() {
 
-        console.log("hello");
-        // let img = $(this).find('.image1').attr("src");
         let img = $(this).find('.image1').html();
-
         let id = $(this).find('.first').html();
         let name = $(this).find('.naming').html();
         console.log(img);

@@ -13,13 +13,11 @@ let router = express.Router()
 let randomize = require('randomatic')
 let moment = require('moment')
 let async = require('async')
-    // STATIC DATA 1 time insertion
 
 
 
 /// ////////////////////////////////////////////////
 // FIXME GET create short url
-// router.get('/create-shorturl', requireLogin, function(req, res) {
 router.get('/404', function(req, res) {
     res.render('404', {})
 
@@ -29,18 +27,11 @@ router.get('/404', function(req, res) {
 
 router.get('/create-shorturl/', requireLogin, function(req, res) {
 
-        // let userid = req.body.userid;
-        // let shorturl = req.body.shorturl;
-
-        Tracking.find({
-            is_del: false
-        }, function(errTracking, trackingResult) {
-
+  
 
 
             let shortcode = randomize('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 5)
 
-            console.log(shortcode)
 
             UserShortURL.find({
                 shorturl: shortcode
@@ -96,16 +87,11 @@ router.get('/create-shorturl/', requireLogin, function(req, res) {
 
                                     res.render('create-shorturl', {
 
-                                        // 'socialmediaList': socialMediaObj,
                                         'socialmediaList': socialmediaList,
-                                        'trackingList': trackingResult,
-
-
                                         'shortcode': shortcode,
                                         'from': 'createbio',
                                         'clientimage': '/userui/180.png',
                                         'backgroundcolor': 'purewhite',
-
                                         'border': 'false',
                                         'name': 'Enter your name here',
                                         'bio': 'Enter your bio here',
@@ -138,7 +124,6 @@ router.get('/create-shorturl/', requireLogin, function(req, res) {
                 }
             })
 
-        })
 
     })
     /// ///////////////////////////////////////////////////////////////
@@ -147,9 +132,7 @@ router.post('/create-instabio', requireLogin, function(req, res) {
     let shortcode = req.body.shortcode
     let type = req.body.type
     let socialmedia = req.body.socialmedia;
-    console.log("###############################################################################");
     console.log(socialmedia, "socialmedia");
-    console.log("###############################################################################");
 
     let links = req.body.links
     let title = req.body.title
@@ -205,60 +188,6 @@ router.post('/create-instabio', requireLogin, function(req, res) {
     })
 })
 
-
-
-/// ////////////////////////////////////////////////////////////////
-
-// router.get('/dashboard', requireLogin, function(req, res) {
-//     let url = req.url
-//     let userid = req.session.user._id
-//     console.log(userid)
-//         /// ///////###################################prinitng random images
-//     let description = ['app-icon1.png', 'app-icon2.png', 'app-icon3.png', 'app-icon4.png', 'app-icon5.png',
-//         'app-icon6.png', 'app-icon7.png'
-//     ]
-//     let size = description.length
-//     let x = Math.floor(size * Math.random())
-//     let imaged = '/userui/img/' + description[x];
-
-
-//     Client.find({
-//         is_del: false,
-//         user: userid
-//     }).populate('client').exec(function(err, clientsList) {
-//         console.log(clientsList)
-//         if (err) {
-//             console.log(url + '\n Error is - ' + err)
-//             res.status(501).send({
-//                 error: 'Client Search Error',
-//                 data: null,
-//                 message: 'Oops! Please try again'
-//             })
-//             res.end()
-//         } else {
-//             let count = clientsList.length
-
-//             Tracking.find({
-//                 is_del: false
-//             }, function(errTracking, trackingResult) {
-//                 UserShortURL.find({
-//                     is_del: false
-//                 }, function(errShorturl, shorturlsList) {
-//                     res.render('dashboard', {
-
-//                         moment: moment,
-//                         client_count: count,
-//                         clientsList: clientsList,
-//                         trackingList: trackingResult,
-//                         shorturlsList: shorturlsList,
-//                         'from': 'default'
-
-//                     })
-//                 })
-//             })
-//         }
-//     })
-// })
 
 router.post('/getclientcount', requireLogin, function(req, res) {
         // console.log("motherfucker");
@@ -626,13 +555,13 @@ router.get('/link/:id', function(req, res) {
                 }).exec(function(err2, result) {
                    
 
-
+console.log(result, "result shortcontroller link");
 
                     res.render('final', {
                         'from': 'instabio',
                         'socialmediaList': socialmediaList,
                         'shortcode': result.shortcode,
-                        'clientimage': result.img,
+                        'clientimage': result.dashimg,
                         'backgroundcolor': result.bg_color,
                         'name': result.title,
                         'bio': result.bio,
@@ -1546,55 +1475,40 @@ router.get('/short-url-onEnter/:short', requireLogin, function(req, res) {
 // });
 // ///////////////////////
 // FIXME GET Instabio
-router.get('/instabio/:id', requireLogin, function(req, res) {
-    let url = req.url
-    let id = req.params.id
-    let userid = req.session.user._id
 
-    console.log(userid);
+router.get('/instabio/:id', requireLogin, async function(req, res) {
+ res.render('create-shorturl',{
+    "from": "instabio"
+ });
+});
 
 
-    SocialMedia.find({
-        is_del: false
-    }, function(err1, socialmediaList) {
-        if (err1) {
-            console.log(url + '\n Error is - ' + err)
+router.get('/getShortUrlData/:id', requireLogin, function (req, res) {
+    let url = req.url;
+    let id = req.params.id;
+    console.log(id);
+
+    UserShortURL.findById(id, function (err, result) {
+        if (err) {
+            console.log(url + '\n Error is - ' + err);
             res.status(501).send({
-                error: 'shorturl does not exist',
+                error: "shorturl does not exist",
                 data: null,
-                message: 'shorturl does not exist'
-            })
-            res.end()
+                message: "shorturl does not exist"
+            });
+            res.end();
         } else {
-            // UserShortURL.findById(id, function(err2, result) {
-            UserShortURL.findById(id).populate('client').populate('SocialMedia').then(function(result) {
-
-                // console.log(result)
-
-
-                console.log(result);
-                res.render('create-shorturl', {
-                    'from': 'instabio',
-                    'socialmediaList': socialmediaList,
-                    'shortcode': result.shortcode,
-                    'clientimage': result.img,
-                    'backgroundcolor': result.bg_color,
-                    'name': result.title,
-                    'bio': result.bio,
-                    'sociallists': result.socialmedia,
-                    'links': result.links,
-                    'border': result.rounded_border,
-                    'id': result._id,
-                    'inditracking': result.tracking
-
-
-                })
-            })
+            console.log(result,"result");
+       res.status(200).send({
+              data: result
+            });
+            res.end();
         }
-    })
 
+    });
 
-})
+});
+
 
 // res.render('create-shorturl', {
 // 	'clientsList': clientsList,
@@ -1656,53 +1570,69 @@ router.put('/updateclicks', function(req, res) {
 })
 
 /// /////////////////////////////////////
-router.put('/update-instabio', requireLogin, function(req, res) {
-    let id = req.body.id
-    let shortcode = req.body.shortcode
-    let socialmedia = req.body.socialmedia
-    let links = req.body.links
-    let title = req.body.title
-    let bio = req.body.bio
-    let img = req.body.img
-    let trackingList = req.body.trackingList;
 
-    let bg_color = req.body.bg_color
-    let rounded_border = req.body.rounded_border
-    UserShortURL.findById(id, function(err, result) {
-        console.log(result)
+router.put('/update-instabio', requireLogin, async (req, res) => {
+    try {
+        const {
+            _id,
+            shortcode,
+            socialmedia,
+            links,
+            title,
+            bio,
+            img,
+            trackingList,
+            bg_color,
+            rounded_border
+        } = req.body;
 
+        // Validate required fields
+        if (!_id || !shortcode || !title || !bio) {
+            return res.status(400).send({
+                error: 'Validation Error',
+                data: null,
+                message: 'ID, shortcode, title, and bio are required fields.'
+            });
+        }
+
+        // Find the document by ID
+        const result = await UserShortURL.findById(_id);
+        if (!result) {
+            return res.status(404).send({
+                error: 'Not Found',
+                data: null,
+                message: 'Insta Bio not found.'
+            });
+        }
+
+        // Update the document fields
         result.shortcode = shortcode;
         result.socialmedia = socialmedia;
         result.links = links;
         result.title = title;
         result.bio = bio;
         result.tracking = trackingList;
-
         result.img = img;
         result.bg_color = bg_color;
-        result.rounded_border = rounded_border;
+        result.rounded_border = rounded_border === 'true'; // Convert string to boolean
         result.updated_at = new Date();
 
-        result.save(function(err, result) {
-            if (err) {
-                console.log('Insta Bio Updation Failed' + err)
-                res.status(501).send({
-                    error: 'Insta Bio Updation Failed',
-                    data: null,
-                    message: 'Oops! Please try again'
-                })
-                res.end()
-            } else {
-                console.log('Insta Bio Updation', result)
-                res.status(200).send({
-                    data: 'Insta Bio Updated Successfully'
-                })
-                res.end()
-            }
-        })
-    })
-})
+        // Save the updated document
+        const updatedResult = await result.save();
+        console.log('Insta Bio Updated', updatedResult);
 
+        res.status(200).send({
+            data: 'Insta Bio Updated Successfully'
+        });
+    } catch (err) {
+        console.error('Insta Bio Updation Failed', err);
+        res.status(500).send({
+            error: 'Insta Bio Updation Failed',
+            data: null,
+            message: 'Oops! Please try again'
+        });
+    }
+});
 // dashboard page date###########################################################################
 
 router.get('/getSocialMediaList', requireLogin, function(req, res) {
